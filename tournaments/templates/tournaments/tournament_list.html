@@ -1,0 +1,52 @@
+{% extends 'tournaments/base.html' %}
+
+{% block title %}賽事列表{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1 class="mb-4">所有賽事</h1>
+
+        {% for t in tournaments %}
+        <div class="card mb-4 shadow-sm">
+            {% if t.header_image %}
+            <img src="{{ t.header_image.url }}" class="card-img-top" alt="{{ t.name }} 主圖" style="height: 200px; object-fit: cover;">
+            {% endif %}
+            <div class="card-header">
+                <strong>遊戲項目：</strong>{{ t.game }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ t.name }}</h5>
+                <p class="card-text"><strong>狀態：</strong>{{ t.get_status_display }}</p>
+                <a href="{% url 'tournament_detail' pk=t.pk %}" class="btn btn-primary">查看詳情</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info" role="alert">
+            目前沒有任何賽事。
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+                     <div class="card-header !bg-dark text-white">
+             <h5>近期比賽</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for match in upcoming_matches %}
+                <li class="list-group-item">
+                    <a href="{% url 'tournament_detail' pk=match.tournament.pk %}" class="text-decoration-none text-dark">
+                        <div class="fw-bold">{{ match.tournament.name }}</div>
+                        <small>{{ match.team1.name }} vs {{ match.team2.name }}</small>
+                        <div class="text-muted mt-1">{{ match.match_time|date:"Y-m-d H:i" }}</div>
+                    </a>
+                </li>
+                {% empty %}
+                <li class="list-group-item">目前沒有即將到來的比賽。</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

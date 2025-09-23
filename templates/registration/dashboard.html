@@ -1,0 +1,18 @@
+{% extends 'tournaments/base.html' %}
+
+{% block title %}使用者儀表板{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">歡迎回來，{{ user.username }}！</h1>
+    <p class="text-secondary">這裡是您的儀表板，未來所有管理功能都將從這裡開始。</p>
+
+    <div class="mt-5">
+        <div class="d-grid gap-2 col-md-6 mx-auto">
+            <a href="{% url 'tournament_create_step1' %}" class="btn btn-success btn-lg">＋ 建立新賽事</a>
+
+            <a href="#" class="btn btn-outline-secondary btn-lg disabled">
+                管理我的隊伍 (開發中...)
+            </a>
+        </div>
+    </div>
+{% endblock %}

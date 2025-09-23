@@ -1,0 +1,220 @@
+{% extends 'tournaments/base.html' %}
+
+{% block title %}{{ tournament.name }} - 賽事詳情{% endblock %}
+
+{% block content %}
+<style>
+    .bracket {
+        display: flex;
+        overflow-x: auto;
+        padding: 20px;
+    }
+    .round {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        min-width: 220px;
+        margin-right: 50px;
+    }
+    .round-title {
+        font-weight: bold;
+        text-align: center;
+    }
+    .match-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        flex-grow: 1;
+    }
+    .match-up {
+        position: relative;
+        margin: 20px 0;
+    }
+    /* 從比賽中間向右延伸的橫線 */
+    .match-up::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 2px;
+        background-color: #999;
+        left: 100%;
+        top: 50%;
+    }
+
+    .participant {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 10px 15px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+    }
+    /* 上半部的隊伍，畫出右、下框線 */
+    .participant-top {
+        border-bottom: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    /* 下半部的隊伍，畫出右、上框線 */
+    .participant-bottom {
+        border-top: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .participant.winner {
+        font-weight: bold;
+        border-color: #0d6efd;
+    }
+    .participant span:last-child {
+        font-weight: bold;
+    }
+
+    /* --- 互動高亮樣式 --- */
+    .participant.highlight {
+        background-color: #ffc107;
+        border-color: #ffc107;
+    }
+    .match-up.highlight-line::after {
+        background-color: #ffc107 !important;
+    }
+</style>
+
+<h1 class="mb-3">{{ tournament.name }}</h1>
+<a href="{% url 'tournament_stats' pk=tournament.pk %}" class="btn btn-info mb-3">查看選手數據統計</a>
+<p class="lead"><strong>遊戲項目：</strong> {{ tournament.game }}</p>
+
+{% if tournament.format == 'round_robin' %}
+
+    <h3 class="mt-5">分組賽況</h3>
+    <hr>
+    {% for group in groups %}
+        <h4 class="mt-4">{{ group.name }}</h4>
+        <h5>積分榜</h5>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>排名</th>
+                    <th>隊伍</th>
+                    <th>勝場</th>
+                    <th>敗場</th>
+                    <th>積分</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for standing in group.standings.all %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ standing.team.name }}</td>
+                    <td>{{ standing.wins }}</td>
+                    <td>{{ standing.losses }}</td>
+                    <td>{{ standing.points }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5">此分組尚無積分資料。</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h5>{{ group.name }} 賽程</h5>
+        {% for match in tournament.matches.all %}
+            {% if match.team1 in group.teams.all and match.team2 in group.teams.all %}
+                <div class="card mb-2">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <span>{{ match.team1.name }}</span>
+                        <span class="badge bg-danger">{{ match.team1_score }} - {{ match.team2_score }}</span>
+                        <span>{{ match.team2.name }}</span>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% empty %}
+        <p>此賽事尚無分組資訊。</p>
+    {% endfor %}
+
+{% elif tournament.format == 'swiss' %}
+
+    <div class="row">
+        <div class="col-md-5">
+            <h3 class="mt-5">總積分榜</h3>
+            <hr>
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>排名</th><th>隊伍</th><th>積分</th><th>勝-敗</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for standing in standings %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ standing.team.name }}</td>
+                        <td>{{ standing.points }}</td>
+                        <td>{{ standing.wins }} - {{ standing.losses }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-7">
+            <h3 class="mt-5">各輪賽程</h3>
+            <hr>
+            {% for round_number, matches_in_round in rounds.items %}
+                <h5 class="mt-3">第 {{ round_number }} 輪</h5>
+                {% for match in matches_in_round %}
+                    <div class="card mb-2">
+                        <div class="card-body d-flex justify-content-between align-items-center p-2">
+                            <span class="w-40 text-end">{{ match.team1.name }}</span>
+                            <span class="badge bg-danger mx-2">{{ match.team1_score }} - {{ match.team2_score }}</span>
+                            <span class="w-40 text-start">{{ match.team2.name }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% empty %}
+                <p>尚無比賽。</p>
+            {% endfor %}
+        </div>
+    </div>
+
+{% else %}
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3>對戰樹</h3>
+            <hr>
+            <div class="bracket">
+    {% for round_number, matches_in_round in rounds.items %}
+        <div class="round">
+            <h5 class="round-title">第 {{ round_number }} 輪</h5>
+            <div class="match-list">
+                {% for match in matches_in_round %}
+                    <div class="match-up">
+                        <div class="participant {% if match.winner == match.team1 %}winner{% endif %} participant-top"
+                             id="participant-{{ match.id }}-{{ match.team1.id }}"
+                             data-team-id="{{ match.team1.id }}">
+                            <span>{{ match.team1.name | default:"待定" }}</span>
+                            <span>{{ match.team1_score }}</span>
+                        </div>
+                        <div class="participant {% if match.winner == match.team2 %}winner{% endif %} participant-bottom"
+                             id="participant-{{ match.id }}-{{ match.team2.id }}"
+                             data-team-id="{{ match.team2.id }}">
+                            <span>{{ match.team2.name | default:"待定" }}</span>
+                            <span>{{ match.team2_score }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endif %}
+<div class="row mt-5">
+    <div class="col-md-6">
+        <h3>賽事規章</h3>
+        <hr>
+        <p>{{ tournament.rules|linebreaks }}</p>
+    </div>
+</div>
+
+<a href="{% url 'tournament_list' %}" class="btn btn-secondary mt-4">返回賽事列表</a>
+{% endblock %}

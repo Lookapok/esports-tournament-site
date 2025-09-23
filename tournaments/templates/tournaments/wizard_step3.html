@@ -1,0 +1,37 @@
+{% extends 'tournaments/base.html' %}
+
+{% block title %}建立新賽事 - 步驟 3/3{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>建立新賽事 - 步驟 3/3：預覽與確認</h2>
+                </div>
+                <div class="card-body">
+                    <h4>賽事資訊</h4>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>賽事名稱：</strong> {{ step1_data.name }}</li>
+                        <li class="list-group-item"><strong>遊戲項目：</strong> {{ step1_data.game }}</li>
+                        <li class="list-group-item"><strong>賽制：</strong> {{ step1_data.format }}</li>
+                    </ul>
+                    <h4>參賽隊伍</h4>
+                    <ul class="list-group">
+                        {% for team_name in step2_data.teams %}
+                            <li class="list-group-item">{{ team_name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <hr>
+                    <p class="text-muted">請確認以上所有資訊是否正確。點擊下方按鈕後，將會正式建立賽事與隊伍資料。</p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success w-100">確認並建立賽事</button>
+                        <a href="{% url 'tournament_create_step1' %}" class="btn btn-secondary w-100 mt-2">返回修改</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

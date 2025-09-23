@@ -1,0 +1,22 @@
+{% extends 'tournaments/base.html' %}
+
+{% block title %}建立新賽事 - 步驟 1/4{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>建立新賽事 - 步驟 1/4：基本資訊</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary w-100">下一步：新增隊伍</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

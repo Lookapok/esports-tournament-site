@@ -1,0 +1,34 @@
+{% extends 'tournaments/base.html' %}
+
+{% block title %}所有隊伍{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">所有參賽隊伍</h1>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    {% for team in teams %}
+    <div class="col">
+        <a href="{% url 'team_detail' pk=team.pk %}" class="text-decoration-none">
+            <div class="card h-100 text-center team-card">
+                <div class="team-logo-container mx-auto mt-4">
+                    {% if team.logo %}
+                    <img src="{{ team.logo.url }}" alt="{{ team.name }} Logo">
+                    {% else %}
+                    <div class="no-logo-placeholder">
+                        <span>{{ team.name|slice:":1" }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title mt-2">{{ team.name }}</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% empty %}
+    <div class="col">
+        <p class="text-secondary">目前尚無任何隊伍資料。</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

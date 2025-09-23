@@ -1,0 +1,33 @@
+{% extends 'tournaments/base.html' %}
+{% load django_tables2 %} {% block title %}數據統計中心{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">數據統計中心</h1>
+
+    <div class="card card-body mb-4">
+        <form method="GET" action="{% url 'overall_stats' %}" class="row g-3 align-items-center">
+            <div class="col-md-5">
+                <label for="team-filter" class="form-label">依隊伍篩選</label>
+                <select name="team" id="team-filter" class="form-select">
+                    <option value="">所有隊伍</option>
+                    {% for team in all_teams %}
+                        <option value="{{ team.id }}" {% if selected_team_id == team.id|stringformat:"s" %}selected{% endif %}>
+                            {{ team.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-5">
+                <label for="player-name-filter" class="form-label">搜尋選手名稱</label>
+                <input type="text" name="player_name" id="player-name-filter" class="form-control" placeholder="輸入選手ID..." value="{{ player_name_query|default_if_none:'' }}">
+            </div>
+            <div class="col-md-2 d-grid" style="margin-top: 3rem;">
+                <button type="submit" class="btn btn-primary">篩選</button>
+            </div>
+        </form>
+    </div>
+
+    {% render_table table %}
+
+{% endblock %}
+

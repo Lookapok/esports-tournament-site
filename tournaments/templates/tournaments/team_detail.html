@@ -1,0 +1,124 @@
+{% extends 'tournaments/base.html' %}
+
+{% block title %}{{ team.name }} - 隊伍介紹{% endblock %}
+
+{% block content %}
+    <div class="row align-items-center mb-4">
+        <div class="col-md-3 text-center">
+            {% if team.logo %}
+                <img src="{{ team.logo.url }}" alt="{{ team.name }} Logo" class="img-fluid rounded-circle" style="max-width: 150px; border: 2px solid var(--border-color);">
+            {% else %}
+                <div class="p-4 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 150px; height: 150px; background-color: var(--surface-color); border: 2px solid var(--border-color);">
+                    <span class="fs-1 text-secondary">{{ team.name|slice:":1" }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-9">
+            <h1>{{ team.name }}</h1>
+        </div>
+    </div>
+
+    <hr>
+
+<h3 class="mt-5 mb-4">最近比賽紀錄</h3>
+<div class="match-history-list" id="match-history-container">
+    {% for match in match_history %}
+        <div class="match-history-item card card-body mb-2 {% if forloop.counter > 4 %}is_hidden{% endif %}">
+            <div class="row align-items-center g-0 text-center text-sm-start">
+
+                <div class="col-12 col-sm-3 text-secondary mb-2 mb-sm-0">
+                    <div>{{ match.tournament.name }}</div>
+                    <small>第 {{ match.round_number }} 輪</small>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <div class="row align-items-center g-0">
+
+                        <div class="col-5 d-flex justify-content-end align-items-center pe-2">
+                            <span class="team-name d-none d-md-inline-block me-2">{{ match.team1.name }}</span>
+                            {% if match.team1.logo %}
+                            <img src="{{ match.team1.logo.url }}" class="match-history-logo" alt="{{ match.team1.name }}">
+                            {% else %}
+                            <div class="match-history-logo no-logo-placeholder-sm bg-secondary text-white-50 d-flex align-items-center justify-content-center">
+                                {{ match.team1.name|slice:":1" }}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-2 text-center px-0">
+                            <span class="match-score {% if match.winner == match.team1 %}score-win{% else %}score-lose{% endif %}">
+                                {{ match.team1_score }}
+                            </span>
+                            <span class="mx-1">-</span>
+                            <span class="match-score {% if match.winner == match.team2 %}score-win{% else %}score-lose{% endif %}">
+                                {{ match.team2_score }}
+                            </span>
+                        </div>
+
+                        <div class="col-5 d-flex align-items-center ps-2">
+                            {% if match.team2.logo %}
+                            <img src="{{ match.team2.logo.url }}" class="match-history-logo" alt="{{ match.team2.name }}">
+                            {% else %}
+                            <div class="match-history-logo no-logo-placeholder-sm bg-secondary text-white-50 d-flex align-items-center justify-content-center">
+                                {{ match.team2.name|slice:":1" }}
+                            </div>
+                            {% endif %}
+                            <span class="team-name d-none d-md-inline-block ms-2">{{ match.team2.name }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-3 text-secondary mt-2 mt-sm-0 text-sm-end">
+                    {{ match.match_time|date:"Y-m-d H:i" }}
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-secondary">尚無已完成的比賽紀錄。</p>
+    {% endfor %}
+</div>
+
+{% if match_history|length > 4 %}
+<div class="text-center mt-3">
+    <button class="btn btn-outline-secondary" id="toggle-matches-btn">顯示更多紀錄</button>
+</div>
+{% endif %}
+
+<h3 class="mt-5 mb-4">選手名單</h3>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+    {% for player in players %}
+        <div class="col">
+            <a href="{% url 'player_detail' pk=player.pk %}" class="text-decoration-none">
+                <div class="card h-100 player-card text-center">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center p-3">
+                        <div class="player-avatar-wrapper mb-3">
+                            {% if player.avatar %}
+                                <img src="{{ player.avatar.url }}" alt="{{ player.nickname }} Avatar">
+                            {% else %}
+                                <div class="player-avatar-placeholder bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center rounded-circle">
+                                    <span class="fw-bold fs-3">{{ player.nickname|slice:":1" }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <h5 class="card-title mb-1">{{ player.nickname }}</h5>
+                        <p class="card-text text-secondary mb-0">
+                            {% if player.get_role_display %}
+                                {{ player.get_role_display }}
+                            {% else %}
+                                未設定角色
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <p class="text-secondary">目前尚無選手資料。</p>
+        </div>
+    {% endfor %}
+</div>
+
+    <a href="{% url 'tournament_list' %}" class="btn btn-secondary mt-4">返回賽事列表</a>
+
+{% endblock %}

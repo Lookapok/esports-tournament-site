@@ -1,0 +1,240 @@
+/* tournaments/static/css/custom.css (明亮而柔和主題) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+:root {
+    --primary-color: #4A90E2; /* 一個柔和而專業的藍色 */
+    --background-color: lch(86.34% 0.01 296.81); /* 非常淺的藍灰色背景 */
+    --surface-color: #FFFFFF; /* 卡片等元件使用純白色 */
+    --text-color: #333333; /* 深灰色主要文字，比純黑更柔和 */
+    --text-secondary: #777777; /* 中灰色次要文字 */
+    --border-color: #EAECEF; /* 非常淺的灰色邊框 */
+    --success-color: #28a745; /* 綠色 */
+    --error-color: #dc3545; /* 紅色 */
+}
+
+html {
+    background-color: var(--background-color);
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;    
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* 導覽列 */
+.navbar {
+    background-color: var(--surface-color) !important;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* 加上細微的陰影 */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.navbar-logo {
+    height: 40px;
+    width: auto;
+}
+.navbar .navbar-brand span {
+    color: var(--text-color) !important;
+}
+.navbar .navbar-nav .nav-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-secondary) !important;
+    transition: color 0.3s ease;
+}
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+/* 主要內容區塊的標題 */
+h1, h2, h3, h4, h5 {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+/* 卡片樣式 */
+.card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* 增加圓角，看起來更柔和 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.card-header {
+    background-color: var(--background-color); /* 讓標頭背景色和整體背景色一致 */
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 500;
+    color: var(--text-color); /* 確保文字顏色是主要的深灰色文字 */
+}
+.card-body {
+    color: var(--text-color);
+}
+.card-title {
+    color: var(--primary-color);
+}
+
+/* 按鈕 */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #ffffff;
+    font-weight: 500;
+    border-radius: 50px; /* 圓角按鈕 */
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+}
+.btn-primary:hover {
+    opacity: 0.85;
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.4);
+}
+
+/* 隊伍 Logo 容器 (所有參賽隊伍列表中的卡片) */
+.team-logo-container {
+    width: 120px; /* 固定寬度 */
+    height: 120px; /* 固定高度 */
+    margin: 0 auto 15px auto; /* 居中並留出下邊距 */
+    border-radius: 8px; /* 方形圓角容器 */
+    border: 1px solid var(--border-color);
+    display: flex; /* 使用 flexbox 讓圖片或文字居中 */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* 確保超出容器的圖片部分被隱藏 */
+}
+
+.team-logo-container img {
+    max-width: 100%; /* 確保圖片不超出容器 */
+    max-height: 100%; /* 確保圖片不超出容器 */
+    object-fit: contain; /* 保持圖片比例，並在容器內完整顯示 */
+}
+
+.no-logo-placeholder {
+    width: 100%; /* 佔滿容器 */
+    height: 100%; /* 佔滿容器 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem; /* 大字體 */
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+/* --- 隊伍歷史戰績樣式 (優化版) --- */
+.match-history-item {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    padding: 0.75rem 1rem;
+    transition: none;
+}
+.match-history-item:hover {
+    transform: none;
+    box-shadow: none;
+    background-color: rgba(0,0,0,0.02); /* 滑鼠移上去時，加上淡淡的背景色 */
+}
+.match-history-list .team-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.match-history-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.no-logo-placeholder-sm {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.match-score {
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background-color: var(--background-color);
+}
+.score-win {
+    color: var(--success-color);
+    background-color: rgba(40, 167, 69, 0.1);
+}
+.score-lose {
+    color: var(--error-color);
+    background-color: rgba(220, 53, 69, 0.1);
+}
+/* --- 選手卡片樣式 --- */
+.player-card {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.player-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.player-avatar-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* 圓形頭像框 */
+    overflow: hidden;
+    border: 2px solid var(--primary-color); /* 頭像邊框 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-color); /* 頭像背景色 */
+}
+
+.player-avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    font-size: 2rem;
+}
+
+/* 如果將來有圖片頭像，可以這樣處理 */
+.player-avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* tournaments/static/css/custom.css */
+
+/* --- 選手個人卡片/頭像樣式 --- */
+.player-avatar-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* 圓形頭像 */
+    overflow: hidden;
+    border: 3px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* cover 會裁切圖片以填滿圓形，適合頭像 */
+}
+
+.no-avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}

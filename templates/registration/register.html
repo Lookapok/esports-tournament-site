@@ -1,0 +1,22 @@
+{% extends 'tournaments/base.html' %}
+
+{% block title %}建立新帳號{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>建立新帳號</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %} {{ form.as_p }}
+
+                        <button type="submit" class="btn btn-primary w-100">註冊</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

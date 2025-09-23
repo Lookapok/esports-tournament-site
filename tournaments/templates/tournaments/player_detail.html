@@ -1,0 +1,63 @@
+{% extends 'tournaments/base.html' %}
+
+{% block title %}{{ player.nickname }} - 選手資訊{% endblock %}
+
+{% block content %}
+    <div class="row align-items-center mb-4">
+    <div class="col-md-2 text-center">
+        <div class="player-avatar-container mx-auto">
+            {% if player.avatar %}
+                <img src="{{ player.avatar.url }}" alt="{{ player.nickname }} Avatar">
+            {% else %}
+                <div class="no-avatar-placeholder">
+                    <span>{{ player.nickname|slice:":2" }}</span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-md-10">
+        <h1>{{ player.nickname }}</h1>
+        {% if player.team %}
+        <p class="lead text-secondary">{{ player.team.name }} - <span class="badge bg-primary">{{ player.get_role_display }}</span></p>
+        {% endif %}
+    </div>
+</div>
+
+    <hr>
+
+    <h3 class="mt-4 mb-3">生涯比賽數據</h3>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>賽事</th>
+                    <th>對戰組合</th>
+                    <th>擊殺</th>
+                    <th>死亡</th>
+                    <th>助攻</th>
+                    <th>ACS</th>
+                    <th>日期</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stat in stats %}
+                    <tr>
+                        <td>{{ stat.match.tournament.name }}</td>
+                        <td>{{ stat.match.team1.name }} vs {{ stat.match.team2.name }}</td>
+                        <td>{{ stat.kills }}</td>
+                        <td>{{ stat.deaths }}</td>
+                        <td>{{ stat.assists }}</td>
+                        <td>{{ stat.acs }}</td>
+                        <td>{{ stat.match.match_time|date:"Y-m-d" }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center text-secondary">目前尚無比賽數據。</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="javascript:history.back()" class="btn btn-secondary mt-4">返回上一頁</a>
+{% endblock %}
