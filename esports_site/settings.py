@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['winnerstakesall.onrender.com', '127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    'monitoring.apps.MonitoringConfig',
+    'monitoring',
     'tournaments.apps.TournamentsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
