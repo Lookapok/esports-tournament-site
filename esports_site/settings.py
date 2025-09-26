@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'monitoring',
     'tournaments.apps.TournamentsConfig',
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth',git add esports_site/settings.py
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -130,6 +130,12 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
