@@ -77,6 +77,32 @@
     .match-up.highlight-line::after {
         background-color: #ffc107 !important;
     }
+    
+    /* --- 雙淘汰賽樣式 --- */
+    .upper-bracket {
+        border-right: 2px solid #0d6efd;
+        padding-right: 15px;
+        margin-right: 15px;
+    }
+    .lower-bracket {
+        border-left: 2px solid #dc3545;
+        padding-left: 15px;
+        margin-left: 15px;
+    }
+    .upper-bracket .round-title {
+        color: #0d6efd;
+        font-weight: 600;
+    }
+    .lower-bracket .round-title {
+        color: #dc3545;
+        font-weight: 600;
+    }
+    .upper-bracket .participant {
+        border-left: 3px solid #0d6efd;
+    }
+    .lower-bracket .participant {
+        border-left: 3px solid #dc3545;
+    }
 </style>
 
 <h1 class="mb-3">{{ tournament.name }}</h1>
@@ -87,49 +113,77 @@
 
     <h3 class="mt-5">分組賽況</h3>
     <hr>
-    {% for group in groups %}
-        <h4 class="mt-4">{{ group.name }}</h4>
-        <h5>積分榜</h5>
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>排名</th>
-                    <th>隊伍</th>
-                    <th>勝場</th>
-                    <th>敗場</th>
-                    <th>積分</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for standing in group.standings.all %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ standing.team.name }}</td>
-                    <td>{{ standing.wins }}</td>
-                    <td>{{ standing.losses }}</td>
-                    <td>{{ standing.points }}</td>
-                </tr>
-                {% empty %}
-                <tr><td colspan="5">此分組尚無積分資料。</td></tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    
+    <div class="accordion" id="groupAccordion">
+        {% for group in groups %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                    <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="collapse{{ forloop.counter }}">
+                        <strong>{{ group.name }}</strong>
+                        <span class="ms-2 text-muted">({{ group.teams.count }} 支隊伍)</span>
+                    </button>
+                </h2>
+                <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#groupAccordion">
+                    <div class="accordion-body">
+                        <!-- 積分榜 -->
+                        <h6 class="mb-3">積分榜</h6>
+                        <table class="table table-striped table-sm mb-4">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>排名</th>
+                                    <th>隊伍</th>
+                                    <th>勝場</th>
+                                    <th>敗場</th>
+                                    <th>積分</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for standing in group.standings.all %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ standing.team.name }}</td>
+                                    <td>{{ standing.wins }}</td>
+                                    <td>{{ standing.losses }}</td>
+                                    <td><span class="badge bg-primary">{{ standing.points }}</span></td>
+                                </tr>
+                                {% empty %}
+                                <tr><td colspan="5" class="text-center text-muted">此分組尚無積分資料。</td></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
 
-        <h5>{{ group.name }} 賽程</h5>
-        {% for match in tournament.matches.all %}
-            {% if match.team1 in group.teams.all and match.team2 in group.teams.all %}
-                <div class="card mb-2">
-                    <div class="card-body d-flex justify-content-between align-items-center">
-                        <span>{{ match.team1.name }}</span>
-                        <span class="badge bg-danger">{{ match.team1_score }} - {{ match.team2_score }}</span>
-                        <span>{{ match.team2.name }}</span>
+                        <!-- 賽程 -->
+                        <h6 class="mb-3">{{ group.name }} 賽程</h6>
+                        <div class="row">
+                            {% for match in tournament.matches.all %}
+                                {% if match.team1 in group.teams.all and match.team2 in group.teams.all %}
+                                    <div class="col-md-6 mb-2">
+                                        <div class="card border-0 shadow-sm">
+                                            <div class="card-body p-2 d-flex justify-content-between align-items-center">
+                                                <span class="text-truncate" style="max-width: 40%;">{{ match.team1.name }}</span>
+                                                <span class="badge bg-{% if match.status == 'completed' %}success{% else %}secondary{% endif %} mx-2">
+                                                    {{ match.team1_score }} - {{ match.team2_score }}
+                                                </span>
+                                                <span class="text-truncate text-end" style="max-width: 40%;">{{ match.team2.name }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% empty %}
+                                <div class="col-12">
+                                    <p class="text-center text-muted">此分組尚無賽程。</p>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
-            {% endif %}
+            </div>
+        {% empty %}
+            <div class="alert alert-info" role="alert">
+                此賽事尚無分組資訊。
+            </div>
         {% endfor %}
-    {% empty %}
-        <p>此賽事尚無分組資訊。</p>
-    {% endfor %}
+    </div>
 
 {% elif tournament.format == 'swiss' %}
 
@@ -181,31 +235,120 @@
         <div class="col-12">
             <h3>對戰樹</h3>
             <hr>
-            <div class="bracket">
-    {% for round_number, matches_in_round in rounds.items %}
-        <div class="round">
-            <h5 class="round-title">第 {{ round_number }} 輪</h5>
-            <div class="match-list">
-                {% for match in matches_in_round %}
-                    <div class="match-up">
-                        <div class="participant {% if match.winner == match.team1 %}winner{% endif %} participant-top"
-                             id="participant-{{ match.id }}-{{ match.team1.id }}"
-                             data-team-id="{{ match.team1.id }}">
-                            <span>{{ match.team1.name | default:"待定" }}</span>
-                            <span>{{ match.team1_score }}</span>
-                        </div>
-                        <div class="participant {% if match.winner == match.team2 %}winner{% endif %} participant-bottom"
-                             id="participant-{{ match.id }}-{{ match.team2.id }}"
-                             data-team-id="{{ match.team2.id }}">
-                            <span>{{ match.team2.name | default:"待定" }}</span>
-                            <span>{{ match.team2_score }}</span>
+            
+            {% if tournament.format == 'double_elimination' %}
+                <!-- 雙淘汰賽：分別顯示勝部和敗部 -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="text-primary">勝部 (Upper Bracket)</h4>
+                        <div class="bracket upper-bracket">
+                            {% for round_number, matches_in_round in rounds.items %}
+                                {% with upper_matches=matches_in_round|dictsort:"is_lower_bracket" %}
+                                {% for match in upper_matches %}
+                                    {% if not match.is_lower_bracket %}
+                                        {% if forloop.first %}
+                                            <div class="round">
+                                                <h6 class="round-title">第 {{ round_number }} 輪</h6>
+                                                <div class="match-list">
+                                        {% endif %}
+                                        
+                                        <div class="match-up">
+                                            <div class="participant {% if match.winner == match.team1 %}winner{% endif %} participant-top">
+                                                <span>{{ match.team1.name | default:"待定" }}</span>
+                                                <span>{{ match.team1_score }}</span>
+                                            </div>
+                                            <div class="participant {% if match.winner == match.team2 %}winner{% endif %} participant-bottom">
+                                                <span>{{ match.team2.name | default:"待定" }}</span>
+                                                <span>{{ match.team2_score }}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        {% if forloop.last %}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% endwith %}
+                            {% endfor %}
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+                    
+                    <div class="col-md-6">
+                        <h4 class="text-danger">敗部 (Lower Bracket)</h4>
+                        <div class="bracket lower-bracket">
+                            {% for round_number, matches_in_round in rounds.items %}
+                                {% with lower_matches=matches_in_round|dictsort:"is_lower_bracket" %}
+                                {% for match in lower_matches %}
+                                    {% if match.is_lower_bracket %}
+                                        {% if forloop.first %}
+                                            <div class="round">
+                                                <h6 class="round-title">第 {{ round_number }} 輪</h6>
+                                                <div class="match-list">
+                                        {% endif %}
+                                        
+                                        <div class="match-up">
+                                            <div class="participant {% if match.winner == match.team1 %}winner{% endif %} participant-top">
+                                                <span>{{ match.team1.name | default:"待定" }}</span>
+                                                <span>{{ match.team1_score }}</span>
+                                            </div>
+                                            <div class="participant {% if match.winner == match.team2 %}winner{% endif %} participant-bottom">
+                                                <span>{{ match.team2.name | default:"待定" }}</span>
+                                                <span>{{ match.team2_score }}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        {% if forloop.last %}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% endwith %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <!-- 單淘汰賽：標準對戰樹 -->
+                <div class="bracket">
+                    {% for round_number, matches_in_round in rounds.items %}
+                        <div class="round">
+                            <h5 class="round-title">
+                                {% if forloop.last %}
+                                    決賽
+                                {% elif forloop.revcounter == 2 %}
+                                    準決賽
+                                {% elif forloop.revcounter == 3 %}
+                                    準準決賽
+                                {% else %}
+                                    第 {{ round_number }} 輪
+                                {% endif %}
+                            </h5>
+                            <div class="match-list">
+                                {% for match in matches_in_round %}
+                                    <div class="match-up">
+                                        <div class="participant {% if match.winner == match.team1 %}winner{% endif %} participant-top"
+                                             id="participant-{{ match.id }}-{{ match.team1.id }}"
+                                             data-team-id="{{ match.team1.id }}">
+                                            <span>{{ match.team1.name | default:"待定" }}</span>
+                                            <span>{{ match.team1_score }}</span>
+                                        </div>
+                                        <div class="participant {% if match.winner == match.team2 %}winner{% endif %} participant-bottom"
+                                             id="participant-{{ match.id }}-{{ match.team2.id }}"
+                                             data-team-id="{{ match.team2.id }}">
+                                            <span>{{ match.team2.name | default:"待定" }}</span>
+                                            <span>{{ match.team2_score }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
-    {% endfor %}
-</div>
+    </div>
 
 {% endif %}
 <div class="row mt-5">

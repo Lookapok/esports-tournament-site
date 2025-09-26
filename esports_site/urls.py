@@ -6,6 +6,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    # 監控儀表板路由 - 必須在 admin/ 之前
+    path('', include('monitoring.urls')),
     path('admin/', admin.site.urls),
     # 這一行負責處理給使用者看的所有網頁
     path('', include('tournaments.urls')),

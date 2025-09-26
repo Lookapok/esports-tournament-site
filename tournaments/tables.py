@@ -1,19 +1,53 @@
-# tournaments/tables.py (這是新檔案)
+# tournaments/tables.py
 import django_tables2 as tables
-from .models import PlayerMatchStat
+from .models import PlayerGameStat
 
 class StatsTable(tables.Table):
-    # 讓選手和隊伍名稱可以連結到對應的頁面
-    player = tables.Column(linkify=lambda record: record.player.get_absolute_url() if hasattr(record.player, 'get_absolute_url') else None)
-    team = tables.Column(linkify=lambda record: record.team.get_absolute_url() if hasattr(record.team, 'get_absolute_url') else None)
+    # --- [修改] 比賽欄位 ---
+    # 使用 lambda 函數自訂連結文字，讓它變短
+    match = tables.LinkColumn(
+        "tournament_detail",
+        # 只顯示「賽事名稱 - R輪次」
+        text=lambda record: f"{record.game.match.tournament.name} - R{record.game.match.round_number}",
+        args=[tables.A("game.match.pk")],
+        verbose_name="比賽"
+    )
+    
+    # --- [修改] 選手欄位 ---
+    # 使用 accessor 直接抓取 player 物件中的 nickname 屬性
+    player = tables.Column(
+        accessor="player.nickname", 
+        verbose_name="選手"
+    )
+
+    # --- [修改] 代表隊伍欄位 ---
+    # 同樣只抓取 team 的 name 屬性
+    team = tables.Column(
+        accessor="team.name",
+        verbose_name="代表隊伍"
+    )
+
+    # --- [修改] 地圖欄位 ---
+    # 使用 accessor 直接抓取關聯的 game 物件中的 map_name 欄位
+    game = tables.Column(
+        accessor="game.map_name", 
+        verbose_name="地圖"
+    )
 
     class Meta:
-        model = PlayerMatchStat
-        # 定義表格要顯示的欄位順序
-        sequence = ('match', 'player', 'team', 'kills', 'deaths', 'assists', 'first_kills', 'acs')
-        # 排除我們不想顯示的欄位
-        exclude = ('id',)
-        # 為表格加上 Bootstrap 的樣式
-        attrs = {"class": "table table-striped table-hover"}
-        # 設定預設的空白提示文字
-        empty_text = "目前尚無符合條件的數據。"
+        model = PlayerGameStat
+        template_name = "django_tables2/bootstrap5.html"
+        
+        # 欄位順序與要顯示的欄位
+        fields = (
+            "match", 
+            "player", 
+            "team", 
+            "game",  # <-- 注意這裡的名字要和上面我們定義的變數名一致
+            "kills", 
+            "deaths", 
+            "assists", 
+            "first_kills", 
+            "acs"
+        )
+        sequence = fields

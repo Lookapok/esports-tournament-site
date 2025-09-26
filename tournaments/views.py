@@ -5,13 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.db.models import Q
 from collections import defaultdict
-
-from .models import Tournament, Match, Team, Player, PlayerMatchStat, Group
+from .models import Tournament, Match, Team, Player, PlayerGameStat, Group
 from .forms import TournamentCreationStep1Form, TeamCreationStep2Form
-from .tables import StatsTable 
+from .tables import StatsTable
+from django.shortcuts import render
+from django.contrib import messages
+from .logic import generate_round_robin_matches, generate_swiss_round_matches, generate_single_elimination_matches, generate_double_elimination_matches
 
-
-# tournaments/views.py
 
 # tournaments/views.py
 
@@ -91,34 +91,42 @@ def team_detail(request, pk):
     return render(request, 'tournaments/team_detail.html', context)
 
 def overall_stats(request):
-    # 預設抓取所有選手的比賽數據
-    stats_list = PlayerMatchStat.objects.select_related('player', 'team', 'match__tournament').all()
+    # --- [核心修正點] ---
+    # 查詢路徑從 'match__tournament' 改為 'game__match__tournament'
+    # 為了讓 tables.py 中的 LinkColumn 能運作，我們也需要預先載入 'game__match'
+    stats_queryset = PlayerGameStat.objects.select_related(
+        'player', 
+        'team', 
+        'game__match', 
+        'game__match__tournament'
+    ).all()
+    # --------------------
 
     # --- 篩選邏輯 (維持不變) ---
     selected_team_id = request.GET.get('team')
     player_name_query = request.GET.get('player_name')
 
     if selected_team_id:
-        stats_list = stats_list.filter(team__id=selected_team_id)
+        # 篩選條件也要跟著更新
+        stats_queryset = stats_queryset.filter(team__id=selected_team_id)
 
     if player_name_query:
-        stats_list = stats_list.filter(player__nickname__icontains=player_name_query)
+        stats_queryset = stats_queryset.filter(player__nickname__icontains=player_name_query)
 
-    # --- 核心修正點 ---
     # 建立 Table 的實例
-    table = StatsTable(stats_list)
+    table = StatsTable(stats_queryset) # <-- 使用修正後的查詢結果
 
     # 告訴 Table 要根據 URL 中的 "sort" 參數來排序
     table.order_by = request.GET.get("sort", "-acs") # 預設按 ACS 降序排列
-    # ------------------
-
+    
     # 準備篩選器下拉選單要用的所有隊伍資料
     all_teams = Team.objects.all()
 
     context = {
-        'table': table, # 我們傳遞的是 table 物件
+        'table': table,
         'all_teams': all_teams,
-        'selected_team_id': selected_team_id,
+        # 讓前端能保留篩選狀態
+        'selected_team_id': int(selected_team_id) if selected_team_id else None,
         'player_name_query': player_name_query,
     }
 
@@ -127,7 +135,8 @@ def overall_stats(request):
 # This is the function that was missing
 def tournament_stats(request, pk):
     tournament = get_object_or_404(Tournament, pk=pk)
-    stats = PlayerMatchStat.objects.filter(match__tournament=tournament).select_related('player', 'team')
+    # 修正關聯查詢路徑：game -> match -> tournament
+    stats = PlayerGameStat.objects.filter(game__match__tournament=tournament).select_related('player', 'team', 'game__match')
     context = {
         'tournament': tournament,
         'stats': stats,
@@ -299,3 +308,69 @@ def player_detail(request, pk):
     }
 
     return render(request, 'tournaments/player_detail.html', context)
+
+@login_required
+def generate_tournament_schedule(request, pk):
+    """自動產生賽事賽程"""
+    tournament = get_object_or_404(Tournament, pk=pk)
+    
+    if request.method == 'POST':
+        try:
+            if tournament.format == 'round_robin':
+                # 檢查是否有分組
+                if not tournament.groups.exists():
+                    messages.error(request, '請先建立分組才能產生賽程')
+                    return redirect('tournament_detail', pk=pk)
+                
+                # 清理舊的積分表
+                from .models import Standing
+                Standing.objects.filter(tournament=tournament).delete()
+                
+                # 為所有分組隊伍建立積分表
+                groups = tournament.groups.all()
+                for group in groups:
+                    for team in group.teams.all():
+                        # 檢查是否已存在，避免重複建立
+                        if not Standing.objects.filter(tournament=tournament, team=team, group=group).exists():
+                            Standing.objects.create(tournament=tournament, team=team, group=group)
+                
+                # 產生比賽
+                count = generate_round_robin_matches(tournament)
+                messages.success(request, f'已成功產生 {count} 場分組循環賽')
+                
+            elif tournament.format == 'swiss':
+                # 確保所有參賽隊伍都有積分紀錄
+                from .models import Standing
+                existing_teams = set(Standing.objects.filter(tournament=tournament).values_list('team_id', flat=True))
+                for team in tournament.participants.all():
+                    if team.id not in existing_teams:
+                        Standing.objects.create(tournament=tournament, team=team)
+                
+                count = generate_swiss_round_matches(tournament)
+                messages.success(request, f'已成功產生 {count} 場瑞士輪比賽')
+                
+            elif tournament.format == 'single_elimination':
+                # 檢查是否有參賽隊伍
+                if not tournament.participants.exists():
+                    messages.error(request, '請先添加參賽隊伍才能產生賽程')
+                    return redirect('tournament_detail', pk=pk)
+                
+                count = generate_single_elimination_matches(tournament)
+                messages.success(request, f'已成功產生 {count} 場單淘汰賽')
+                
+            elif tournament.format == 'double_elimination':
+                # 檢查是否有參賽隊伍
+                if not tournament.participants.exists():
+                    messages.error(request, '請先添加參賽隊伍才能產生賽程')
+                    return redirect('tournament_detail', pk=pk)
+                
+                count = generate_double_elimination_matches(tournament)
+                messages.success(request, f'已成功產生 {count} 場雙淘汰賽')
+                
+            else:
+                messages.error(request, f'不支援的賽制：{tournament.get_format_display()}')
+                
+        except Exception as e:
+            messages.error(request, f'產生賽程時發生錯誤：{str(e)}')
+    
+    return redirect('tournament_detail', pk=pk)

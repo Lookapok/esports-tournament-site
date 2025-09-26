@@ -29,7 +29,12 @@
                 <div class="col-12 col-sm-3 text-secondary mb-2 mb-sm-0">
                     <div>{{ match.tournament.name }}</div>
                     <small>第 {{ match.round_number }} 輪</small>
+
+                         {% if match.map %}
+                             <div class="mt-1"><span class="badge bg-secondary">{{ match.map }}</span></div>
+                         {% endif %}
                 </div>
+
 
                 <div class="col-12 col-sm-6">
                     <div class="row align-items-center g-0">

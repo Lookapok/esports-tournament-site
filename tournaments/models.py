@@ -69,6 +69,7 @@ class Player(models.Model):
 class Match(models.Model):
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='matches', verbose_name="所屬賽事")
     round_number = models.PositiveIntegerField(verbose_name="比賽輪次")
+    map = models.CharField(max_length=100, blank=True, null=True, verbose_name="地圖")
     team1 = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, related_name='matches_as_team1', verbose_name="隊伍一")
     team2 = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, related_name='matches_as_team2', verbose_name="隊伍二")
     team1_score = models.PositiveIntegerField(default=0, verbose_name="隊伍一得分")
@@ -88,6 +89,21 @@ class Match(models.Model):
         t1_name = self.team1.name if self.team1 else "待定 (TBD)"
         t2_name = self.team2.name if self.team2 else "待定 (TBD)"
         return f"{self.tournament.name} - R{self.round_number}{bracket}: {t1_name} vs {t2_name}"
+    
+class Game(models.Model):
+    match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='games', verbose_name="所屬比賽")
+    map_number = models.PositiveIntegerField(verbose_name="地圖編號") # e.g., 1, 2, 3
+    map_name = models.CharField(max_length=100, blank=True, null=True, verbose_name="地圖名稱") # e.g., "Ascent"
+    team1_score = models.PositiveIntegerField(default=0, verbose_name="隊伍一地圖得分") # e.g., 13
+    team2_score = models.PositiveIntegerField(default=0, verbose_name="隊伍二地圖得分") # e.g., 5
+    winner = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True, related_name='won_games', verbose_name="地圖勝者")
+
+    class Meta:
+        unique_together = ('match', 'map_number') # 一場比賽中，地圖編號是唯一的
+        ordering = ['map_number']
+
+    def __str__(self):
+        return f"{self.match} - Map {self.map_number}"
 
 class Group(models.Model):
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='groups', verbose_name="所屬賽事")
@@ -112,9 +128,9 @@ class Standing(models.Model):
     def __str__(self):
         return f"{self.tournament.name} - {self.team.name}: {self.points}分"
 
-class PlayerMatchStat(models.Model):
-    match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='player_stats', verbose_name="對應比賽")
-    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='match_stats', verbose_name="選手")
+class PlayerGameStat(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='player_stats', verbose_name="對應小局")
+    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='game_stats', verbose_name="選手")
     team = models.ForeignKey(Team, on_delete=models.CASCADE, verbose_name="代表隊伍")
     kills = models.PositiveIntegerField(default=0, verbose_name="擊殺")
     deaths = models.PositiveIntegerField(default=0, verbose_name="死亡")
@@ -123,9 +139,10 @@ class PlayerMatchStat(models.Model):
     acs = models.FloatField(default=0.0, verbose_name="ACS")
 
     class Meta:
-        unique_together = ('match', 'player')
-        verbose_name = "選手比賽數據"
-        verbose_name_plural = "選手比賽數據"
+        # unique_together 現在是 game 和 player
+        unique_together = ('game', 'player')
+        verbose_name = "選手單局數據"
+        verbose_name_plural = "選手單局數據"
 
     def __str__(self):
-        return f"{self.match} - {self.player.nickname}: KDA({self.kills}/{self.deaths}/{self.assists})"
+        return f"{self.game} - {self.player.nickname}: KDA({self.kills}/{self.deaths}/{self.assists})"

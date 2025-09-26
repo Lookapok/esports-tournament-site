@@ -1,6 +1,6 @@
 # tournaments/serializers.py
 from rest_framework import serializers
-from .models import Tournament, Team, Match, PlayerMatchStat
+from .models import Tournament, Team, Match, Game, PlayerGameStat
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,8 +18,7 @@ class MatchSerializer(serializers.ModelSerializer):
         # 只允許更新這幾個欄位
         fields = ['team1_score', 'team2_score', 'winner', 'status']
 
-class PlayerMatchStatSerializer(serializers.ModelSerializer):
+class PlayerGameStatSerializer(serializers.ModelSerializer): # <--- 類別名稱也要改
     class Meta:
-        model = PlayerMatchStat
-        # 允許新增時提供所有欄位
+        model = PlayerGameStat # <--- 在這裡更新模型名稱
         fields = '__all__'

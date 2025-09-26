@@ -1,116 +1,285 @@
-/* tournaments/static/css/custom.css (明亮而柔和主題) */
+/* 
+ * 方案 B：幾何圖案背景 - 前端頁面美化
+ * 電競賽事管理系統前端樣式
+ */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
 
 :root {
-    --primary-color: #4A90E2; /* 一個柔和而專業的藍色 */
-    --background-color: lch(86.34% 0.01 296.81); /* 非常淺的藍灰色背景 */
-    --surface-color: #FFFFFF; /* 卡片等元件使用純白色 */
-    --text-color: #333333; /* 深灰色主要文字，比純黑更柔和 */
-    --text-secondary: #777777; /* 中灰色次要文字 */
-    --border-color: #EAECEF; /* 非常淺的灰色邊框 */
-    --success-color: #28a745; /* 綠色 */
-    --error-color: #dc3545; /* 紅色 */
+    --primary-color: #667eea; /* 電競紫藍色 */
+    --secondary-color: #764ba2; /* 深紫色 */
+    --accent-color: #00d4ff; /* 電競藍 */
+    --success-color: #51cf66; /* 勝利綠 */
+    --error-color: #ff6b6b; /* 警告紅 */
+    --text-light: #ffffff; /* 白色文字 */
+    --text-dark: #333333; /* 深色文字 */
+    --glass-bg: rgba(255, 255, 255, 0.1); /* 毛玻璃背景 */
+    --glass-border: rgba(255, 255, 255, 0.2); /* 毛玻璃邊框 */
 }
 
-html {
-    background-color: var(--background-color);
+/* ==============================================
+   基礎背景設定 - 方案 B 幾何圖案
+   ============================================== */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Noto Sans TC', sans-serif;
 }
 
 body {
-    font-family: 'Noto Sans TC', sans-serif;    
-    background-color: var(--background-color);
-    color: var(--text-color);
+    /* 主要背景漸層 */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    position: relative;
+    color: var(--text-light) !important;
 }
 
-/* 導覽列 */
+/* 確保所有文字都是白色可見 */
+body, body * {
+    color: var(--text-light) !important;
+}
+
+/* 主要內容區域背景強化 */
+.container, .container-fluid {
+    background: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 20px !important;
+    padding: 2rem !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+/* 確保特定元素的文字顏色和對比度 */
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff !important;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8) !important;
+    font-weight: 700 !important;
+}
+
+p, span, div, a, li, 
+label, .card-text, .card-title, .card-body,
+.tournament-title, .game-name, .team-name,
+.btn, .nav-link, .navbar-text {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* 連結懸停效果增強 */
+a:hover {
+    color: var(--accent-color) !important;
+    text-decoration: none;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.8) !important;
+}
+
+/* 幾何網格圖案 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -2;
+    animation: gridMove 30s linear infinite;
+    pointer-events: none;
+}
+
+/* 六角形圖案覆蓋層 */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 25px 25px, rgba(255,255,255,0.03) 2px, transparent 2px);
+    background-size: 100px 100px;
+    z-index: -1;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+/* ==============================================
+   導覽列美化 - 毛玻璃效果
+   ============================================== */
+
 .navbar {
-    background-color: var(--surface-color) !important;
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* 加上細微的陰影 */
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(15px) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    transition: all 0.3s ease;
 }
+
 .navbar-logo {
     height: 40px;
     width: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
+
+.navbar .navbar-brand {
+    color: var(--text-light) !important;
+    font-weight: 700 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.navbar .navbar-brand:hover {
+    color: var(--accent-color) !important;
+    transform: scale(1.05);
+}
+
 .navbar .navbar-brand span {
-    color: var(--text-color) !important;
+    color: var(--text-light) !important;
 }
+
 .navbar .navbar-nav .nav-link {
     font-size: 1.1rem;
     font-weight: 500;
-    color: var(--text-secondary) !important;
-    transition: color 0.3s ease;
+    color: rgba(255, 255, 255, 0.8) !important;
+    transition: all 0.3s ease;
+    padding: 8px 16px !important;
+    border-radius: 8px;
+    margin: 0 4px;
 }
+
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .nav-link.active {
-    color: var(--primary-color) !important;
+    color: var(--text-light) !important;
+    background: var(--glass-bg) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+/* ==============================================
+   內容區域美化
+   ============================================== */
 
 /* 主要內容區塊的標題 */
 h1, h2, h3, h4, h5 {
-    color: var(--text-color);
+    color: var(--text-light) !important;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* 毛玻璃卡片樣式 */
+.card {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+.card-header {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    font-weight: 600;
+    color: var(--text-light) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.card-body {
+    color: var(--text-light) !important;
+}
+
+.card-title {
+    color: var(--accent-color) !important;
     font-weight: 700;
 }
 
-/* 卡片樣式 */
-.card {
-    background-color: var(--surface-color);
-    border: 1px solid var(--border-color);
-    border-radius: 8px; /* 增加圓角，看起來更柔和 */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+/* ==============================================
+   按鈕美化 - 電競風格
+   ============================================== */
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) !important;
+    border: 2px solid var(--glass-border) !important;
+    color: var(--text-light) !important;
+    font-weight: 600;
+    border-radius: 25px !important;
+    padding: 0.7rem 2rem;
     transition: all 0.3s ease;
-}
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-.card-header {
-    background-color: var(--background-color); /* 讓標頭背景色和整體背景色一致 */
-    border-bottom: 1px solid var(--border-color);
-    font-weight: 500;
-    color: var(--text-color); /* 確保文字顏色是主要的深灰色文字 */
-}
-.card-body {
-    color: var(--text-color);
-}
-.card-title {
-    color: var(--primary-color);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
 }
 
-/* 按鈕 */
-.btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: #ffffff;
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4) !important;
+    border-color: var(--accent-color) !important;
+    color: var(--text-light) !important;
+}
+
+.btn-secondary, .btn-outline-primary {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid var(--glass-border) !important;
+    color: var(--text-light) !important;
     font-weight: 500;
-    border-radius: 50px; /* 圓角按鈕 */
-    padding: 0.5rem 1.5rem;
+    border-radius: 20px !important;
     transition: all 0.3s ease;
 }
-.btn-primary:hover {
-    opacity: 0.85;
-    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.4);
+
+.btn-secondary:hover, .btn-outline-primary:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-2px);
+    color: var(--text-light) !important;
 }
+
+/* ==============================================
+   團隊和競賽元件美化
+   ============================================== */
 
 /* 隊伍 Logo 容器 (所有參賽隊伍列表中的卡片) */
 .team-logo-container {
-    width: 120px; /* 固定寬度 */
-    height: 120px; /* 固定高度 */
-    margin: 0 auto 15px auto; /* 居中並留出下邊距 */
-    border-radius: 8px; /* 方形圓角容器 */
-    border: 1px solid var(--border-color);
-    display: flex; /* 使用 flexbox 讓圖片或文字居中 */
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px auto;
+    border-radius: 15px !important;
+    border: 2px solid var(--glass-border) !important;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* 確保超出容器的圖片部分被隱藏 */
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.team-logo-container img {
-    max-width: 100%; /* 確保圖片不超出容器 */
-    max-height: 100%; /* 確保圖片不超出容器 */
-    object-fit: contain; /* 保持圖片比例，並在容器內完整顯示 */
+.team-logo-container:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+}
+
+/* 隊伍 Logo 圖片 */
+.team-logo, .team-logo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: brightness(1.1);
+    transition: filter 0.3s ease;
 }
 
 .no-logo-placeholder {
@@ -172,60 +341,143 @@ h1, h2, h3, h4, h5 {
     color: var(--error-color);
     background-color: rgba(220, 53, 69, 0.1);
 }
-/* --- 選手卡片樣式 --- */
-.player-card {
-    border-radius: 10px;
-    transition: all 0.3s ease;
+/* 隊伍名稱增強樣式 */
+.team-name {
+    font-weight: 600;
+    margin-top: 15px;
+    text-align: center;
+    color: var(--text-primary) !important;
+    font-size: 1.1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
+
+/* 競賽動作按鈕樣式增強 */
+.btn-join {
+    background: linear-gradient(135deg, #00d4ff, #667eea) !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 25px !important;
+    cursor: pointer;
+    transition: all 0.3s ease !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.btn-join:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5) !important;
+    filter: brightness(1.1) !important;
+}
+
+.btn-leave {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24) !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 25px !important;
+    cursor: pointer;
+    transition: all 0.3s ease !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.btn-leave:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5) !important;
+    filter: brightness(1.1) !important;
+}
+
+/* --- 選手卡片樣式增強 --- */
+.player-card {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid var(--glass-border) !important;
+    border-radius: 20px !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
 .player-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 15px 30px rgba(0, 212, 255, 0.3) !important;
 }
 
 .player-avatar-wrapper {
     width: 80px;
     height: 80px;
-    border-radius: 50%; /* 圓形頭像框 */
+    border-radius: 50%;
     overflow: hidden;
-    border: 2px solid var(--primary-color); /* 頭像邊框 */
+    border: 3px solid var(--accent-color) !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--surface-color); /* 頭像背景色 */
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(5px) !important;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.player-avatar-wrapper:hover {
+    transform: scale(1.1);
+    border-color: rgba(0, 212, 255, 0.8) !important;
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
 }
 
 .player-avatar-placeholder {
     width: 100%;
     height: 100%;
     font-size: 2rem;
+    color: var(--accent-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* 如果將來有圖片頭像，可以這樣處理 */
+/* 選手頭像圖片 */
 .player-avatar-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(1.1) contrast(1.1);
+    transition: filter 0.3s ease;
 }
 
-/* tournaments/static/css/custom.css */
+/* ==============================================
+   表格和表單美化
+   ============================================== */
 
-/* --- 選手個人卡片/頭像樣式 --- */
+/* --- 選手個人卡片/頭像樣式增強 --- */
 .player-avatar-container {
     width: 120px;
     height: 120px;
-    border-radius: 50%; /* 圓形頭像 */
+    border-radius: 50%;
     overflow: hidden;
-    border: 3px solid var(--border-color);
-    background-color: rgba(0, 0, 0, 0.2);
+    border: 4px solid var(--accent-color) !important;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px) !important;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.player-avatar-container:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 12px 35px rgba(0, 212, 255, 0.5);
 }
 
 .player-avatar-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* cover 會裁切圖片以填滿圓形，適合頭像 */
+    object-fit: cover;
+    filter: brightness(1.2) contrast(1.1);
+    transition: filter 0.3s ease;
 }
 
 .no-avatar-placeholder {
@@ -236,5 +488,472 @@ h1, h2, h3, h4, h5 {
     justify-content: center;
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--text-secondary);
+    color: var(--accent-color) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ==============================================
+   電競風格表格和分組顯示美化
+   ============================================== */
+
+/* 主要競賽容器 */
+.tournament-container {
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 20px !important;
+    padding: 2rem;
+    margin: 1rem 0;
+    border: 2px solid rgba(0, 212, 255, 0.3) !important;
+    box-shadow: 
+        0 0 30px rgba(0, 212, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Django Tables2 表格全新設計 */
+.table {
+    background: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(15px) !important;
+    border-radius: 15px !important;
+    overflow: hidden;
+    border: 2px solid rgba(0, 212, 255, 0.4) !important;
+    box-shadow: 
+        0 0 20px rgba(0, 212, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+}
+
+.table th {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(102, 126, 234, 0.3)) !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    border-color: rgba(0, 212, 255, 0.5) !important;
+    white-space: nowrap;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    padding: 1rem 1.5rem;
+    position: relative;
+}
+
+.table th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.8), transparent);
+}
+
+.table td {
+    color: #ffffff !important;
+    border-color: rgba(0, 212, 255, 0.2) !important;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 1rem 1.5rem;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.table-striped tbody tr:nth-of-type(odd) td {
+    background: rgba(0, 212, 255, 0.05) !important;
+}
+
+.table-hover tbody tr:hover td {
+    background: rgba(0, 212, 255, 0.15) !important;
+    color: #00d4ff !important;
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+/* 分組標題美化 */
+.group-header, h2, h3 {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(102, 126, 234, 0.2)) !important;
+    color: #ffffff !important;
+    padding: 1.5rem 2rem !important;
+    border-radius: 15px !important;
+    margin: 2rem 0 1rem 0 !important;
+    border-left: 5px solid var(--accent-color) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.group-header::before, h2::before, h3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { transform: translateX(-100%); opacity: 0; }
+    50% { transform: translateX(100%); opacity: 1; }
+}
+
+/* 比賽卡片樣式 */
+.match-card {
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 2px solid rgba(0, 212, 255, 0.3) !important;
+    border-radius: 15px !important;
+    padding: 1.5rem !important;
+    margin: 1rem 0 !important;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.match-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+}
+
+.match-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(0, 212, 255, 0.6) !important;
+    box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2) !important;
+}
+
+/* 比分樣式增強 */
+.score {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 212, 255, 0.1)) !important;
+    color: #ffffff !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+    border: 1px solid rgba(0, 212, 255, 0.4) !important;
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+}
+
+/* ==============================================
+   表單元件美化
+   ============================================== */
+
+.form-control, .form-select {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid var(--glass-border) !important;
+    border-radius: 15px !important;
+    color: var(--text-light) !important;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 0.25rem rgba(0, 212, 255, 0.25) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.form-label {
+    color: var(--text-light) !important;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.75rem;
+}
+
+/* 複選框和單選框美化 */
+.form-check-input[type="checkbox"], .form-check-input[type="radio"] {
+    background: var(--glass-bg) !important;
+    border: 2px solid var(--glass-border) !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+}
+
+.form-check-label {
+    color: var(--text-light) !important;
+    font-weight: 500;
+}
+
+/* ==============================================
+   分頁器美化
+   ============================================== */
+
+.pagination {
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.page-link {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid var(--glass-border) !important;
+    color: var(--text-light) !important;
+    margin: 0 0.25rem;
+    border-radius: 10px !important;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.page-link:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: var(--accent-color) !important;
+    color: var(--accent-color) !important;
+    transform: translateY(-2px);
+}
+
+.page-item.active .page-link {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    border-color: var(--accent-color) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+/* ==============================================
+   彈出提示和警告框美化
+   ============================================== */
+
+.alert {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid var(--glass-border) !important;
+    border-radius: 15px !important;
+    color: var(--text-light) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.alert-success {
+    border-color: rgba(40, 167, 69, 0.5) !important;
+    background: rgba(40, 167, 69, 0.1) !important;
+}
+
+.alert-warning {
+    border-color: rgba(255, 193, 7, 0.5) !important;
+    background: rgba(255, 193, 7, 0.1) !important;
+}
+
+.alert-danger {
+    border-color: rgba(220, 53, 69, 0.5) !important;
+    background: rgba(220, 53, 69, 0.1) !important;
+}
+
+.alert-info {
+    border-color: rgba(13, 202, 240, 0.5) !important;
+    background: rgba(13, 202, 240, 0.1) !important;
+}
+
+/* ==============================================
+   強制文字顏色設定 - 覆蓋 Bootstrap 預設樣式
+   ============================================== */
+
+/* 覆蓋所有可能的文字顏色設定 */
+* {
+    color: var(--text-light) !important;
+}
+
+/* Bootstrap 特定元素覆蓋 */
+.container, .container-fluid,
+.row, .col, .col-*, 
+.card, .card-body, .card-header, .card-footer,
+.alert, .badge, .breadcrumb, .dropdown-menu,
+.list-group, .list-group-item,
+.modal, .modal-body, .modal-header, .modal-footer {
+    color: var(--text-light) !important;
+}
+
+/* 表格內容強制白色 */
+.table, .table th, .table td,
+.table-striped, .table-hover,
+table, th, td {
+    color: var(--text-light) !important;
+}
+
+/* 表單元件文字顏色 */
+.form-control, .form-select, .form-check-label,
+input, select, textarea, option {
+    color: var(--text-light) !important;
+}
+
+/* 按鈕文字確保可見 */
+.btn, button {
+    color: var(--text-light) !important;
+}
+
+/* 導航元件 */
+.nav, .navbar, .nav-link, .navbar-nav,
+.breadcrumb, .breadcrumb-item {
+    color: var(--text-light) !important;
+}
+
+/* 分頁器 */
+.pagination, .page-link {
+    color: var(--text-light) !important;
+}
+
+/* 確保文字陰影增強可讀性 */
+body * {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* ==============================================
+   響應式設計增強
+   ============================================== */
+
+@media (max-width: 768px) {
+    .geometric-pattern {
+        opacity: 0.3;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .team-logo-container {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .player-avatar-container {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ==============================================
+   頁面標題和遊戲資訊電競風格
+   ============================================== */
+
+/* 主標題樣式 */
+h1.tournament-title {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 212, 255, 0.2)) !important;
+    color: #ffffff !important;
+    padding: 2rem 3rem !important;
+    border-radius: 20px !important;
+    text-align: center !important;
+    font-weight: 900 !important;
+    font-size: 3rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 3px !important;
+    text-shadow: 
+        0 0 10px rgba(0, 212, 255, 0.8),
+        0 4px 8px rgba(0, 0, 0, 0.8) !important;
+    border: 3px solid rgba(0, 212, 255, 0.5) !important;
+    margin: 2rem 0 !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 遊戲名稱樣式 */
+.game-info {
+    background: rgba(0, 0, 0, 0.7) !important;
+    color: var(--accent-color) !important;
+    padding: 1rem 2rem !important;
+    border-radius: 15px !important;
+    font-weight: 600 !important;
+    font-size: 1.2rem !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+    border-left: 4px solid var(--accent-color) !important;
+    margin-bottom: 2rem !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* 按鈕樣式增強 - 電競風格 */
+.btn {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 212, 255, 0.3)) !important;
+    border: 2px solid var(--accent-color) !important;
+    color: #ffffff !important;
+    padding: 0.8rem 2rem !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    transition: all 0.3s ease !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: 
+        0 0 20px rgba(0, 212, 255, 0.6),
+        0 8px 25px rgba(0, 0, 0, 0.3) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+/* 數據統計樣式 */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    background: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 2px solid rgba(0, 212, 255, 0.3) !important;
+    border-radius: 15px !important;
+    padding: 2rem !important;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 212, 255, 0.6) !important;
+    box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2) !important;
+}
+
+.stat-number {
+    font-size: 3rem !important;
+    font-weight: 900 !important;
+    color: var(--accent-color) !important;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.8) !important;
+    display: block;
+}
+
+.stat-label {
+    font-size: 1rem !important;
+    color: #ffffff !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin-top: 0.5rem;
 }
