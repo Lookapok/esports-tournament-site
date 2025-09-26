@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['winnerstakesall.onrender.com', '127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'monitoring.apps.MonitoringConfig',
     'tournaments.apps.TournamentsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,12 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'rest_framework.authtoken', # <-- Add comma here
     'django_tables2',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # <-- 把它加在這裡
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
