@@ -2,6 +2,31 @@
 {% load django_tables2 %} {% block title %}數據統計中心{% endblock %}
 
 {% block content %}
+<style>
+/* 強制數據統計表格使用白色文字 */
+.table th, .table td,
+table th, table td,
+thead th, tbody td {
+    color: #ffffff !important;
+    background-color: transparent !important;
+}
+.table th, table th, thead th {
+    background: linear-gradient(135deg, #ff4757 0%, #dc3545 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 1) !important;
+}
+.table td, table td, tbody td {
+    background: rgba(45, 45, 45, 0.9) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+.table {
+    background: rgba(45, 45, 45, 0.9) !important;
+    border: 2px solid rgba(255, 71, 87, 0.4) !important;
+}
+</style>
     <h1 class="mb-4">數據統計中心</h1>
 
     <div class="card card-body mb-4">

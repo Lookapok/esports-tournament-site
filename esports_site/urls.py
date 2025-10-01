@@ -4,16 +4,24 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 
 urlpatterns = [
-    # 監控儀表板路由 - 必須在 admin/ 之前
-    path('', include('monitoring.urls')),
+    # Admin 路由
     path('admin/', admin.site.urls),
-    # 這一行負責處理給使用者看的所有網頁
+    
+    # 監控儀表板路由
+    path('monitoring/', include('monitoring.urls')),
+    
+    # 主要應用路由
     path('', include('tournaments.urls')),
 
-    # --- 新增下面這一行，專門處理 API ---
+    # API 路由
     path('api/', include('tournaments.api_urls')),
+    
+    # 大寫 API 重定向到小寫 (可選)
+    path('API/', RedirectView.as_view(url='/api/', permanent=True)),
+    path('API', RedirectView.as_view(url='/api/', permanent=True)),
 ]
 
 if settings.DEBUG:

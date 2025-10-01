@@ -6,10 +6,35 @@ from rest_framework import status
 from .models import Tournament, Team, Match, Game, PlayerGameStat, Player
 from .serializers import TournamentSerializer, TeamSerializer, MatchSerializer, PlayerGameStatSerializer
 from django.db import transaction
+from django.urls import reverse
 import logging
 
 # 取得 API 專用的日誌記錄器
 api_logger = logging.getLogger('tournaments.api')
+
+class APIRootView(APIView):
+    """
+    API 根端點 - 顯示所有可用的 API 路由
+    """
+    permission_classes = [AllowAny]
+    
+    def get(self, request, format=None):
+        return Response({
+            'message': '歡迎使用電競賽事管理系統 API',
+            'version': '1.0',
+            'endpoints': {
+                'tournaments': request.build_absolute_uri(reverse('api_tournament_list')),
+                'teams': request.build_absolute_uri(reverse('api_team_list')),
+                'match_detail': 'api/matches/{id}/',
+                'match_stats': 'api/matches/{id}/stats/',
+            },
+            'documentation': {
+                'tournaments': 'GET: 獲取所有賽事, POST: 創建新賽事',
+                'teams': 'POST: 創建新隊伍',
+                'match_detail': 'GET: 獲取比賽詳情',
+                'match_stats': 'POST: 提交比賽統計資料',
+            }
+        })
 
 class TournamentListAPI(APIView):
     def get(self, request):
