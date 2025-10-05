@@ -25,7 +25,13 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['winnerstakesall.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = [
+    'winnerstakesall.onrender.com', 
+    '127.0.0.1', 
+    'localhost',
+    # Render.com 自動生成的網域
+    '.onrender.com',
+]
 
 # ===== HTTPS 安全設定 =====
 # 只在生產環境啟用 HTTPS 強制重定向
