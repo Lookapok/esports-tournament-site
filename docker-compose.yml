@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres-esports
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-your-password}
+      POSTGRES_DB: ${DB_NAME:-esports_dev}
+      POSTGRES_USER: ${DB_USER:-postgres}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # 如果有備份檔案，取消註解下一行
+      # - ./esports_backup.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-esports_dev}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    driver: local
+
+# 使用方法：
+# 1. 複製 .env.example 到 .env 並設定資料庫變數
+# 2. 運行：docker-compose up -d
+# 3. 還原備份：docker exec -i postgres-esports psql -U postgres esports_dev < esports_backup.sql
