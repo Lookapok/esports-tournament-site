@@ -17,7 +17,10 @@ db.sqlite3
 
 # Django static and media files
 /staticfiles/
-/media/
+# 注意：為了解決 Render 部署 LOGO 顯示問題，我們需要將現有的 team_logos 包含在 Git 中
+# 但仍然忽略其他 media 文件
+/media/player_avatars/
+# /media/team_logos/  # 註解掉這行，讓 team_logos 被包含在 Git 中
 
 # Log files
 /logs/
