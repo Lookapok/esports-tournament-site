@@ -25,23 +25,47 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-# 本地開發專用設定
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# 允許的主機設定 - 支援本地開發和 Render 部署
+ALLOWED_HOSTS = [
+    '127.0.0.1', 
+    'localhost',
+    'winnerstakesall.onrender.com',  # Render 部署域名
+    '.onrender.com',  # 允許所有 Render 子域名
+]
 
-# ===== 本地開發 - 強制禁用所有 HTTPS 設定 =====
-# 無論 DEBUG 狀態如何，強制禁用 HTTPS（本地開發用）
-SECURE_SSL_REDIRECT = False
-SECURE_HSTS_SECONDS = 0
-SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-SECURE_HSTS_PRELOAD = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-
-# 禁用安全代理設定
-SECURE_PROXY_SSL_HEADER = None
-
-# 確保不會有其他 HTTPS 相關的中間件
-USE_TLS = False
+# ===== 環境相關安全設定 =====
+# 根據環境動態調整安全設定
+if not DEBUG:  # 生產環境
+    # 啟用 HTTPS 安全設定（僅生產環境）
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000  # 1年
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    
+    # Render 使用代理，需要設定代理標頭
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+    # CSRF 信任的來源
+    CSRF_TRUSTED_ORIGINS = [
+        'https://winnerstakesall.onrender.com',
+        'https://*.onrender.com',
+    ]
+else:  # 本地開發環境
+    # 本地開發 - 強制禁用所有 HTTPS 設定
+    SECURE_SSL_REDIRECT = False
+    SECURE_HSTS_SECONDS = 0
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_PRELOAD = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    
+    # 禁用安全代理設定
+    SECURE_PROXY_SSL_HEADER = None
+    
+    # 確保不會有其他 HTTPS 相關的中間件
+    USE_TLS = False
 
 # 通用安全設定
 SESSION_COOKIE_HTTPONLY = True
@@ -120,17 +144,28 @@ WSGI_APPLICATION = 'esports_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# PostgreSQL 設定
-DATABASES = {
-    'default': {
-        'ENGINE': config('DB_ENGINE', default='django.db.backends.sqlite3'),
-        'NAME': config('DB_NAME', default=BASE_DIR / 'db.sqlite3'),
-        'USER': config('DB_USER', default=''),
-        'PASSWORD': config('DB_PASSWORD', default=''),
-        'HOST': config('DB_HOST', default=''),
-        'PORT': config('DB_PORT', default=''),
+import dj_database_url
+
+# 資料庫配置 - 支援本地和生產環境
+DATABASE_URL = config('DATABASE_URL', default='')
+
+if DATABASE_URL:
+    # 生產環境：使用 Render 提供的 PostgreSQL
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
     }
-}
+else:
+    # 本地開發環境：PostgreSQL 或 SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': config('DB_ENGINE', default='django.db.backends.sqlite3'),
+            'NAME': config('DB_NAME', default=BASE_DIR / 'db.sqlite3'),
+            'USER': config('DB_USER', default=''),
+            'PASSWORD': config('DB_PASSWORD', default=''),
+            'HOST': config('DB_HOST', default=''),
+            'PORT': config('DB_PORT', default=''),
+        }
+    }
 
 # Cache configuration
 CACHES = {
