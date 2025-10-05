@@ -34,9 +34,11 @@ ALLOWED_HOSTS = [
 ]
 
 # ===== 環境相關安全設定 =====
-# 根據環境動態調整安全設定
-if not DEBUG:  # 生產環境
-    # 啟用 HTTPS 安全設定（僅生產環境）
+# 檢查是否在 Render 生產環境
+IS_RENDER = config('RENDER', default=False, cast=bool)
+
+if IS_RENDER:  # Render 生產環境
+    # 啟用 HTTPS 安全設定（僅 Render 生產環境）
     SECURE_SSL_REDIRECT = True
     SECURE_HSTS_SECONDS = 31536000  # 1年
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -52,20 +54,25 @@ if not DEBUG:  # 生產環境
         'https://winnerstakesall.onrender.com',
         'https://*.onrender.com',
     ]
-else:  # 本地開發環境
-    # 本地開發 - 強制禁用所有 HTTPS 設定
-    SECURE_SSL_REDIRECT = False
+else:  # 本地開發環境（支援 HTTP 和 HTTPS）
+    # 本地開發 - 保持彈性，支援 HTTP 和 HTTPS
+    SECURE_SSL_REDIRECT = False  # 不強制重定向到 HTTPS
     SECURE_HSTS_SECONDS = 0
     SECURE_HSTS_INCLUDE_SUBDOMAINS = False
     SECURE_HSTS_PRELOAD = False
-    SESSION_COOKIE_SECURE = False
-    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False  # 允許 HTTP cookies
+    CSRF_COOKIE_SECURE = False     # 允許 HTTP CSRF cookies
     
-    # 禁用安全代理設定
+    # 不設定代理標頭
     SECURE_PROXY_SSL_HEADER = None
     
-    # 確保不會有其他 HTTPS 相關的中間件
-    USE_TLS = False
+    # 本地 CSRF 信任來源（支援 HTTP 和 HTTPS）
+    CSRF_TRUSTED_ORIGINS = [
+        'http://127.0.0.1:8000',
+        'http://localhost:8000',
+        'https://127.0.0.1:8000',
+        'https://localhost:8000',
+    ]
 
 # 通用安全設定
 SESSION_COOKIE_HTTPONLY = True
