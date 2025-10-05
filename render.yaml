@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: winnerstakesall
+    env: python
+    buildCommand: bash build.sh
+    startCommand: gunicorn esports_site.wsgi:application
+    envVars:
+      - key: RENDER
+        value: "true"
+      - key: DEBUG
+        value: "false"
