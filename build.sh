@@ -21,4 +21,13 @@ python manage.py load_initial_data
 echo "🎨 收集靜態檔案..."
 python manage.py collectstatic --noinput
 
+# 檢查 media 文件是否存在
+echo "📁 檢查 media 文件..."
+if [ -d "media/team_logos" ]; then
+    echo "✅ team_logos 目錄存在，包含 $(ls media/team_logos | wc -l) 個文件"
+    ls media/team_logos | head -5
+else
+    echo "❌ team_logos 目錄不存在！"
+fi
+
 echo "🎉 部署完成！Winner Takes All 錦標賽系統已就緒！"

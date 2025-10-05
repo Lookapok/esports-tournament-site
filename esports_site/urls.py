@@ -1,10 +1,11 @@
 # esports_site/urls.py
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
+from django.views.static import serve
 
 urlpatterns = [
     # Admin 路由
@@ -24,6 +25,13 @@ urlpatterns = [
     path('API', RedirectView.as_view(url='/api/', permanent=True)),
 ]
 
-# ===== Media 文件處理 - 適用於所有環境 =====
-# 為了解決 Render 生產環境 LOGO 顯示問題，我們讓所有環境都能服務 media 文件
+# ===== Media 文件處理 - 強制使用 Django 服務所有環境 =====
+# 使用 Django 的內建 serve 視圖來服務 media 文件，解決 Render 生產環境問題
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
+]
+
+# 額外的靜態文件配置（備用）
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
