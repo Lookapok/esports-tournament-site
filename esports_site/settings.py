@@ -25,35 +25,28 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = [
-    'winnerstakesall.onrender.com', 
-    '127.0.0.1', 
-    'localhost',
-    # Render.com 自動生成的網域
-    '.onrender.com',
-]
+# 本地開發專用設定
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-# ===== HTTPS 安全設定 =====
-# 只在生產環境啟用 HTTPS 強制重定向
-SECURE_SSL_REDIRECT = not DEBUG
+# ===== 本地開發 - 強制禁用所有 HTTPS 設定 =====
+# 無論 DEBUG 狀態如何，強制禁用 HTTPS（本地開發用）
+SECURE_SSL_REDIRECT = False
+SECURE_HSTS_SECONDS = 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
-# HTTP Strict Transport Security (HSTS) 設定
-SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0  # 1年 (365天 * 24小時 * 3600秒)
-SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
-SECURE_HSTS_PRELOAD = not DEBUG
+# 禁用安全代理設定
+SECURE_PROXY_SSL_HEADER = None
 
-# 安全代理設定 (適用於 Nginx, Cloudflare 等反向代理)
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# 確保不會有其他 HTTPS 相關的中間件
+USE_TLS = False
 
-# ===== Cookie 和 Session 安全設定 =====
-# Session Cookie 安全設定
-SESSION_COOKIE_SECURE = not DEBUG  # 只在 HTTPS 下傳輸 Session Cookie
-SESSION_COOKIE_HTTPONLY = True  # 防止 JavaScript 存取 Session Cookie
-SESSION_COOKIE_SAMESITE = 'Lax'  # 防止跨站請求偽造攻擊
-SESSION_COOKIE_AGE = 3600 * 24 * 7  # Session 過期時間：7天
-
-# CSRF Cookie 安全設定
-CSRF_COOKIE_SECURE = not DEBUG  # 只在 HTTPS 下傳輸 CSRF Token
+# 通用安全設定
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_AGE = 3600 * 24 * 7  # 7天
 CSRF_COOKIE_HTTPONLY = True  # 防止 JavaScript 存取 CSRF Token
 CSRF_COOKIE_SAMESITE = 'Lax'  # 防止跨站請求偽造攻擊
 

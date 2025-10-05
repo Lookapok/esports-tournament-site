@@ -307,9 +307,9 @@ def player_detail(request, pk):
 
     # 從選手身上，反向查詢所有他打過的比賽數據
     # .select_related() 用來優化查詢，一次性抓取相關的比賽和賽事資訊
-    stats = player.game_stats.select_related(
-        'game__match', 'game__match__tournament', 'game__match__team1', 'game__match__team2'
-    ).order_by('-game__match__match_time') # 讓最新的比賽顯示在最上面
+    stats = player.match_stats.select_related(
+        'match', 'match__tournament', 'match__team1', 'match__team2'
+    ).order_by('-match__match_time') # 讓最新的比賽顯示在最上面
 
     context = {
         'player': player,
@@ -319,7 +319,6 @@ def player_detail(request, pk):
     return render(request, 'tournaments/player_detail.html', context)
 
 @login_required
-@user_passes_test(is_superuser, login_url='/admin/')
 def generate_tournament_schedule(request, pk):
     """自動產生賽事賽程"""
     tournament = get_object_or_404(Tournament, pk=pk)

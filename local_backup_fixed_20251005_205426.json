@@ -5,52 +5,50 @@
     "fields": {
       "name": "WTACS S1",
       "game": "Valorant",
-      "start_date": "2025-08-15T10:12:54Z",
-      "end_date": "2026-01-18T21:30:00Z",
+      "start_date": "2025-08-15T10:12:54+00:00",
+      "end_date": "2026-01-18T21:30:00+00:00",
       "rules": "本賽事將採三個階段，直至產生最終總冠軍。雙敗淘汰賽將分為勝部組（Winners Bracket）與敗部組（Losers Bracket），每支隊伍在被淘汰兩次後才正式出局。\r\n主要階段劃分為：\r\n\r\n第一階段(32至16強)：分組循環賽\r\n第二階段(16至8強)：瑞士輪\r\n第三階段(八強至冠亞)：雙敗淘汰賽",
-      "status": "upcoming",
+      "status": "ongoing",
       "format": "round_robin",
       "participants": [
-        27,
         28,
-        29,
         30,
         31,
         32,
         33,
         34,
         35,
-        36,
         38,
         39,
-        40,
         41,
-        47,
         48,
         49,
-        50,
-        51,
-        52,
-        53,
-        54,
-        55,
-        56,
+        59,
+        63,
+        36,
+        40,
+        60,
         57,
         58,
-        59,
-        60,
-        61,
+        50,
+        65,
         62,
-        63
+        56,
+        51,
+        64,
+        47,
+        70,
+        71,
+        72,
+        73,
+        74,
+        53,
+        52,
+        27,
+        29,
+        75,
+        76
       ]
-    }
-  },
-  {
-    "model": "tournaments.team",
-    "pk": 27,
-    "fields": {
-      "name": "稻江高級商業職業學校",
-      "logo": "team_logos/DJT.png"
     }
   },
   {
@@ -59,14 +57,6 @@
     "fields": {
       "name": "宜寧高級中學",
       "logo": "team_logos/10.png"
-    }
-  },
-  {
-    "model": "tournaments.team",
-    "pk": 29,
-    "fields": {
-      "name": "正修科技大學",
-      "logo": "team_logos/正修龍logo去背藍.png"
     }
   },
   {
@@ -119,14 +109,6 @@
   },
   {
     "model": "tournaments.team",
-    "pk": 36,
-    "fields": {
-      "name": "嘉義市私立興華中學",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
     "pk": 38,
     "fields": {
       "name": "臺北市立松山高級中學-THE FORTH CHOICE",
@@ -143,25 +125,9 @@
   },
   {
     "model": "tournaments.team",
-    "pk": 40,
-    "fields": {
-      "name": "臺中市立清水高級中等學校-清高可愛男娘中心",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
     "pk": 41,
     "fields": {
       "name": "臺中市私立新民高級中學",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
-    "pk": 47,
-    "fields": {
-      "name": "台北海洋科技大學-台北海大狂獵鯊",
       "logo": ""
     }
   },
@@ -183,78 +149,6 @@
   },
   {
     "model": "tournaments.team",
-    "pk": 50,
-    "fields": {
-      "name": "樹人高級家事商業職業學校-樹人家商SJHS",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
-    "pk": 51,
-    "fields": {
-      "name": "健行科技大學-EK 1v50",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
-    "pk": 52,
-    "fields": {
-      "name": "黎明技術學院-黎明企鵝",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
-    "pk": 53,
-    "fields": {
-      "name": "黎明技術學院-黎明企鵝鵝",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
-    "pk": 54,
-    "fields": {
-      "name": "臺北市立松山高級中學-THE FIFTH CHOICE",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
-    "pk": 55,
-    "fields": {
-      "name": "新北市立金山高級中學-huangg沒浮木",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
-    "pk": 56,
-    "fields": {
-      "name": "稻江商職-稻江哈士奇II",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
-    "pk": 57,
-    "fields": {
-      "name": "高雄市私立立志高級中學-LCVS",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
-    "pk": 58,
-    "fields": {
-      "name": "高雄市私立立志高級中學-立志猩勢力",
-      "logo": ""
-    }
-  },
-  {
-    "model": "tournaments.team",
     "pk": 59,
     "fields": {
       "name": "國立成功大學附屬臺南工業高級中等學校-Five gun boy",
@@ -263,18 +157,66 @@
   },
   {
     "model": "tournaments.team",
-    "pk": 60,
+    "pk": 63,
     "fields": {
-      "name": "僑光科技大學-OCU 僑光黑鯊",
-      "logo": ""
+      "name": "台北科技大學-TeamShell",
+      "logo": "team_logos/北科電競社LOGO4167.jpg"
     }
   },
   {
     "model": "tournaments.team",
-    "pk": 61,
+    "pk": 36,
     "fields": {
-      "name": "台北科技大學-安俞真的狗",
-      "logo": ""
+      "name": "嘉義市私立興華中學",
+      "logo": "team_logos/興華LOGO去背版.png"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 40,
+    "fields": {
+      "name": "臺中市立清水高級中等學校-清高可愛男娘中心",
+      "logo": "team_logos/CFC.jpg"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 60,
+    "fields": {
+      "name": "僑光科技大學-OCU 僑光黑鯊",
+      "logo": "team_logos/OCU.jpg"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 57,
+    "fields": {
+      "name": "高雄市私立立志高級中學-LCVS",
+      "logo": "team_logos/lcvs1.jpg"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 58,
+    "fields": {
+      "name": "高雄市私立立志高級中學-立志猩勢力",
+      "logo": "team_logos/lcvs2.jpg"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 50,
+    "fields": {
+      "name": "樹人高級家事商業職業學校-樹人家商SJHS",
+      "logo": "team_logos/樹人logo-v0.png"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 65,
+    "fields": {
+      "name": "台北科技大學-北邊的老虎",
+      "logo": "team_logos/北科電競社LOGO4167_UdGbwy2.jpg"
     }
   },
   {
@@ -282,15 +224,127 @@
     "pk": 62,
     "fields": {
       "name": "中國文化大學-往日記憶如海綿中的水全部擠壓出來，我回到了特戰開服二零年的那一天",
+      "logo": "team_logos/重生歸來我為天.png"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 56,
+    "fields": {
+      "name": "稻江商職-稻江哈士奇II",
+      "logo": "team_logos/DJT_0SP0Vth.png"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 51,
+    "fields": {
+      "name": "健行科技大學-EK 1v50",
+      "logo": "team_logos/健行_oPkk3iU.jpg"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 64,
+    "fields": {
+      "name": "健行科技大學-不要再murmur了",
+      "logo": "team_logos/健行_wJdZLLI.jpg"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 47,
+    "fields": {
+      "name": "台北海洋科技大學-台北海大狂獵鯊",
+      "logo": "team_logos/總.png"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 70,
+    "fields": {
+      "name": "啟英高級中學-CYVS",
       "logo": ""
     }
   },
   {
     "model": "tournaments.team",
-    "pk": 63,
+    "pk": 71,
     "fields": {
-      "name": "台北科技大學-TeamShell",
-      "logo": "team_logos/北科電競社LOGO4167.jpg"
+      "name": "致理科技大學-那晚用橡皮筋騙她是超薄",
+      "logo": ""
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 72,
+    "fields": {
+      "name": "龍華科技大學-哈吉米南北綠豆",
+      "logo": ""
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 73,
+    "fields": {
+      "name": "萬能科技大學-毛毛兄弟幫",
+      "logo": ""
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 74,
+    "fields": {
+      "name": "莊敬高職-莊敬猛虎",
+      "logo": ""
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 53,
+    "fields": {
+      "name": "黎明技術學院-黎明企鵝鵝",
+      "logo": "team_logos/IMG_7625-removebg-preview_TtrthUu.png"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 52,
+    "fields": {
+      "name": "黎明技術學院-黎明企鵝",
+      "logo": "team_logos/IMG_7625-removebg-preview_py0YpwP.png"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 27,
+    "fields": {
+      "name": "稻江商職-稻江哈士奇I",
+      "logo": "team_logos/DJT.png"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 29,
+    "fields": {
+      "name": "正修科技大學-CSU",
+      "logo": "team_logos/正修龍logo去背藍.png"
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 75,
+    "fields": {
+      "name": "勤益科技大學-LWX",
+      "logo": ""
+    }
+  },
+  {
+    "model": "tournaments.team",
+    "pk": 76,
+    "fields": {
+      "name": "黎明高中-泡槍就對了",
+      "logo": ""
     }
   },
   {
@@ -1395,76 +1449,6 @@
   },
   {
     "model": "tournaments.player",
-    "pk": 131,
-    "fields": {
-      "nickname": "trance #66666",
-      "team": 54,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 132,
-    "fields": {
-      "nickname": "EG yay#0213",
-      "team": 54,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 133,
-    "fields": {
-      "nickname": "wesleychiu45#haha",
-      "team": 54,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 134,
-    "fields": {
-      "nickname": "jimbosun1#jim",
-      "team": 54,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 135,
-    "fields": {
-      "nickname": "chiuananananan#11451",
-      "team": 54,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 136,
-    "fields": {
-      "nickname": "kagura1121#6810",
-      "team": 54,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 137,
-    "fields": {
-      "nickname": "wesleychiu45#haha",
-      "team": 54,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
     "pk": 138,
     "fields": {
       "nickname": "gogo狗勾#閃閃閃閃閃",
@@ -1479,66 +1463,6 @@
     "fields": {
       "nickname": "He1t#0118",
       "team": 27,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 140,
-    "fields": {
-      "nickname": "pi yan yang#幫我抓會爽",
-      "team": 55,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 141,
-    "fields": {
-      "nickname": "Nazuna#luvme",
-      "team": 55,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 142,
-    "fields": {
-      "nickname": "拿下了残局却拿不下她#bro",
-      "team": 55,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 143,
-    "fields": {
-      "nickname": "多次拒絕簡富源#KING",
-      "team": 55,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 144,
-    "fields": {
-      "nickname": "owldka#piyan",
-      "team": 55,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 145,
-    "fields": {
-      "nickname": "SweetDog#3797",
-      "team": 55,
       "avatar": "",
       "role": "Flex"
     }
@@ -1825,56 +1749,6 @@
   },
   {
     "model": "tournaments.player",
-    "pk": 178,
-    "fields": {
-      "nickname": "多多綠茶",
-      "team": 61,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 179,
-    "fields": {
-      "nickname": "skyinbright",
-      "team": 61,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 180,
-    "fields": {
-      "nickname": "URHotPot",
-      "team": 61,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 181,
-    "fields": {
-      "nickname": "Kind Lun",
-      "team": 61,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
-    "pk": 182,
-    "fields": {
-      "nickname": "1amAtom1c",
-      "team": 61,
-      "avatar": "",
-      "role": "Flex"
-    }
-  },
-  {
-    "model": "tournaments.player",
     "pk": 183,
     "fields": {
       "nickname": "中国文化大学美术系第一突破手#PCCU",
@@ -2031,6 +1905,653 @@
       "team": 59,
       "avatar": "",
       "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 199,
+    "fields": {
+      "nickname": "jankx123#7092",
+      "team": 64,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 200,
+    "fields": {
+      "nickname": "我不是人#2486",
+      "team": 64,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 201,
+    "fields": {
+      "nickname": "CrazyGua#6969",
+      "team": 64,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 202,
+    "fields": {
+      "nickname": "Workeys#5246",
+      "team": 64,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 203,
+    "fields": {
+      "nickname": "Markk#5663",
+      "team": 64,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 204,
+    "fields": {
+      "nickname": "Kuro#せんせい",
+      "team": 65,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 205,
+    "fields": {
+      "nickname": "hea1sh0t#Ace",
+      "team": 65,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 206,
+    "fields": {
+      "nickname": "Passerby#0503",
+      "team": 65,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 207,
+    "fields": {
+      "nickname": "月は見えなかった#00000",
+      "team": 65,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 208,
+    "fields": {
+      "nickname": "유레인#0525",
+      "team": 65,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 209,
+    "fields": {
+      "nickname": "Tairitsu#1450",
+      "team": 65,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 210,
+    "fields": {
+      "nickname": "Hoshina Reze#BOMB",
+      "team": 65,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 211,
+    "fields": {
+      "nickname": "比奇堡第一智能障碍海超人#Lin",
+      "team": 64,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 212,
+    "fields": {
+      "nickname": "比奇堡第一天才突破手派大星教授#派崔克星星",
+      "team": 64,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 213,
+    "fields": {
+      "nickname": "比奇堡第一美女派大珊#Q愛與花Q",
+      "team": 64,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 214,
+    "fields": {
+      "nickname": "Try my best#7777",
+      "team": 64,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 215,
+    "fields": {
+      "nickname": "INFINITE#柚柚班",
+      "team": 64,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 216,
+    "fields": {
+      "nickname": "布梨狗#uvu",
+      "team": 64,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 222,
+    "fields": {
+      "nickname": "zEx1An#0625",
+      "team": 71,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 223,
+    "fields": {
+      "nickname": "粥粥粥粥粥#粥粥粥",
+      "team": 71,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 224,
+    "fields": {
+      "nickname": "essayer#773",
+      "team": 71,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 225,
+    "fields": {
+      "nickname": "族人救世劍#0611",
+      "team": 71,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 226,
+    "fields": {
+      "nickname": "Ebara69#7005",
+      "team": 71,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 227,
+    "fields": {
+      "nickname": "XiaoHa#16y",
+      "team": 70,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 228,
+    "fields": {
+      "nickname": "Falcons Niko#背身三槍",
+      "team": 70,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 229,
+    "fields": {
+      "nickname": "KSH#0421",
+      "team": 70,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 230,
+    "fields": {
+      "nickname": "请你吃我勾吧就不能颗秒我了#勾吧超级大",
+      "team": 70,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 231,
+    "fields": {
+      "nickname": "X2LspHp#0612",
+      "team": 70,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 232,
+    "fields": {
+      "nickname": "Reze TQDD#1487",
+      "team": 70,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 233,
+    "fields": {
+      "nickname": "Karyl ツ #男の娘",
+      "team": 72,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 234,
+    "fields": {
+      "nickname": "下雨天#精品品",
+      "team": 72,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 235,
+    "fields": {
+      "nickname": "Normal#lhu",
+      "team": 72,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 236,
+    "fields": {
+      "nickname": "璃月第一突破手刻晴#Karyl",
+      "team": 72,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 237,
+    "fields": {
+      "nickname": "南瓜pumpkin8766#5608",
+      "team": 72,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 238,
+    "fields": {
+      "nickname": "Z0 huawei1016#Z0WIN",
+      "team": 73,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 239,
+    "fields": {
+      "nickname": "ONLY초신성#Minji",
+      "team": 73,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 240,
+    "fields": {
+      "nickname": "ShangYan#YUJ",
+      "team": 73,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 241,
+    "fields": {
+      "nickname": "VNU XmA#18y",
+      "team": 73,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 242,
+    "fields": {
+      "nickname": "wCr1119c#cdc",
+      "team": 73,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 243,
+    "fields": {
+      "nickname": "Kr1sss#Zzz",
+      "team": 74,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 244,
+    "fields": {
+      "nickname": "Lanthe#yuio",
+      "team": 74,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 245,
+    "fields": {
+      "nickname": "Chen youting#刨冰かき氷",
+      "team": 74,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 246,
+    "fields": {
+      "nickname": "SurPr1se#ryoku",
+      "team": 74,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 247,
+    "fields": {
+      "nickname": "Jackyyy#zwh",
+      "team": 74,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 248,
+    "fields": {
+      "nickname": "r1chard#2334",
+      "team": 74,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 249,
+    "fields": {
+      "nickname": "jankx123#7092",
+      "team": 75,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 250,
+    "fields": {
+      "nickname": "我不是人#2486",
+      "team": 75,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 251,
+    "fields": {
+      "nickname": "CrazyGua#6969",
+      "team": 75,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 252,
+    "fields": {
+      "nickname": "Workeys#5246",
+      "team": 75,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 253,
+    "fields": {
+      "nickname": "Markk#5663",
+      "team": 75,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 254,
+    "fields": {
+      "nickname": "Destiny#0620",
+      "team": 75,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 255,
+    "fields": {
+      "nickname": "lanyin#1018",
+      "team": 76,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 256,
+    "fields": {
+      "nickname": "孤獨下雨#2402",
+      "team": 76,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 257,
+    "fields": {
+      "nickname": "xiaohei#0831",
+      "team": 76,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 258,
+    "fields": {
+      "nickname": "Good for you#1526",
+      "team": 76,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 259,
+    "fields": {
+      "nickname": "悠悠ฅ#xuu",
+      "team": 76,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.player",
+    "pk": 260,
+    "fields": {
+      "nickname": "CDog#0710",
+      "team": 76,
+      "avatar": "",
+      "role": "Flex"
+    }
+  },
+  {
+    "model": "tournaments.group",
+    "pk": 97,
+    "fields": {
+      "name": "A組",
+      "tournament": 9,
+      "teams": [
+        35,
+        38,
+        39,
+        49,
+        36,
+        40,
+        62,
+        73,
+        74,
+        27
+      ]
+    }
+  },
+  {
+    "model": "tournaments.group",
+    "pk": 98,
+    "fields": {
+      "name": "B組",
+      "tournament": 9,
+      "teams": [
+        33,
+        34,
+        41,
+        58,
+        51,
+        71,
+        72,
+        53,
+        75
+      ]
+    }
+  },
+  {
+    "model": "tournaments.group",
+    "pk": 99,
+    "fields": {
+      "name": "C組",
+      "tournament": 9,
+      "teams": [
+        28,
+        30,
+        31,
+        48,
+        59,
+        63,
+        57,
+        64,
+        52
+      ]
+    }
+  },
+  {
+    "model": "tournaments.group",
+    "pk": 100,
+    "fields": {
+      "name": "D組",
+      "tournament": 9,
+      "teams": [
+        32,
+        60,
+        50,
+        65,
+        56,
+        47,
+        70,
+        29,
+        76
+      ]
     }
   }
 ]
