@@ -13,4 +13,4 @@ python manage.py collectstatic --no-input
 # 執行資料庫遷移
 python manage.py migrate
 
-echo "部署完成！"
+echo "部署完成！準備啟動 gunicorn..."
