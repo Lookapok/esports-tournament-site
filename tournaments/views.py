@@ -1,17 +1,23 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils import timezone
 from django.db.models import Q
 from collections import defaultdict
-from .models import Tournament, Match, Team, Player, PlayerGameStat, Group
+import random
+import math
+from django.contrib import messages
+from django.http import JsonResponse
+from .models import Tournament, Match, Team, Player, PlayerGameStat, Group, Standing
 from .forms import TournamentCreationStep1Form, TeamCreationStep2Form
 from .tables import StatsTable
-from django.shortcuts import render
-from django.contrib import messages
 from .logic import generate_round_robin_matches, generate_swiss_round_matches, generate_single_elimination_matches, generate_double_elimination_matches
 
+# ===== 權限檢查函數 =====
+def is_superuser(user):
+    """檢查用戶是否為超級管理員"""
+    return user.is_superuser
 
 # tournaments/views.py
 
@@ -165,6 +171,7 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 @login_required
+@user_passes_test(is_superuser, login_url='/admin/')
 def dashboard(request):
     return render(request, 'registration/dashboard.html')
 
@@ -175,6 +182,7 @@ def custom_logout(request):
 # tournaments/views.py
 
 @login_required
+@user_passes_test(is_superuser, login_url='/admin/')
 def tournament_create_step1(request):
     if request.method == 'POST':
         form = TournamentCreationStep1Form(request.POST)
@@ -210,6 +218,7 @@ def tournament_create_step1(request):
 # tournaments/views.py
 
 @login_required
+@user_passes_test(is_superuser, login_url='/admin/')
 def tournament_create_step2(request):
     wizard_data = request.session.get('wizard_data', {})
     # 如果沒有第一步的資料，就強制返回第一步
@@ -239,6 +248,7 @@ def tournament_create_step2(request):
 
 # 在檔案最下方新增這個函式
 @login_required
+@user_passes_test(is_superuser, login_url='/admin/')
 def tournament_create_step3(request):
     # 從 session 中讀取所有暫存的資料
     wizard_data = request.session.get('wizard_data', {})
@@ -297,9 +307,9 @@ def player_detail(request, pk):
 
     # 從選手身上，反向查詢所有他打過的比賽數據
     # .select_related() 用來優化查詢，一次性抓取相關的比賽和賽事資訊
-    stats = player.match_stats.select_related(
-        'match', 'match__tournament', 'match__team1', 'match__team2'
-    ).order_by('-match__match_time') # 讓最新的比賽顯示在最上面
+    stats = player.game_stats.select_related(
+        'game__match', 'game__match__tournament', 'game__match__team1', 'game__match__team2'
+    ).order_by('-game__match__match_time') # 讓最新的比賽顯示在最上面
 
     context = {
         'player': player,
@@ -309,6 +319,7 @@ def player_detail(request, pk):
     return render(request, 'tournaments/player_detail.html', context)
 
 @login_required
+@user_passes_test(is_superuser, login_url='/admin/')
 def generate_tournament_schedule(request, pk):
     """自動產生賽事賽程"""
     tournament = get_object_or_404(Tournament, pk=pk)
@@ -373,3 +384,98 @@ def generate_tournament_schedule(request, pk):
             messages.error(request, f'產生賽程時發生錯誤：{str(e)}')
     
     return redirect('tournament_detail', pk=pk)
+
+
+# ===== 自動隨機分組功能 =====
+@login_required
+@user_passes_test(is_superuser, login_url='/admin/')
+def auto_random_grouping(request, pk):
+    """
+    自動隨機分組功能
+    根據參賽隊伍數量自動建議分組數，並隨機分配隊伍到各組
+    """
+    tournament = get_object_or_404(Tournament, id=pk)
+    
+    if request.method == 'POST':
+        # 獲取分組數量
+        num_groups = int(request.POST.get('num_groups', 2))
+        
+        # 清除現有分組
+        tournament.groups.all().delete()
+        
+        # 獲取所有參賽隊伍
+        teams = list(tournament.participants.all())
+        
+        if len(teams) < num_groups:
+            messages.error(request, f'參賽隊伍數量({len(teams)})不能少於分組數量({num_groups})')
+            return redirect('tournament_detail', pk=pk)
+        
+        # 隨機打亂隊伍順序
+        random.shuffle(teams)
+        
+        # 創建分組
+        groups = []
+        for i in range(num_groups):
+            group_name = chr(65 + i) + '組'  # A組, B組, C組...
+            group = Group.objects.create(
+                tournament=tournament,
+                name=group_name
+            )
+            groups.append(group)
+        
+        # 平均分配隊伍到各組
+        for i, team in enumerate(teams):
+            group_index = i % num_groups
+            groups[group_index].teams.add(team)
+        
+        # 為每個分組創建 Standing 記錄
+        for group in groups:
+            for team in group.teams.all():
+                Standing.objects.get_or_create(
+                    tournament=tournament,
+                    team=team,
+                    group=group,
+                    defaults={
+                        'wins': 0,
+                        'losses': 0,
+                        'draws': 0,
+                        'points': 0
+                    }
+                )
+        
+        messages.success(request, f'成功創建 {num_groups} 個分組，已隨機分配 {len(teams)} 支隊伍')
+        return redirect('tournament_detail', pk=pk)
+    
+    # GET 請求 - 顯示分組設定頁面
+    teams = tournament.participants.all()
+    num_teams = len(teams)
+    
+    # 建議分組數量（每組 3-6 支隊伍為佳）
+    suggested_groups = []
+    if num_teams >= 6:
+        for groups in range(2, min(num_teams // 2 + 1, 8)):  # 最多 8 組
+            teams_per_group = num_teams / groups
+            if 3 <= teams_per_group <= 6:  # 每組 3-6 支隊伍
+                suggested_groups.append({
+                    'num_groups': groups,
+                    'teams_per_group': f'{math.floor(teams_per_group)}-{math.ceil(teams_per_group)}',
+                    'description': f'{groups} 組 (每組約 {teams_per_group:.1f} 支隊伍)'
+                })
+    
+    # 如果沒有合適的建議，至少提供 2 組的選項
+    if not suggested_groups:
+        suggested_groups.append({
+            'num_groups': 2,
+            'teams_per_group': f'{num_teams // 2}' if num_teams % 2 == 0 else f'{num_teams // 2}-{num_teams // 2 + 1}',
+            'description': f'2 組 (每組約 {num_teams / 2:.1f} 支隊伍)'
+        })
+    
+    context = {
+        'tournament': tournament,
+        'teams': teams,
+        'num_teams': num_teams,
+        'suggested_groups': suggested_groups,
+        'existing_groups': tournament.groups.all()
+    }
+    
+    return render(request, 'tournaments/auto_grouping.html', context)

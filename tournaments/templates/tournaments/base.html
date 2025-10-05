@@ -39,12 +39,14 @@
         <a class="nav-link {% if request.resolver_match.url_name == 'overall_stats' %}active{% endif %}" href="{% url 'overall_stats' %}">數據統計</a>
     </li>
     {% if user.is_authenticated %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard' %}">儀表板</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-success" href="{% url 'tournament_create_step1' %}">＋ 新賽事</a>
-        </li>
+        {% if user.is_superuser %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard' %}">儀表板</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-success" href="{% url 'tournament_create_step1' %}">＋ 新賽事</a>
+            </li>
+        {% endif %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">登出</a>
         </li>

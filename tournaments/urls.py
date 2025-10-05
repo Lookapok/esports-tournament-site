@@ -31,6 +31,10 @@ urlpatterns = [
     
     # 賽程管理
     path('tournaments/<int:pk>/generate-schedule/', views.generate_tournament_schedule, name='generate_tournament_schedule'),
+    
+    # 自動分組功能
+    path('tournaments/<int:pk>/auto-grouping/', views.auto_random_grouping, name='auto_random_grouping'),
+    
     path('tournaments/create/step2/', views.tournament_create_step2, name='tournament_create_step2'),
     path('tournaments/create/step3/', views.tournament_create_step3, name='tournament_create_step3'),
 ]

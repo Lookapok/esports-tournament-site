@@ -4,6 +4,50 @@
 
 {% block content %}
 <style>
+    /* 強制設定隊伍名稱為清晰的深色，完全移除任何陰影效果 */
+    .team-name-black {
+        color: #343a40 !important;
+        font-weight: 600 !important;
+        text-shadow: none !important;
+        -webkit-text-stroke: 0 !important;
+        text-rendering: optimizeLegibility !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+    }
+    
+    /* 更具體的選擇器 */
+    table.table tbody tr td strong.team-name-black {
+        color: #343a40 !important;
+        font-weight: 600 !important;
+        text-shadow: none !important;
+        -webkit-text-stroke: 0 !important;
+        text-rendering: optimizeLegibility !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+    }
+    
+    /* 賽程中的隊伍名稱 */
+    .card-body span.team-name-black {
+        color: #343a40 !important;
+        font-weight: 600 !important;
+        text-shadow: none !important;
+        -webkit-text-stroke: 0 !important;
+        text-rendering: optimizeLegibility !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+    }
+    
+    /* 完成的比賽卡片樣式 */
+    .card.bg-light {
+        background-color: #f8f9fa !important;
+        border: 1px solid #e9ecef !important;
+    }
+    
+    /* 未完成的比賽保持原樣 */
+    .card:not(.bg-light) {
+        background-color: #ffffff !important;
+    }
+    
     .bracket {
         display: flex;
         overflow-x: auto;
@@ -106,7 +150,29 @@
 </style>
 
 <h1 class="mb-3">{{ tournament.name }}</h1>
-<a href="{% url 'tournament_stats' pk=tournament.pk %}" class="btn btn-info mb-3">查看選手數據統計</a>
+
+<!-- 操作按鈕區域 -->
+<div class="mb-3">
+    <a href="{% url 'tournament_stats' pk=tournament.pk %}" class="btn btn-info">
+        <i class="fas fa-chart-bar"></i> 查看選手數據統計
+    </a>
+    
+    {% if user.is_superuser %}
+        {% if tournament.format == 'round_robin' %}
+        <a href="{% url 'auto_random_grouping' pk=tournament.pk %}" class="btn btn-success">
+            <i class="fas fa-random"></i> 自動隨機分組 (管理員)
+        </a>
+        {% endif %}
+        
+        <form method="post" action="{% url 'generate_tournament_schedule' pk=tournament.pk %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary" onclick="return confirm('確定要自動產生賽程嗎？這將清除現有賽程並重新生成。')">
+                <i class="fas fa-calendar-plus"></i> 自動排賽程 (管理員)
+            </button>
+        </form>
+    {% endif %}
+</div>
+
 <p class="lead"><strong>遊戲項目：</strong> {{ tournament.game }}</p>
 
 {% if tournament.format == 'round_robin' %}
@@ -119,8 +185,8 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="heading{{ forloop.counter }}">
                     <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="collapse{{ forloop.counter }}">
-                        <strong>{{ group.name }}</strong>
-                        <span class="ms-2 text-muted">({{ group.teams.count }} 支隊伍)</span>
+                        <strong style="color: #0d6efd; font-size: 1.1rem; font-weight: 700;">{{ group.name }}</strong>
+                        <span class="ms-2" style="color: #000000; font-weight: bold;">({{ group.teams.count }} 支隊伍)</span>
                     </button>
                 </h2>
                 <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#groupAccordion">
@@ -140,11 +206,11 @@
                             <tbody>
                                 {% for standing in group.standings.all %}
                                 <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                    <td>{{ standing.team.name }}</td>
-                                    <td>{{ standing.wins }}</td>
-                                    <td>{{ standing.losses }}</td>
-                                    <td><span class="badge bg-primary">{{ standing.points }}</span></td>
+                                    <td><strong class="text-primary">{{ forloop.counter }}</strong></td>
+                                    <td><strong class="team-name-black">{{ standing.team.name }}</strong></td>
+                                    <td><span class="text-success fw-bold">{{ standing.wins }}</span></td>
+                                    <td><span class="text-danger fw-bold">{{ standing.losses }}</span></td>
+                                    <td><span class="badge bg-primary fs-6">{{ standing.points }}</span></td>
                                 </tr>
                                 {% empty %}
                                 <tr><td colspan="5" class="text-center text-muted">此分組尚無積分資料。</td></tr>
@@ -153,18 +219,18 @@
                         </table>
 
                         <!-- 賽程 -->
-                        <h6 class="mb-3">{{ group.name }} 賽程</h6>
+                        <h6 class="mb-3 text-primary">{{ group.name }} 賽程</h6>
                         <div class="row">
                             {% for match in tournament.matches.all %}
                                 {% if match.team1 in group.teams.all and match.team2 in group.teams.all %}
                                     <div class="col-md-6 mb-2">
-                                        <div class="card border-0 shadow-sm">
+                                        <div class="card border-0 shadow-sm {% if match.status == 'completed' %}bg-light{% endif %}">
                                             <div class="card-body p-2 d-flex justify-content-between align-items-center">
-                                                <span class="text-truncate" style="max-width: 40%;">{{ match.team1.name }}</span>
-                                                <span class="badge bg-{% if match.status == 'completed' %}success{% else %}secondary{% endif %} mx-2">
+                                                <span class="text-truncate team-name-black" style="max-width: 40%;">{{ match.team1.name }}</span>
+                                                <span class="badge bg-{% if match.status == 'completed' %}success{% else %}secondary{% endif %} mx-2 fs-6">
                                                     {{ match.team1_score }} - {{ match.team2_score }}
                                                 </span>
-                                                <span class="text-truncate text-end" style="max-width: 40%;">{{ match.team2.name }}</span>
+                                                <span class="text-truncate text-end team-name-black" style="max-width: 40%;">{{ match.team2.name }}</span>
                                             </div>
                                         </div>
                                     </div>

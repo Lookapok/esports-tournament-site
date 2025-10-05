@@ -27,6 +27,46 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['winnerstakesall.onrender.com', '127.0.0.1', 'localhost']
 
+# ===== HTTPS 安全設定 =====
+# 只在生產環境啟用 HTTPS 強制重定向
+SECURE_SSL_REDIRECT = not DEBUG
+
+# HTTP Strict Transport Security (HSTS) 設定
+SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0  # 1年 (365天 * 24小時 * 3600秒)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SECURE_HSTS_PRELOAD = not DEBUG
+
+# 安全代理設定 (適用於 Nginx, Cloudflare 等反向代理)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# ===== Cookie 和 Session 安全設定 =====
+# Session Cookie 安全設定
+SESSION_COOKIE_SECURE = not DEBUG  # 只在 HTTPS 下傳輸 Session Cookie
+SESSION_COOKIE_HTTPONLY = True  # 防止 JavaScript 存取 Session Cookie
+SESSION_COOKIE_SAMESITE = 'Lax'  # 防止跨站請求偽造攻擊
+SESSION_COOKIE_AGE = 3600 * 24 * 7  # Session 過期時間：7天
+
+# CSRF Cookie 安全設定
+CSRF_COOKIE_SECURE = not DEBUG  # 只在 HTTPS 下傳輸 CSRF Token
+CSRF_COOKIE_HTTPONLY = True  # 防止 JavaScript 存取 CSRF Token
+CSRF_COOKIE_SAMESITE = 'Lax'  # 防止跨站請求偽造攻擊
+
+# ===== 安全標頭設定 =====
+# 防止 XSS (跨站腳本) 攻擊
+SECURE_BROWSER_XSS_FILTER = True
+
+# 防止內容類型嗅探攻擊
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# 防止點擊劫持攻擊 (Clickjacking)
+X_FRAME_OPTIONS = 'DENY'
+
+# 控制推薦人政策，保護用戶隱私
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+
+# 防止在不安全的連接中洩漏安全資訊
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
+
 
 # Application definition
 
@@ -286,5 +326,3 @@ if DEBUG:
     for logger in LOGGING['loggers'].values():
         if 'level' in logger:
             logger['level'] = 'DEBUG'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
