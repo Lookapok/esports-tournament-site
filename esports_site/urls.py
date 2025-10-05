@@ -24,5 +24,6 @@ urlpatterns = [
     path('API', RedirectView.as_view(url='/api/', permanent=True)),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# ===== Media 文件處理 - 適用於所有環境 =====
+# 為了解決 Render 生產環境 LOGO 顯示問題，我們讓所有環境都能服務 media 文件
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -251,6 +251,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# ===== WhiteNoise 配置 - 解決生產環境 Media 文件顯示問題 =====
+# WhiteNoise 6.x 的正確配置方式
+WHITENOISE_USE_FINDERS = True  # 讓 WhiteNoise 能找到靜態文件
+
+# 開發環境專用設定
+if not IS_RENDER:  # 本地開發環境
+    WHITENOISE_AUTOREFRESH = True  # 開發時自動重新載入
+
+# 設定 WhiteNoise 的壓縮選項（提升效能）
+WHITENOISE_SKIP_COMPRESS_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'zip', 'gz', 'tgz', 'bz2', 'tbz', 'xz', 'br']
+WHITENOISE_MAX_AGE = 31536000  # 1年的快取時間
+
 # esports_site/settings.py
 LOGIN_REDIRECT_URL = '/'
 
