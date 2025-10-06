@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils import timezone
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from django.views.decorators.cache import cache_page
 from django.core.cache import cache
 from django.core.paginator import Paginator
@@ -36,24 +36,29 @@ def tournament_list(request):
     if cached_result:
         return render(request, 'tournaments/tournament_list.html', cached_result)
     
-    # 1. 優化賽事查詢，預載入必要數據但避免過度載入
-    tournaments = Tournament.objects.prefetch_related('participants').order_by('-start_date')
+    # 1. 極度優化的賽事查詢，只載入必要欄位
+    tournaments = Tournament.objects.select_related().only(
+        'id', 'name', 'start_date', 'end_date', 'status', 'format', 'description'
+    ).order_by('-start_date')
     
-    # 2. 限制即將到來的比賽數量，並優化查詢
+    # 2. 極度優化的即將到來比賽查詢
     upcoming_matches = Match.objects.select_related(
         'tournament', 'team1', 'team2'
+    ).only(
+        'id', 'match_time', 'status',
+        'tournament__name', 'team1__name', 'team2__name'
     ).filter(
         status='scheduled',
         match_time__gte=timezone.now()
-    ).order_by('match_time')[:5]  # 只載入前5場即將到來的比賽
+    ).order_by('match_time')[:3]  # 減少到3場以加快載入
 
     context = {
         'tournaments': tournaments,
         'upcoming_matches': upcoming_matches,
     }
     
-    # 快取結果 5 分鐘，賽事列表變動較少
-    cache.set(cache_key, context, 300)
+    # 快取結果 10 分鐘，賽事列表變動較少
+    cache.set(cache_key, context, 600)
     
     return render(request, 'tournaments/tournament_list.html', context)
 
@@ -72,46 +77,65 @@ def tournament_detail(request, pk):
     
     # 分層載入數據，避免一次載入過多數據導致頁面載入緩慢
     
-    # 1. 先載入基本賽事信息（不預載入所有關聯數據）
-    tournament = get_object_or_404(Tournament, pk=pk)
+    # 1. 極度優化的賽事基本信息載入
+    tournament = get_object_or_404(
+        Tournament.objects.select_related().only(
+            'id', 'name', 'format', 'status', 'start_date', 'end_date', 'description'
+        ), 
+        pk=pk
+    )
     
     context = {'tournament': tournament}
     
-    # 2. 根據賽制分別優化數據載入
+    # 2. 根據賽制分別極度優化數據載入
     if tournament.format == 'round_robin':
         # 分組循環：按分組分頁顯示（A組、B組、C組、D組等）
         from django.core.paginator import Paginator
         
-        groups = tournament.groups.prefetch_related('teams').all()
+        # 只載入必要的分組資料
+        groups = tournament.groups.prefetch_related(
+            Prefetch('teams', queryset=Team.objects.only('id', 'name', 'logo'))
+        ).only('id', 'name', 'tournament_id').all()
         
         # 按分組分頁（每頁顯示一個分組）
         paginator = Paginator(groups, 1)
         page_number = request.GET.get('page', 1)
         page_groups = paginator.get_page(page_number)
         
-        # 為當前分組載入相關比賽
+        # 為當前分組載入相關比賽（極度優化）
         current_group = page_groups.object_list[0] if page_groups.object_list else None
         group_matches = []
         if current_group:
-            # 只載入當前分組的比賽
-            group_matches = tournament.matches.select_related('team1', 'team2', 'winner').filter(
+            # 只載入當前分組的比賽，使用 only() 限制欄位
+            group_matches = tournament.matches.select_related(
+                'team1', 'team2', 'winner'
+            ).only(
+                'id', 'team1__name', 'team2__name', 'winner__name', 
+                'team1_score', 'team2_score', 'status', 'match_time'
+            ).filter(
                 team1__in=current_group.teams.all(),
                 team2__in=current_group.teams.all()
-            ).order_by('id')
+            ).order_by('id')[:50]  # 限制載入數量
         
         context['groups'] = page_groups
         context['current_group'] = current_group
         context['group_matches'] = group_matches
         
     elif tournament.format == 'swiss':
-        # 瑞士輪：載入積分榜和分頁比賽
-        context['standings'] = tournament.standings.select_related('team').order_by('-points', '-wins')
+        # 瑞士輪：極度優化積分榜和分頁比賽
+        context['standings'] = tournament.standings.select_related('team').only(
+            'team__name', 'points', 'wins', 'losses', 'draws'
+        ).order_by('-points', '-wins')[:20]  # 限制顯示前20名
         
-        # 分頁顯示比賽（每頁20場）
+        # 極度優化的分頁比賽（每頁15場以加快載入）
         from django.core.paginator import Paginator
         
-        matches = tournament.matches.select_related('team1', 'team2', 'winner').order_by('round_number', 'id')
-        paginator = Paginator(matches, 20)
+        matches = tournament.matches.select_related('team1', 'team2', 'winner').only(
+            'id', 'round_number', 'team1__name', 'team2__name', 'winner__name',
+            'team1_score', 'team2_score', 'status', 'match_time'
+        ).order_by('round_number', 'id')
+        
+        paginator = Paginator(matches, 15)  # 減少每頁數量
         page_number = request.GET.get('page', 1)
         page_matches = paginator.get_page(page_number)
         
@@ -124,11 +148,15 @@ def tournament_detail(request, pk):
         context['page_matches'] = page_matches
         
     else:  # Elimination (single/double)
-        # 淘汰賽：分頁顯示比賽
+        # 淘汰賽：極度優化分頁顯示比賽
         from django.core.paginator import Paginator
         
-        matches = tournament.matches.select_related('team1', 'team2', 'winner').order_by('round_number', 'id')
-        paginator = Paginator(matches, 20)
+        matches = tournament.matches.select_related('team1', 'team2', 'winner').only(
+            'id', 'round_number', 'team1__name', 'team2__name', 'winner__name',
+            'team1_score', 'team2_score', 'status', 'match_time'
+        ).order_by('round_number', 'id')
+        
+        paginator = Paginator(matches, 15)  # 減少每頁數量
         page_number = request.GET.get('page', 1)
         page_matches = paginator.get_page(page_number)
         
@@ -172,12 +200,14 @@ def team_list(request):
     if cached_result:
         return render(request, 'tournaments/team_list.html', cached_result)
     
-    # 1. 添加分頁，避免一次載入所有隊伍
-    # 2. 優化查詢，只預載入必要的關聯數據
-    teams = Team.objects.prefetch_related('players').order_by('name')
+    # 1. 極度優化的隊伍查詢，只載入必要欄位
+    # 2. 使用 only() 限制載入的欄位以加快查詢
+    teams = Team.objects.prefetch_related(
+        Prefetch('players', queryset=Player.objects.only('id', 'name', 'position'))
+    ).only('id', 'name', 'logo', 'captain', 'school').order_by('name')
     
-    # 3. 實施分頁（每頁顯示18個隊伍，適合3x6的網格布局）
-    paginator = Paginator(teams, 18)
+    # 3. 實施分頁（每頁顯示12個隊伍，減少載入量）
+    paginator = Paginator(teams, 12)
     page_teams = paginator.get_page(page_number)
     
     context = {

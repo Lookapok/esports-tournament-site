@@ -301,22 +301,68 @@ if not IS_RENDER:  # 本地開發環境
 WHITENOISE_SKIP_COMPRESS_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'zip', 'gz', 'tgz', 'bz2', 'tbz', 'xz', 'br']
 WHITENOISE_MAX_AGE = 31536000  # 1年的快取時間
 
-# esports_site/settings.py
-LOGIN_REDIRECT_URL = '/'
+# ===== 前端資源優化配置 =====
+# Gzip 壓縮配置
+WHITENOISE_COMPRESS_EXTENSIONS = [
+    'css', 'js', 'svg', 'json', 'xml', 'txt', 'html'
+]
 
-# 在檔案最下方新增這整個區塊
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 設定預設的認證方式為 Token 認證
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        # 設定預設的權限為「必須是已登入的使用者」
-        'rest_framework.permissions.IsAuthenticated',
-    ]
+# 靜態文件快取配置
+WHITENOISE_MAX_AGE = 31536000  # 1年快取
+
+# 禁用不必要的中間件以提高性能
+if IS_RENDER:  # 生產環境
+    # 移除一些開發專用的中間件
+    pass
+
+# ===== 資料庫連線池優化 =====
+if 'postgresql' in DATABASES['default']['ENGINE']:
+    DATABASES['default'].update({
+        'CONN_MAX_AGE': 600,  # 連線保持 10 分鐘
+        'OPTIONS': {
+            'MAX_CONNS': 20,  # 最大連線數
+            'AUTOCOMMIT': True,
+        }
+    })
+
+# ===== 模板快取優化 =====
+if IS_RENDER:  # 生產環境
+    for template_config in TEMPLATES:
+        if 'OPTIONS' not in template_config:
+            template_config['OPTIONS'] = {}
+        template_config['OPTIONS']['loaders'] = [
+            ('django.template.loaders.cached.Loader', [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ]),
+        ]
+
+# ===== 日誌優化 =====
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'WARNING' if IS_RENDER else 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs' / 'django.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'WARNING' if IS_RENDER else 'INFO',
+            'propagate': True,
+        },
+    },
 }
 
-# 用於使用者上傳檔案 (例如隊伍 Logo)
+# Debug 模式下的額外日誌配置
+if DEBUG:
+    LOGGING['handlers']['console']['level'] = 'DEBUG'
+    for logger in LOGGING['loggers'].values():
+        if 'level' in logger:
+            logger['level'] = 'DEBUG'
 
 # ===== 日誌監控系統配置 =====
 import os
