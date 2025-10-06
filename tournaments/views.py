@@ -38,7 +38,7 @@ def tournament_list(request):
     
     # 1. 極度優化的賽事查詢，只載入必要欄位
     tournaments = Tournament.objects.select_related().only(
-        'id', 'name', 'start_date', 'end_date', 'status', 'format', 'description'
+        'id', 'name', 'start_date', 'end_date', 'status', 'format'
     ).order_by('-start_date')
     
     # 2. 極度優化的即將到來比賽查詢
@@ -80,7 +80,7 @@ def tournament_detail(request, pk):
     # 1. 極度優化的賽事基本信息載入
     tournament = get_object_or_404(
         Tournament.objects.select_related().only(
-            'id', 'name', 'format', 'status', 'start_date', 'end_date', 'description'
+            'id', 'name', 'format', 'status', 'start_date', 'end_date'
         ), 
         pk=pk
     )
@@ -95,7 +95,7 @@ def tournament_detail(request, pk):
         # 只載入必要的分組資料
         groups = tournament.groups.prefetch_related(
             Prefetch('teams', queryset=Team.objects.only('id', 'name', 'logo'))
-        ).only('id', 'name', 'tournament_id').all()
+        ).only('id', 'name', 'tournament').all()
         
         # 按分組分頁（每頁顯示一個分組）
         paginator = Paginator(groups, 1)
@@ -203,8 +203,8 @@ def team_list(request):
     # 1. 極度優化的隊伍查詢，只載入必要欄位
     # 2. 使用 only() 限制載入的欄位以加快查詢
     teams = Team.objects.prefetch_related(
-        Prefetch('players', queryset=Player.objects.only('id', 'name', 'position'))
-    ).only('id', 'name', 'logo', 'captain', 'school').order_by('name')
+        Prefetch('players', queryset=Player.objects.only('id', 'nickname', 'role'))
+    ).only('id', 'name', 'logo').order_by('name')
     
     # 3. 實施分頁（每頁顯示12個隊伍，減少載入量）
     paginator = Paginator(teams, 12)
