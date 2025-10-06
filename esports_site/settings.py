@@ -159,7 +159,11 @@ DATABASE_URL = config('DATABASE_URL', default='')
 if DATABASE_URL:
     # 生產環境：使用 Render 提供的 PostgreSQL
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, conn_health_checks=True)
+    }
+    # PostgreSQL 特定優化
+    DATABASES['default']['OPTIONS'] = {
+        'OPTIONS': '-c default_transaction_isolation=read_committed'
     }
 else:
     # 本地開發環境：PostgreSQL 或 SQLite
@@ -171,32 +175,50 @@ else:
             'PASSWORD': config('DB_PASSWORD', default=''),
             'HOST': config('DB_HOST', default=''),
             'PORT': config('DB_PORT', default=''),
+            'OPTIONS': {
+                'timeout': 20,  # SQLite 連接超時
+            } if config('DB_ENGINE', default='django.db.backends.sqlite3') == 'django.db.backends.sqlite3' else {}
         }
     }
 
-# Cache configuration
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
-        'TIMEOUT': 300,  # 5 分鐘預設過期時間
-        'OPTIONS': {
-            'MAX_ENTRIES': 1000,
+# ===== 快取配置 =====
+# 根據環境選擇不同的快取後端
+REDIS_URL = config('REDIS_URL', default='')
+
+if REDIS_URL and IS_RENDER:
+    # 生產環境：使用 Redis 快取（Render 提供的 Redis）
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': REDIS_URL,
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+                'PARSER_CLASS': 'redis.connection.HiredisParser',
+                'CONNECTION_POOL_KWARGS': {'max_connections': 50},
+                'COMPRESSOR': 'django_redis.compressors.zlib.ZlibCompressor',
+            },
+            'TIMEOUT': 600,  # 10 分鐘
         }
     }
-}
+    # Redis 作為 Session 存儲
+    SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+    SESSION_CACHE_ALIAS = 'default'
+else:
+    # 開發環境：使用內存快取
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'unique-snowflake',
+            'TIMEOUT': 300,  # 5 分鐘
+            'OPTIONS': {
+                'MAX_ENTRIES': 2000,  # 增加快取容量
+            }
+        }
+    }
 
-# 如果要使用 Redis (需要安裝 redis 和 django-redis)
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django_redis.cache.RedisCache',
-#         'LOCATION': 'redis://127.0.0.1:6379/1',
-#         'OPTIONS': {
-#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-#         },
-#         'TIMEOUT': 300,
-#     }
-# }
+# 快取金鑰前綴
+CACHE_MIDDLEWARE_KEY_PREFIX = 'esports'
+CACHE_MIDDLEWARE_SECONDS = 300  # 頁面快取 5 分鐘
 
 
 # Password validation

@@ -4,6 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils import timezone
 from django.db.models import Q
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+from django.core.paginator import Paginator
 from collections import defaultdict
 import random
 import math
@@ -22,7 +25,14 @@ def is_superuser(user):
 # tournaments/views.py
 
 def tournament_list(request):
-    # ===== 第一階段性能優化 =====
+    # ===== 第一階段性能優化 + 快取 =====
+    # 檢查快取
+    cache_key = 'tournament_list_main'
+    cached_result = cache.get(cache_key)
+    
+    if cached_result:
+        return render(request, 'tournaments/tournament_list.html', cached_result)
+    
     # 1. 優化賽事查詢，預載入必要數據但避免過度載入
     tournaments = Tournament.objects.prefetch_related('participants').order_by('-start_date')
     
@@ -38,10 +48,23 @@ def tournament_list(request):
         'tournaments': tournaments,
         'upcoming_matches': upcoming_matches,
     }
+    
+    # 快取結果 3 分鐘
+    cache.set(cache_key, context, 180)
+    
     return render(request, 'tournaments/tournament_list.html', context)
 
 def tournament_detail(request, pk):
-    # ===== 第一階段性能優化 =====
+    # ===== 第一+二階段性能優化 =====
+    # 智能快取：根據賽制和分頁參數快取不同內容
+    page_number = request.GET.get('page', '1')
+    cache_key = f'tournament_detail_{pk}_page_{page_number}'
+    
+    # 檢查快取
+    cached_result = cache.get(cache_key)
+    if cached_result:
+        return render(request, 'tournaments/tournament_detail.html', cached_result)
+    
     # 分層載入數據，避免一次載入過多數據導致頁面載入緩慢
     
     # 1. 先載入基本賽事信息（不預載入所有關聯數據）
@@ -112,25 +135,43 @@ def tournament_detail(request, pk):
         context['rounds'] = dict(rounds)
         context['page_matches'] = page_matches
     
+    
+    # 快取結果（根據賽事活躍度設定不同的過期時間）
+    if tournament.status == 'completed':
+        # 已完成的賽事快取更久（30分鐘）
+        cache.set(cache_key, context, 1800)
+    else:
+        # 進行中的賽事快取時間較短（5分鐘）
+        cache.set(cache_key, context, 300)
+    
     return render(request, 'tournaments/tournament_detail.html', context)
 
 def team_list(request):
-    # ===== 第一階段性能優化 =====
-    # 1. 添加分頁，避免一次載入所有隊伍
-    from django.core.paginator import Paginator
+    # ===== 第一+二階段性能優化 =====
+    # 檢查快取
+    page_number = request.GET.get('page', '1')
+    cache_key = f'team_list_page_{page_number}'
+    cached_result = cache.get(cache_key)
     
+    if cached_result:
+        return render(request, 'tournaments/team_list.html', cached_result)
+    
+    # 1. 添加分頁，避免一次載入所有隊伍
     # 2. 優化查詢，只預載入必要的關聯數據
     teams = Team.objects.prefetch_related('players').order_by('name')
     
     # 3. 實施分頁（每頁顯示18個隊伍，適合3x6的網格布局）
     paginator = Paginator(teams, 18)
-    page_number = request.GET.get('page', 1)
     page_teams = paginator.get_page(page_number)
     
     context = {
         'teams': page_teams,  # 使用分頁後的隊伍列表
         'page_obj': page_teams,  # 為模板提供分頁信息
     }
+    
+    # 快取結果 10 分鐘
+    cache.set(cache_key, context, 600)
+    
     return render(request, 'tournaments/team_list.html', context)
 
 # tournaments/views.py
