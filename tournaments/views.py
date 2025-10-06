@@ -190,10 +190,9 @@ def tournament_detail(request, pk):
 
 def team_list(request):
     # ===== 優化的隊伍列表快取策略 =====
-    page_number = request.GET.get('page', '1')
     from django.conf import settings
     cache_version = getattr(settings, 'CACHE_VERSION', 1)
-    cache_key = f'team_list_v{cache_version}_page_{page_number}'
+    cache_key = f'team_list_v{cache_version}_all'  # 移除分頁，改為全部隊伍
     
     # 檢查快取
     cached_result = cache.get(cache_key)
