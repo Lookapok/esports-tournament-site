@@ -200,19 +200,13 @@ def team_list(request):
     if cached_result:
         return render(request, 'tournaments/team_list.html', cached_result)
     
-    # 1. 極度優化的隊伍查詢，只載入必要欄位
-    # 2. 使用 only() 限制載入的欄位以加快查詢
+    # 1. 優化的隊伍查詢，載入所有隊伍
     teams = Team.objects.prefetch_related(
         Prefetch('players', queryset=Player.objects.only('id', 'nickname', 'role'))
     ).only('id', 'name', 'logo').order_by('name')
     
-    # 3. 實施分頁（每頁顯示12個隊伍，減少載入量）
-    paginator = Paginator(teams, 12)
-    page_teams = paginator.get_page(page_number)
-    
     context = {
-        'teams': page_teams,  # 使用分頁後的隊伍列表
-        'page_obj': page_teams,  # 為模板提供分頁信息
+        'teams': teams,  # 顯示所有隊伍
     }
     
     # 隊伍資料相對穩定，快取 15 分鐘
