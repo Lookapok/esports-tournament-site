@@ -163,7 +163,7 @@ if DATABASE_URL:
     }
     # PostgreSQL 特定優化
     DATABASES['default']['OPTIONS'] = {
-        'OPTIONS': '-c default_transaction_isolation=read_committed'
+        'options': '-c default_transaction_isolation=read_committed'
     }
 else:
     # 本地開發環境：PostgreSQL 或 SQLite
@@ -319,10 +319,7 @@ if IS_RENDER:  # 生產環境
 if 'postgresql' in DATABASES['default']['ENGINE']:
     DATABASES['default'].update({
         'CONN_MAX_AGE': 600,  # 連線保持 10 分鐘
-        'OPTIONS': {
-            'MAX_CONNS': 20,  # 最大連線數
-            'AUTOCOMMIT': True,
-        }
+        'CONN_HEALTH_CHECKS': True,  # 連線健康檢查
     })
 
 # ===== 模板快取優化 =====
