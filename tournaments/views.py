@@ -22,54 +22,115 @@ def is_superuser(user):
 # tournaments/views.py
 
 def tournament_list(request):
-    # 優化：預先抓取每場賽事的主圖，避免在模板中產生額外查詢
-    tournaments = Tournament.objects.all().order_by('-start_date')
-
-    # 優化：預先抓取比賽關聯的賽事、隊伍資訊
+    # ===== 第一階段性能優化 =====
+    # 1. 優化賽事查詢，預載入必要數據但避免過度載入
+    tournaments = Tournament.objects.prefetch_related('participants').order_by('-start_date')
+    
+    # 2. 限制即將到來的比賽數量，並優化查詢
     upcoming_matches = Match.objects.select_related(
         'tournament', 'team1', 'team2'
     ).filter(
         status='scheduled',
         match_time__gte=timezone.now()
-    ).order_by('match_time')[:5]
+    ).order_by('match_time')[:5]  # 只載入前5場即將到來的比賽
 
     context = {
         'tournaments': tournaments,
         'upcoming_matches': upcoming_matches,
     }
-    # 確認是渲染到 tournament_list.html
     return render(request, 'tournaments/tournament_list.html', context)
 
 def tournament_detail(request, pk):
-    tournament = get_object_or_404(
-        Tournament.objects.prefetch_related(
-            'participants', 
-            'matches__team1', 'matches__team2', 'matches__winner',
-            'groups__teams', 'standings__team'
-        ), 
-        pk=pk
-    )
+    # ===== 第一階段性能優化 =====
+    # 分層載入數據，避免一次載入過多數據導致頁面載入緩慢
+    
+    # 1. 先載入基本賽事信息（不預載入所有關聯數據）
+    tournament = get_object_or_404(Tournament, pk=pk)
+    
     context = {'tournament': tournament}
+    
+    # 2. 根據賽制分別優化數據載入
     if tournament.format == 'round_robin':
-        context['groups'] = tournament.groups.all()
+        # 分組循環：按分組分頁顯示（A組、B組、C組、D組等）
+        from django.core.paginator import Paginator
+        
+        groups = tournament.groups.prefetch_related('teams').all()
+        
+        # 按分組分頁（每頁顯示一個分組）
+        paginator = Paginator(groups, 1)
+        page_number = request.GET.get('page', 1)
+        page_groups = paginator.get_page(page_number)
+        
+        # 為當前分組載入相關比賽
+        current_group = page_groups.object_list[0] if page_groups.object_list else None
+        group_matches = []
+        if current_group:
+            # 只載入當前分組的比賽
+            group_matches = tournament.matches.select_related('team1', 'team2', 'winner').filter(
+                team1__in=current_group.teams.all(),
+                team2__in=current_group.teams.all()
+            ).order_by('id')
+        
+        context['groups'] = page_groups
+        context['current_group'] = current_group
+        context['group_matches'] = group_matches
+        
     elif tournament.format == 'swiss':
-        context['standings'] = tournament.standings.all().order_by('-points', '-wins')
-        matches = tournament.matches.all()
+        # 瑞士輪：載入積分榜和分頁比賽
+        context['standings'] = tournament.standings.select_related('team').order_by('-points', '-wins')
+        
+        # 分頁顯示比賽（每頁20場）
+        from django.core.paginator import Paginator
+        
+        matches = tournament.matches.select_related('team1', 'team2', 'winner').order_by('round_number', 'id')
+        paginator = Paginator(matches, 20)
+        page_number = request.GET.get('page', 1)
+        page_matches = paginator.get_page(page_number)
+        
+        # 按輪次分組（僅針對當前頁面的比賽）
         rounds = defaultdict(list)
-        for match in matches:
+        for match in page_matches:
             rounds[match.round_number].append(match)
+        
         context['rounds'] = dict(rounds)
-    else: # Elimination
-        matches = tournament.matches.all()
+        context['page_matches'] = page_matches
+        
+    else:  # Elimination (single/double)
+        # 淘汰賽：分頁顯示比賽
+        from django.core.paginator import Paginator
+        
+        matches = tournament.matches.select_related('team1', 'team2', 'winner').order_by('round_number', 'id')
+        paginator = Paginator(matches, 20)
+        page_number = request.GET.get('page', 1)
+        page_matches = paginator.get_page(page_number)
+        
+        # 按輪次分組（僅針對當前頁面的比賽）
         rounds = defaultdict(list)
-        for match in matches:
+        for match in page_matches:
             rounds[match.round_number].append(match)
+        
         context['rounds'] = dict(rounds)
+        context['page_matches'] = page_matches
+    
     return render(request, 'tournaments/tournament_detail.html', context)
 
 def team_list(request):
-    teams = Team.objects.prefetch_related('players').all().order_by('name')
-    context = {'teams': teams}
+    # ===== 第一階段性能優化 =====
+    # 1. 添加分頁，避免一次載入所有隊伍
+    from django.core.paginator import Paginator
+    
+    # 2. 優化查詢，只預載入必要的關聯數據
+    teams = Team.objects.prefetch_related('players').order_by('name')
+    
+    # 3. 實施分頁（每頁顯示18個隊伍，適合3x6的網格布局）
+    paginator = Paginator(teams, 18)
+    page_number = request.GET.get('page', 1)
+    page_teams = paginator.get_page(page_number)
+    
+    context = {
+        'teams': page_teams,  # 使用分頁後的隊伍列表
+        'page_obj': page_teams,  # 為模板提供分頁信息
+    }
     return render(request, 'tournaments/team_list.html', context)
 
 # tournaments/views.py
