@@ -341,6 +341,10 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+        },
         'file': {
             'level': 'WARNING' if IS_RENDER else 'INFO',
             'class': 'logging.FileHandler',
@@ -349,7 +353,7 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
+            'handlers': ['console', 'file'] if DEBUG else ['file'],
             'level': 'WARNING' if IS_RENDER else 'INFO',
             'propagate': True,
         },
