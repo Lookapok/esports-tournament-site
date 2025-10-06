@@ -330,6 +330,8 @@ if IS_RENDER:  # 生產環境
     for template_config in TEMPLATES:
         if 'OPTIONS' not in template_config:
             template_config['OPTIONS'] = {}
+        # 使用自定義 loaders 時必須禁用 APP_DIRS
+        template_config['APP_DIRS'] = False
         template_config['OPTIONS']['loaders'] = [
             ('django.template.loaders.cached.Loader', [
                 'django.template.loaders.filesystem.Loader',
