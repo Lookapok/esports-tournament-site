@@ -92,10 +92,10 @@ def tournament_detail(request, pk):
         # 分組循環：按分組分頁顯示（A組、B組、C組、D組等）
         from django.core.paginator import Paginator
         
-        # 只載入必要的分組資料
+        # 只載入必要的分組資料，按名稱排序
         groups = tournament.groups.prefetch_related(
             Prefetch('teams', queryset=Team.objects.only('id', 'name', 'logo'))
-        ).only('id', 'name', 'tournament').all()
+        ).only('id', 'name', 'tournament').order_by('name')
         
         # 按分組分頁（每頁顯示一個分組）
         paginator = Paginator(groups, 1)
@@ -486,8 +486,8 @@ def generate_tournament_schedule(request, pk):
                 from .models import Standing
                 Standing.objects.filter(tournament=tournament).delete()
                 
-                # 為所有分組隊伍建立積分表
-                groups = tournament.groups.all()
+                # 為所有分組隊伍建立積分表，按分組名稱排序
+                groups = tournament.groups.order_by('name')
                 for group in groups:
                     for team in group.teams.all():
                         # 檢查是否已存在，避免重複建立
