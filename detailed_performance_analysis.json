@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-10-06T14:34:14.585363",
+  "summary": {
+    "total_pages_analyzed": 4,
+    "average_load_time": 5.208163321018219,
+    "average_page_size_kb": 25.837890625
+  },
+  "detailed_results": {
+    "/": {
+      "description": "首頁/賽事列表",
+      "total_load_time": 4.284323215484619,
+      "page_size_kb": 3.3125,
+      "status_code": 200,
+      "timestamp": "2025-10-06T14:30:48.944277"
+    },
+    "/tournaments/9/": {
+      "description": "WTACS S1 賽事詳情 (A組)",
+      "total_load_time": 8.19795536994934,
+      "page_size_kb": 42.9365234375,
+      "status_code": 200,
+      "timestamp": "2025-10-06T14:31:38.209752"
+    },
+    "/tournaments/9/?page=2": {
+      "description": "WTACS S1 賽事詳情 (B組)",
+      "total_load_time": 8.2379732131958,
+      "page_size_kb": 42.94140625,
+      "status_code": 200,
+      "timestamp": "2025-10-06T14:32:28.401688"
+    },
+    "/teams/": {
+      "description": "隊伍列表",
+      "total_load_time": 0.11240148544311523,
+      "page_size_kb": 14.1611328125,
+      "status_code": 200,
+      "timestamp": "2025-10-06T14:32:33.598266"
+    }
+  }
+}

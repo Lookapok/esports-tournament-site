@@ -25,11 +25,14 @@ def is_superuser(user):
 # tournaments/views.py
 
 def tournament_list(request):
-    # ===== 第一階段性能優化 + 快取 =====
-    # 檢查快取
-    cache_key = 'tournament_list_main'
-    cached_result = cache.get(cache_key)
+    # ===== 優化的快取策略 =====
+    # 使用更細緻的快取金鑰，包含版本資訊
+    from django.conf import settings
+    cache_version = getattr(settings, 'CACHE_VERSION', 1)
+    cache_key = f'tournament_list_v{cache_version}'
     
+    # 檢查快取
+    cached_result = cache.get(cache_key)
     if cached_result:
         return render(request, 'tournaments/tournament_list.html', cached_result)
     
@@ -49,16 +52,18 @@ def tournament_list(request):
         'upcoming_matches': upcoming_matches,
     }
     
-    # 快取結果 3 分鐘
-    cache.set(cache_key, context, 180)
+    # 快取結果 5 分鐘，賽事列表變動較少
+    cache.set(cache_key, context, 300)
     
     return render(request, 'tournaments/tournament_list.html', context)
 
 def tournament_detail(request, pk):
-    # ===== 第一+二階段性能優化 =====
-    # 智能快取：根據賽制和分頁參數快取不同內容
+    # ===== 優化的快取策略 =====
+    # 更精確的快取金鑰，避免衝突
     page_number = request.GET.get('page', '1')
-    cache_key = f'tournament_detail_{pk}_page_{page_number}'
+    from django.conf import settings
+    cache_version = getattr(settings, 'CACHE_VERSION', 1)
+    cache_key = f'tournament_detail_v{cache_version}_{pk}_page_{page_number}'
     
     # 檢查快取
     cached_result = cache.get(cache_key)
@@ -135,24 +140,35 @@ def tournament_detail(request, pk):
         context['rounds'] = dict(rounds)
         context['page_matches'] = page_matches
     
-    
-    # 快取結果（根據賽事活躍度設定不同的過期時間）
+    # 智能快取策略：根據賽事狀態和內容類型設定不同的過期時間
     if tournament.status == 'completed':
-        # 已完成的賽事快取更久（30分鐘）
-        cache.set(cache_key, context, 1800)
+        # 已完成的賽事快取更久（30分鐘），因為數據不會改變
+        cache_timeout = 1800
+    elif tournament.status == 'ongoing':
+        # 進行中的賽事快取時間中等（10分鐘），平衡即時性和性能
+        cache_timeout = 600
     else:
-        # 進行中的賽事快取時間較短（5分鐘）
-        cache.set(cache_key, context, 300)
+        # 未開始的賽事快取時間較短（5分鐘），可能有變動
+        cache_timeout = 300
+    
+    # 設定快取，包含錯誤處理
+    try:
+        cache.set(cache_key, context, cache_timeout)
+    except Exception as e:
+        # 快取失敗不應影響頁面正常顯示
+        print(f"快取設定失敗: {e}")
     
     return render(request, 'tournaments/tournament_detail.html', context)
 
 def team_list(request):
-    # ===== 第一+二階段性能優化 =====
-    # 檢查快取
+    # ===== 優化的隊伍列表快取策略 =====
     page_number = request.GET.get('page', '1')
-    cache_key = f'team_list_page_{page_number}'
-    cached_result = cache.get(cache_key)
+    from django.conf import settings
+    cache_version = getattr(settings, 'CACHE_VERSION', 1)
+    cache_key = f'team_list_v{cache_version}_page_{page_number}'
     
+    # 檢查快取
+    cached_result = cache.get(cache_key)
     if cached_result:
         return render(request, 'tournaments/team_list.html', cached_result)
     
@@ -169,8 +185,11 @@ def team_list(request):
         'page_obj': page_teams,  # 為模板提供分頁信息
     }
     
-    # 快取結果 10 分鐘
-    cache.set(cache_key, context, 600)
+    # 隊伍資料相對穩定，快取 15 分鐘
+    try:
+        cache.set(cache_key, context, 900)
+    except Exception as e:
+        print(f"隊伍列表快取設定失敗: {e}")
     
     return render(request, 'tournaments/team_list.html', context)
 

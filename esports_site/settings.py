@@ -181,12 +181,16 @@ else:
         }
     }
 
-# ===== 快取配置 =====
+# ===== 快取配置優化 =====
 # 根據環境選擇不同的快取後端
 REDIS_URL = config('REDIS_URL', default='')
 
-if REDIS_URL and IS_RENDER:
-    # 生產環境：使用 Redis 快取（Render 提供的 Redis）
+# 檢查是否應該使用 Redis（生產環境或有 REDIS_URL）
+USE_REDIS = REDIS_URL and (IS_RENDER or config('USE_REDIS', default=False, cast=bool))
+
+if USE_REDIS:
+    # 生產環境或明確指定：使用 Redis 快取
+    print(f"🚀 使用 Redis 快取: {REDIS_URL[:20]}...")
     CACHES = {
         'default': {
             'BACKEND': 'django_redis.cache.RedisCache',
@@ -194,30 +198,42 @@ if REDIS_URL and IS_RENDER:
             'OPTIONS': {
                 'CLIENT_CLASS': 'django_redis.client.DefaultClient',
                 'PARSER_CLASS': 'redis.connection.HiredisParser',
-                'CONNECTION_POOL_KWARGS': {'max_connections': 50},
+                'CONNECTION_POOL_KWARGS': {
+                    'max_connections': 50,
+                    'retry_on_timeout': True,
+                },
                 'COMPRESSOR': 'django_redis.compressors.zlib.ZlibCompressor',
+                'IGNORE_EXCEPTIONS': True,  # 快取失敗時不中斷應用
             },
-            'TIMEOUT': 600,  # 10 分鐘
+            'TIMEOUT': 900,  # 15 分鐘預設超時
+            'VERSION': 1,
         }
     }
     # Redis 作為 Session 存儲
     SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
     SESSION_CACHE_ALIAS = 'default'
+    SESSION_COOKIE_AGE = 1800  # 30 分鐘
 else:
-    # 開發環境：使用內存快取
+    # 開發環境：使用優化的內存快取
+    print("💻 使用本地記憶體快取")
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-            'LOCATION': 'unique-snowflake',
-            'TIMEOUT': 300,  # 5 分鐘
+            'LOCATION': 'esports-dev-cache',
+            'TIMEOUT': 600,  # 10 分鐘
             'OPTIONS': {
-                'MAX_ENTRIES': 2000,  # 增加快取容量
+                'MAX_ENTRIES': 5000,  # 增加快取容量
+                'CULL_FREQUENCY': 3,  # 更積極的清理策略
             }
         }
     }
 
-# 快取金鑰前綴
-CACHE_MIDDLEWARE_KEY_PREFIX = 'esports'
+# 快取金鑰配置
+CACHE_MIDDLEWARE_KEY_PREFIX = 'esports_v2'  # 更新版本避免舊快取
+CACHE_MIDDLEWARE_SECONDS = 300  # 中間件快取 5 分鐘
+
+# 快取版本控制（用於清除快取）
+CACHE_VERSION = 2
 CACHE_MIDDLEWARE_SECONDS = 300  # 頁面快取 5 分鐘
 
 

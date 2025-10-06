@@ -1,0 +1,56 @@
+{
+  "timestamp": "2025-10-06T14:51:33.708877",
+  "cache_backend": "django.core.cache.backends.locmem.LocMemCache",
+  "cache_version": 2,
+  "config_info": {
+    "backend": "django.core.cache.backends.locmem.LocMemCache",
+    "timeout": 600,
+    "location": "esports-dev-cache"
+  },
+  "functionality_tests": [
+    {
+      "key": "simple_string",
+      "status": "✅ 成功",
+      "write_time": 3.695487976074219e-05,
+      "read_time": 1.1682510375976562e-05,
+      "data_size": 12
+    },
+    {
+      "key": "complex_dict",
+      "status": "✅ 成功",
+      "write_time": 1.7881393432617188e-05,
+      "read_time": 1.8358230590820312e-05,
+      "data_size": 35
+    },
+    {
+      "key": "large_data",
+      "status": "✅ 成功",
+      "write_time": 1.1920928955078125e-05,
+      "read_time": 8.821487426757812e-06,
+      "data_size": 10000
+    }
+  ],
+  "performance_tests": {
+    "small": {
+      "data_size": 100,
+      "avg_write_time": 8.487701416015625e-06,
+      "avg_read_time": 5.769729614257812e-06,
+      "write_speed_kbps": 11505.617977528089,
+      "read_speed_kbps": 16925.619834710746
+    },
+    "medium": {
+      "data_size": 10000,
+      "avg_write_time": 1.049041748046875e-05,
+      "avg_read_time": 7.104873657226563e-06,
+      "write_speed_kbps": 930909.0909090909,
+      "read_speed_kbps": 1374496.644295302
+    },
+    "large": {
+      "data_size": 100000,
+      "avg_write_time": 3.080368041992187e-05,
+      "avg_read_time": 1.888275146484375e-05,
+      "write_speed_kbps": 3170278.637770898,
+      "read_speed_kbps": 5171717.171717172
+    }
+  }
+}

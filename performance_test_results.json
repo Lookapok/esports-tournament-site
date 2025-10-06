@@ -1,0 +1,53 @@
+{
+  "timestamp": "2025-10-06T14:44:49.380047",
+  "results": {
+    "/": {
+      "description": "賽事列表首頁",
+      "cold_load": 0.10830903053283691,
+      "hot_load": 0.1990053653717041,
+      "improvement": -83.7384790471096,
+      "content_size_kb": 3.3125,
+      "status": "success"
+    },
+    "/tournaments/9/": {
+      "description": "賽事詳情快取測試 #3",
+      "cold_load": 5.681265830993652,
+      "hot_load": 6.8100080490112305,
+      "improvement": -19.867794459816032,
+      "content_size_kb": 42.9365234375,
+      "status": "success"
+    },
+    "/tournaments/9/?page=2": {
+      "description": "賽事詳情 - B組",
+      "cold_load": 8.089868545532227,
+      "hot_load": 5.890615224838257,
+      "improvement": 27.18527882518618,
+      "content_size_kb": 42.94140625,
+      "status": "success"
+    },
+    "/tournaments/9/?page=3": {
+      "description": "賽事詳情 - C組",
+      "cold_load": 8.14718222618103,
+      "hot_load": 5.651383638381958,
+      "improvement": 30.63388688887804,
+      "content_size_kb": 43.9873046875,
+      "status": "success"
+    },
+    "/teams/": {
+      "description": "隊伍列表",
+      "cold_load": 3.9452030658721924,
+      "hot_load": 0.0933375358581543,
+      "improvement": 97.63415128956056,
+      "content_size_kb": 14.1611328125,
+      "status": "success"
+    },
+    "/teams/?page=2": {
+      "description": "隊伍列表 - 第2頁",
+      "cold_load": 4.006381273269653,
+      "hot_load": 0.10137438774108887,
+      "improvement": 97.46967697714013,
+      "content_size_kb": 13.994140625,
+      "status": "success"
+    }
+  }
+}
