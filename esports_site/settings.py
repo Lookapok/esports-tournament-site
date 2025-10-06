@@ -310,6 +310,23 @@ WHITENOISE_COMPRESS_EXTENSIONS = [
 # 靜態文件快取配置
 WHITENOISE_MAX_AGE = 31536000  # 1年快取
 
+# ===== 第四階段：前端性能優化 =====
+# HTTP 快取標頭優化
+if IS_RENDER:  # 生產環境
+    # 啟用 Gzip 壓縮
+    MIDDLEWARE.insert(2, 'django.middleware.gzip.GZipMiddleware')
+    
+    # 瀏覽器快取配置
+    WHITENOISE_STATIC_PREFIX = '/static/'
+    WHITENOISE_STATIC_PREFIX_MAX_AGE = 31536000  # 靜態檔案 1 年快取
+    
+    # 條件請求支援
+    USE_ETAGS = True
+    
+    # 資源提示優化
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+
 # 禁用不必要的中間件以提高性能
 if IS_RENDER:  # 生產環境
     # 移除一些開發專用的中間件

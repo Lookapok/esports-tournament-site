@@ -1,4 +1,43 @@
+// 頁面性能優化和互動功能 v2.0
 document.addEventListener('DOMContentLoaded', function() {
+    // ===== 頁面載入性能優化 =====
+    
+    // 延遲載入非關鍵圖片
+    if ('IntersectionObserver' in window) {
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+        
+        lazyImages.forEach(img => imageObserver.observe(img));
+    }
+    
+    // ===== 頁面切換加速 =====
+    
+    // 預載入連結
+    const links = document.querySelectorAll('a[href^="/"]');
+    links.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            if (!this.dataset.prefetched) {
+                const prefetchLink = document.createElement('link');
+                prefetchLink.rel = 'prefetch';
+                prefetchLink.href = this.href;
+                document.head.appendChild(prefetchLink);
+                this.dataset.prefetched = 'true';
+            }
+        });
+    });
+    
+    // ===== 原有功能保持 =====
+    
+    // 對戰圖表高亮功能
     const winners = document.querySelectorAll('.participant.winner');
 
     winners.forEach(winnerNode => {

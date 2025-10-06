@@ -56,3 +56,8 @@ thead th, tbody td {
 
 {% endblock %}
 
+{% block extra_js %}
+    <!-- Chart.js 只在統計頁面載入 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+{% endblock %}
+
