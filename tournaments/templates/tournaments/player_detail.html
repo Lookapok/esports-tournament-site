@@ -42,13 +42,13 @@
             <tbody>
                 {% for stat in stats %}
                     <tr>
-                        <td>{{ stat.match.tournament.name }}</td>
-                        <td>{{ stat.match.team1.name }} vs {{ stat.match.team2.name }}</td>
+                        <td>{{ stat.game.match.tournament.name }}</td>
+                        <td>{{ stat.game.match.team1.name }} vs {{ stat.game.match.team2.name }}</td>
                         <td>{{ stat.kills }}</td>
                         <td>{{ stat.deaths }}</td>
                         <td>{{ stat.assists }}</td>
                         <td>{{ stat.acs }}</td>
-                        <td>{{ stat.match.match_time|date:"Y-m-d" }}</td>
+                        <td>{{ stat.game.match.match_time|date:"Y-m-d" }}</td>
                     </tr>
                 {% empty %}
                     <tr>

@@ -202,8 +202,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for standing in current_group.standings.all %}
-                        <tr>
+                        {% for standing in group_standings %}  <tr>
                             <td><strong class="text-primary">{{ forloop.counter }}</strong></td>
                             <td><strong class="team-name-black">{{ standing.team.name }}</strong></td>
                             <td><span class="text-success fw-bold">{{ standing.wins }}</span></td>

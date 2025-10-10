@@ -93,20 +93,25 @@ def tournament_detail(request, pk):
         from django.core.paginator import Paginator
         
         # 只載入必要的分組資料，按名稱排序
-        groups = tournament.groups.prefetch_related(
-            Prefetch('teams', queryset=Team.objects.only('id', 'name', 'logo'))
-        ).only('id', 'name', 'tournament').order_by('name')
+        groups = tournament.groups.order_by('name') # 這裡不需要 prefetch teams 了
         
         # 按分組分頁（每頁顯示一個分組）
         paginator = Paginator(groups, 1)
         page_number = request.GET.get('page', 1)
         page_groups = paginator.get_page(page_number)
         
-        # 為當前分組載入相關比賽（極度優化）
+        # 取得當前頁面的分組
         current_group = page_groups.object_list[0] if page_groups.object_list else None
+        
+        # --- [核心修正點] ---
+        group_standings = []
         group_matches = []
         if current_group:
-            # 只載入當前分組的比賽，使用 only() 限制欄位
+            # [新增] 查詢當前分組的積分榜 (Standing) 並進行排序
+            # 這是解決您問題的關鍵程式碼
+            group_standings = Standing.objects.filter(group=current_group).select_related('team').order_by('-points', '-wins', 'team__name')
+
+            # [優化] 為當前分組載入相關比賽的邏輯
             group_matches = tournament.matches.select_related(
                 'team1', 'team2', 'winner'
             ).only(
@@ -115,11 +120,13 @@ def tournament_detail(request, pk):
             ).filter(
                 team1__in=current_group.teams.all(),
                 team2__in=current_group.teams.all()
-            ).order_by('id')[:50]  # 限制載入數量
-        
+            ).order_by('id')[:50]
+        # --- [修正結束] ---
+
         context['groups'] = page_groups
         context['current_group'] = current_group
         context['group_matches'] = group_matches
+        context['group_standings'] = group_standings # [新增] 將排序好的積分榜傳給模板
         
     elif tournament.format == 'swiss':
         # 瑞士輪：極度優化積分榜和分頁比賽
@@ -451,9 +458,9 @@ def player_detail(request, pk):
 
     # 從選手身上，反向查詢所有他打過的比賽數據
     # .select_related() 用來優化查詢，一次性抓取相關的比賽和賽事資訊
-    stats = player.match_stats.select_related(
-        'match', 'match__tournament', 'match__team1', 'match__team2'
-    ).order_by('-match__match_time') # 讓最新的比賽顯示在最上面
+    stats = player.game_stats.select_related(
+        'game__match', 'game__match__tournament', 'game__match__team1', 'game__match__team2'
+    ).order_by('-game__match__match_time') # 讓最新的比賽顯示在最上面
 
     context = {
         'player': player,

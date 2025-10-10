@@ -25,12 +25,14 @@ class APIRootView(APIView):
             'endpoints': {
                 'tournaments': request.build_absolute_uri(reverse('api_tournament_list')),
                 'teams': request.build_absolute_uri(reverse('api_team_list')),
+                'players': request.build_absolute_uri(reverse('api_player_list')),
                 'match_detail': 'api/matches/{id}/',
                 'match_stats': 'api/matches/{id}/stats/',
             },
             'documentation': {
                 'tournaments': 'GET: 獲取所有賽事, POST: 創建新賽事',
                 'teams': 'POST: 創建新隊伍',
+                'players': 'GET: 獲取所有選手暱稱列表',
                 'match_detail': 'GET: 獲取比賽詳情',
                 'match_stats': 'POST: 提交比賽統計資料',
             }
@@ -187,3 +189,25 @@ class GameReportAPIView(APIView):
                 'exception_message': str(e),
             })
             return Response({'error': f'An unexpected error occurred: {str(e)}'}, status=500)
+
+class PlayerListAPI(APIView):
+    """
+    選手列表 API - 提供所有選手的暱稱列表給 Discord bot 進行模糊匹配
+    """
+    permission_classes = [AllowAny]
+    
+    def get(self, request):
+        # 獲取所有選手的暱稱，按暱稱排序
+        players = Player.objects.values_list('nickname', flat=True).order_by('nickname')
+        
+        # 記錄 API 使用情況
+        api_logger.info('Player List API Called', extra={
+            'event_type': 'player_list_request',
+            'player_count': len(players),
+            'user_agent': request.META.get('HTTP_USER_AGENT', ''),
+        })
+        
+        return Response({
+            'players': list(players),
+            'count': len(players)
+        })
