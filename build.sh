@@ -1,8 +1,26 @@
 #!/bin/bash
 # Render 自動部署腳本
-# Force rebuild: 2025-11-29 23:00
-
-set -e  # 遇到錯誤就停止
+# Force rebuild: 2025-11-29 23:# 檢查是否需要從 Docker 遷移資料
+echo "🔍 檢查資料遷移需求..."
+echo "⚠️ 資料匯入已停用，保護手動設定的分組資料"
+if [ -f "production_data.json" ]; then
+    echo "ℹ️ 找到 Docker 資料檔案但不執行匯入（保護現有資料）"
+    echo "📊 檔案大小: $(du -h production_data.json)"
+    
+    # echo "🔄️ 執行完整資料庫重置並匯入Docker資料..."
+    # python manage.py reset_and_import 2>&1
+    
+    # if [ $? -ne 0 ]; then
+    #     echo "❌ 重置匯入失敗，嘗試其他方法..."
+    #     echo "🔄 嘗試安全匯入..."
+    #     python manage.py safe_import 2>&1 || {
+    #         echo "🔄 嘗試強制重新匯入..."
+    #         python manage.py force_reimport 2>&1 || echo "⚠️ 所有匯入方法都失敗"
+    #     }
+    # fi
+else
+    echo "ℹ️ 沒有 Docker 資料檔案，跳過匯入"
+fi止
 
 echo "🚀 開始部署 WTACS 電競賽事系統..."
 
