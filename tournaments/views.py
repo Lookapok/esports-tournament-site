@@ -137,30 +137,30 @@ def tournament_detail(request, pk):
                             group=current_group
                         ).select_related('team').order_by('-points', '-wins', 'team__name')
 
-                        # [修正] 正確查詢分組內比賽的邏輯
+                        # [修正] 簡化查詢邏輯 - 測試版本
                         from django.db.models import Q
+                        
+                        # 方案1: 簡單的 OR 查詢，任一隊伍在分組內的比賽
                         group_teams = list(current_group.teams.all())
-                        
-                        # 調試信息（只在開發時使用）
-                        if len(group_teams) > 0:
-                            print(f"DEBUG: {current_group.name} 有 {len(group_teams)} 支隊伍")
-                            print(f"DEBUG: 隊伍列表: {[team.name for team in group_teams]}")
-                        
-                        # 查詢兩支隊伍都在同一分組內的比賽
                         group_matches = tournament.matches.select_related(
                             'team1', 'team2', 'winner'
                         ).filter(
-                            Q(team1__in=group_teams) & Q(team2__in=group_teams)
-                        ).order_by('round_number', 'id')[:50]
+                            Q(team1__in=group_teams) | Q(team2__in=group_teams)
+                        ).order_by('round_number', 'id')
                         
-                        # 調試信息
-                        if len(group_matches) > 0:
-                            print(f"DEBUG: {current_group.name} 找到 {len(group_matches)} 場比賽")
-                        else:
-                            print(f"DEBUG: {current_group.name} 沒有找到比賽")
-                            # 嘗試查詢所有比賽來診斷問題
-                            all_matches = tournament.matches.all()
-                            print(f"DEBUG: 錦標賽總共有 {len(all_matches)} 場比賽")
+                        print(f"DEBUG: {current_group.name} - 使用 OR 查詢找到 {len(group_matches)} 場比賽")
+                        
+                        # 方案2: 如果OR查詢還是沒有結果，再嘗試AND查詢
+                        if len(group_matches) == 0:
+                            group_matches = tournament.matches.select_related(
+                                'team1', 'team2', 'winner'
+                            ).filter(
+                                Q(team1__in=group_teams) & Q(team2__in=group_teams)
+                            ).order_by('round_number', 'id')
+                            print(f"DEBUG: {current_group.name} - 使用 AND 查詢找到 {len(group_matches)} 場比賽")
+                        
+                        # 限制結果數量
+                        group_matches = list(group_matches[:50])
                     except Exception as e:
                         # 如果查詢失敗，使用空列表
                         group_standings = []
