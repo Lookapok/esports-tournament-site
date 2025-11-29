@@ -1,5 +1,47 @@
-#!/bin/bash
-# Render 自動部署腳本
+#!/becho "🔍 檢查資料遷移需求..."
+echo "⚠️ 檢查是否需要生成統計數據"
+if [ -f "production_data.json" ]; then
+    echo "ℹ️ 找到 Docker 資料檔案但不執行匯入（保護現有資料）"
+    echo "📊 檔案大小: $(du -h production_data.json)"
+    
+    # echo "🔄️ 執行完整資料庫重置並匯入Docker資料..."
+    # python manage.py reset_and_import 2>&1
+    
+    # if [ $? -ne 0 ]; then
+    #     echo "❌ 重置匯入失敗，嘗試其他方法..."
+    #     echo "🔄 嘗試安全匯入..."
+    #     python manage.py safe_import 2>&1 || {
+    #         echo "🔄 嘗試強制重新匯入..."
+    #         python manage.py force_reimport 2>&1 || echo "⚠️ 所有匯入方法都失敗"
+    #     }
+    # fi
+    
+    # 保護現有數據，不刪除任何檔案
+    echo "🔒 保護模式：不執行任何資料變更操作"
+else
+    echo "ℹ️ 沒有 Docker 資料檔案，檢查統計數據"
+fi
+
+# 檢查並生成統計數據（如果需要）
+echo "📊 檢查選手統計數據..."
+python manage.py shell -c "
+from tournaments.models import PlayerGameStat, Game
+stats_count = PlayerGameStat.objects.count()
+games_count = Game.objects.count()
+print(f'統計數據: {stats_count}, 遊戲場次: {games_count}')
+if stats_count == 0 and games_count > 0:
+    print('需要生成統計數據')
+    exit(1)
+else:
+    print('統計數據正常')
+    exit(0)
+"
+
+# 如果沒有統計數據但有遊戲數據，生成統計數據
+if [ $? -eq 1 ]; then
+    echo "🎯 生成選手統計數據..."
+    python manage.py generate_sample_stats 2>&1 || echo "⚠️ 統計數據生成失敗"
+fi部署腳本
 # Force rebuild: 2025-11-29 23:30
 # 檢查是否需要從 Docker 遷移資料
 echo "🔍 檢查資料遷移需求..."
