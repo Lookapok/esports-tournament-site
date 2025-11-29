@@ -162,10 +162,11 @@ if DATABASE_URL:
         'default': dj_database_url.parse(
             DATABASE_URL, 
             conn_max_age=600, 
-            conn_health_checks=True,
-            engine_override='django.db.backends.postgresql'
+            conn_health_checks=True
         )
     }
+    # 確保使用正確的 PostgreSQL 後端
+    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
     # PostgreSQL 特定優化
     DATABASES['default']['OPTIONS'] = {
         'options': '-c default_transaction_isolation=read_committed'
