@@ -169,16 +169,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 快取設定
 if IS_RENDER:
-    # 生產環境使用 Redis
-    CACHES = {
-        'default': {
-            'BACKEND': 'django_redis.cache.RedisCache',
-            'LOCATION': config('REDIS_URL', default='redis://127.0.0.1:6379/1'),
-            'OPTIONS': {
-                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+    # 生產環境：嘗試使用 Redis，失敗則使用內存快取
+    try:
+        import django_redis
+        CACHES = {
+            'default': {
+                'BACKEND': 'django_redis.cache.RedisCache',
+                'LOCATION': config('REDIS_URL', default='redis://127.0.0.1:6379/1'),
+                'OPTIONS': {
+                    'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+                }
             }
         }
-    }
+    except ImportError:
+        # Redis 不可用時使用內存快取
+        CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            }
+        }
 else:
     # 本地開發使用內存快取
     CACHES = {
