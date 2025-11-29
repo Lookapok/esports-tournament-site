@@ -157,9 +157,14 @@ import dj_database_url
 DATABASE_URL = config('DATABASE_URL', default='')
 
 if DATABASE_URL:
-    # 生產環境：使用 Render 提供的 PostgreSQL
+    # 生產環境：使用 Supabase PostgreSQL
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, conn_health_checks=True)
+        'default': dj_database_url.parse(
+            DATABASE_URL, 
+            conn_max_age=600, 
+            conn_health_checks=True,
+            engine_override='django.db.backends.postgresql'
+        )
     }
     # PostgreSQL 特定優化
     DATABASES['default']['OPTIONS'] = {
