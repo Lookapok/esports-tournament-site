@@ -9,9 +9,13 @@ echo "🚀 開始部署 WTACS 電競賽事系統..."
 echo "📦 更新 pip..."
 python -m pip install --upgrade pip
 
-# 先單獨安裝 PostgreSQL 驅動
+# 強制重新安裝 PostgreSQL 驅動 (多重策略)
 echo "📦 安裝 PostgreSQL 驅動..."
-python -m pip install psycopg2-binary==2.9.7
+python -m pip install --force-reinstall psycopg2-binary==2.9.5
+
+# 備用方案: 嘗試 psycopg (newer version)
+echo "📦 嘗試新版 PostgreSQL 驅動..."
+python -m pip install --force-reinstall 'psycopg[binary]>=3.1.8' || echo "⚠️ 新版驅動安裝失敗，使用舊版"
 
 # 安裝依賴
 echo "📦 安裝 Python 套件..."

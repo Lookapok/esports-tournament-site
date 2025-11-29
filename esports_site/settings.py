@@ -99,6 +99,18 @@ import dj_database_url
 
 DATABASE_URL = config('DATABASE_URL', default='')
 
+# 動態檢測可用的 PostgreSQL 驅動
+def get_postgresql_engine():
+    try:
+        import psycopg2
+        return 'django.db.backends.postgresql_psycopg2'
+    except ImportError:
+        try:
+            import psycopg
+            return 'django.db.backends.postgresql'
+        except ImportError:
+            raise Exception("Neither psycopg2 nor psycopg is installed")
+
 if DATABASE_URL:
     # 生產環境：使用 Supabase PostgreSQL
     DATABASES = {
@@ -108,7 +120,12 @@ if DATABASE_URL:
             conn_health_checks=True
         )
     }
-    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
+    # 動態設定引擎
+    try:
+        DATABASES['default']['ENGINE'] = get_postgresql_engine()
+    except Exception:
+        DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
+        
     DATABASES['default']['OPTIONS'] = {
         'options': '-c default_transaction_isolation=read_committed'
     }
