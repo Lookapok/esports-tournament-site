@@ -113,22 +113,32 @@ def get_postgresql_engine():
 
 if DATABASE_URL:
     # 生產環境：使用 Supabase PostgreSQL
-    DATABASES = {
-        'default': dj_database_url.parse(
-            DATABASE_URL, 
-            conn_max_age=600, 
-            conn_health_checks=True
-        )
-    }
-    # 動態設定引擎
     try:
-        DATABASES['default']['ENGINE'] = get_postgresql_engine()
-    except Exception:
-        DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
-        
-    DATABASES['default']['OPTIONS'] = {
-        'options': '-c default_transaction_isolation=read_committed'
-    }
+        DATABASES = {
+            'default': dj_database_url.parse(
+                DATABASE_URL, 
+                conn_max_age=600, 
+                conn_health_checks=True
+            )
+        }
+        # 動態設定引擎
+        try:
+            DATABASES['default']['ENGINE'] = get_postgresql_engine()
+        except Exception:
+            DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
+            
+        DATABASES['default']['OPTIONS'] = {
+            'options': '-c default_transaction_isolation=read_committed'
+        }
+    except Exception as e:
+        print(f"❌ 資料庫配置錯誤: {e}")
+        # 緊急回退到 SQLite
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
 else:
     # 本地開發：SQLite
     DATABASES = {

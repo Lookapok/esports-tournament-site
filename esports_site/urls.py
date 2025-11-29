@@ -6,8 +6,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
 from django.views.static import serve
+from tournaments.health import health_check
 
 urlpatterns = [
+    # 健康檢查端點
+    path('health/', health_check, name='health_check'),
+    
     # Admin 路由
     path('admin/', admin.site.urls),
     

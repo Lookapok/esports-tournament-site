@@ -27,6 +27,8 @@ fi
 
 # 執行資料庫遷移
 echo "🗄️ 執行資料庫遷移..."
+echo "🔍 檢查環境變數..."
+echo "DATABASE_URL 是否存在: ${DATABASE_URL:+是}"
 python manage.py migrate
 
 # 收集靜態檔案
