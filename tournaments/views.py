@@ -25,42 +25,60 @@ def is_superuser(user):
 # tournaments/views.py
 
 def tournament_list(request):
-    # ===== 優化的快取策略 =====
-    # 使用更細緻的快取金鑰，包含版本資訊
-    from django.conf import settings
-    cache_version = getattr(settings, 'CACHE_VERSION', 1)
-    cache_key = f'tournament_list_v{cache_version}'
-    
-    # 檢查快取
-    cached_result = cache.get(cache_key)
-    if cached_result:
-        return render(request, 'tournaments/tournament_list.html', cached_result)
-    
-    # 1. 極度優化的賽事查詢，只載入必要欄位
-    tournaments = Tournament.objects.select_related().only(
-        'id', 'name', 'start_date', 'end_date', 'status', 'format'
-    ).order_by('-start_date')
-    
-    # 2. 極度優化的即將到來比賽查詢
-    upcoming_matches = Match.objects.select_related(
-        'tournament', 'team1', 'team2'
-    ).only(
-        'id', 'match_time', 'status',
-        'tournament__name', 'team1__name', 'team2__name'
-    ).filter(
-        status='scheduled',
-        match_time__gte=timezone.now()
-    ).order_by('match_time')[:3]  # 減少到3場以加快載入
+    try:
+        # ===== 優化的快取策略 =====
+        # 使用更細緻的快取金鑰，包含版本資訊
+        from django.conf import settings
+        cache_version = getattr(settings, 'CACHE_VERSION', 1)
+        cache_key = f'tournament_list_v{cache_version}'
+        
+        # 檢查快取（添加錯誤處理）
+        try:
+            cached_result = cache.get(cache_key)
+            if cached_result:
+                return render(request, 'tournaments/tournament_list.html', cached_result)
+        except Exception:
+            # 快取失敗時忽略並繼續
+            pass
+        
+        # 1. 極度優化的賽事查詢，只載入必要欄位
+        tournaments = Tournament.objects.select_related().only(
+            'id', 'name', 'start_date', 'end_date', 'status', 'format'
+        ).order_by('-start_date')
+        
+        # 2. 極度優化的即將到來比賽查詢
+        upcoming_matches = Match.objects.select_related(
+            'tournament', 'team1', 'team2'
+        ).only(
+            'id', 'match_time', 'status',
+            'tournament__name', 'team1__name', 'team2__name'
+        ).filter(
+            status='scheduled',
+            match_time__gte=timezone.now()
+        ).order_by('match_time')[:3]  # 減少到3場以加快載入
 
-    context = {
-        'tournaments': tournaments,
-        'upcoming_matches': upcoming_matches,
-    }
+        context = {
+            'tournaments': tournaments,
+            'upcoming_matches': upcoming_matches,
+        }
+        
+        # 快取結果 10 分鐘，賽事列表變動較少（添加錯誤處理）
+        try:
+            cache.set(cache_key, context, 600)
+        except Exception:
+            # 快取失敗時忽略
+            pass
+        
+        return render(request, 'tournaments/tournament_list.html', context)
     
-    # 快取結果 10 分鐘，賽事列表變動較少
-    cache.set(cache_key, context, 600)
-    
-    return render(request, 'tournaments/tournament_list.html', context)
+    except Exception as e:
+        # 如果所有操作都失敗，返回簡單的空頁面
+        context = {
+            'tournaments': Tournament.objects.none(),
+            'upcoming_matches': Match.objects.none(),
+            'error_message': f'資料載入中，請稍後再試。'
+        }
+        return render(request, 'tournaments/tournament_list.html', context)
 
 def tournament_detail(request, pk):
     # ===== 優化的快取策略 =====

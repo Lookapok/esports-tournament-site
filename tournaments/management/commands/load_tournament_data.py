@@ -68,6 +68,7 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.WARNING("⚠️ 沒有錦標賽資料可匯入"))
                 return
             
+            # 使用事務確保資料完整性
             with transaction.atomic():
                 # 匯入錦標賽
                 self.stdout.write("🏆 開始匯入錦標賽...")
@@ -186,17 +187,19 @@ class Command(BaseCommand):
                         continue
                 
                 # 匯入積分榜
+                self.stdout.write("🏆 開始匯入積分榜...")
+                standings_imported = 0
                 for item in data.get('standings', []):
                     try:
                         tournament = Tournament.objects.get(id=item['tournament_id'])
                         team = Team.objects.get(id=item['team_id'])
-                        group = Group.objects.get(id=item['group_id']) if item['group_id'] else None
+                        group = Group.objects.get(id=item['group_id']) if item.get('group_id') else None
                         
-                        Standing.objects.get_or_create(
-                            id=item['id'],
+                        # 使用 unique_together 約束進行匯入
+                        standing, created = Standing.objects.get_or_create(
+                            tournament=tournament,
+                            team=team,
                             defaults={
-                                'tournament': tournament,
-                                'team': team,
                                 'group': group,
                                 'wins': item.get('wins', 0),
                                 'losses': item.get('losses', 0),
@@ -204,10 +207,56 @@ class Command(BaseCommand):
                                 'points': item.get('points', 0)
                             }
                         )
-                    except (Tournament.DoesNotExist, Team.DoesNotExist, Group.DoesNotExist):
+                        if created:
+                            standings_imported += 1
+                        else:
+                            # 更新現有記錄
+                            standing.group = group
+                            standing.wins = item.get('wins', 0)
+                            standing.losses = item.get('losses', 0)
+                            standing.draws = item.get('draws', 0)
+                            standing.points = item.get('points', 0)
+                            standing.save()
+                            standings_imported += 1
+                            
+                    except Tournament.DoesNotExist:
+                        self.stdout.write(f"  ⚠️ 找不到錦標賽 ID: {item.get('tournament_id')}")
                         continue
+                    except Team.DoesNotExist:
+                        self.stdout.write(f"  ⚠️ 找不到隊伍 ID: {item.get('team_id')}")
+                        continue
+                    except Group.DoesNotExist:
+                        self.stdout.write(f"  ⚠️ 找不到分組 ID: {item.get('group_id')}")
+                        continue
+                    except Exception as e:
+                        self.stdout.write(f"  ❌ 匯入積分榜記錄失敗: {str(e)}")
+                        continue
+                
+                self.stdout.write(f"🏆 積分榜匯入完成: {standings_imported} 筆")
             
             self.stdout.write(self.style.SUCCESS("🎉 資料匯入完成！"))
             
+            # 驗證匯入結果
+            self.stdout.write("🔍 驗證匯入結果...")
+            tournament_count = Tournament.objects.count()
+            team_count = Team.objects.count()
+            player_count = Player.objects.count()
+            match_count = Match.objects.count()
+            standing_count = Standing.objects.count()
+            
+            self.stdout.write(f"📊 最終統計:")
+            self.stdout.write(f"  - 錦標賽: {tournament_count} 筆")
+            self.stdout.write(f"  - 隊伍: {team_count} 筆")
+            self.stdout.write(f"  - 選手: {player_count} 筆")
+            self.stdout.write(f"  - 比賽: {match_count} 筆")
+            self.stdout.write(f"  - 積分榜: {standing_count} 筆")
+            
+            if tournament_count > 0:
+                self.stdout.write(self.style.SUCCESS("✅ 資料匯入驗證成功！"))
+            else:
+                self.stdout.write(self.style.ERROR("❌ 資料匯入驗證失敗：沒有錦標賽資料"))
+            
         except Exception as e:
             self.stdout.write(self.style.ERROR(f"❌ 匯入失敗: {str(e)}"))
+            import traceback
+            self.stdout.write(f"詳細錯誤: {traceback.format_exc()}")
