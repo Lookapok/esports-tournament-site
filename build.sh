@@ -51,42 +51,16 @@ else:
 # 檢查是否需要從 Docker 遷移資料
 echo "🔍 檢查資料遷移需求..."
 if [ -f "production_data.json" ]; then
-    echo "✅ 找到 Docker 資料檔案，強制重新匯入所有資料..."
-    python manage.py force_reimport
+    echo "✅ 找到 Docker 資料檔案"
+    echo "🧹 清空現有資料並強制重新匯入所有資料..."
     
-    if [ $? -eq 0 ]; then
-        echo "✅ Docker 資料強制重新匯入完成"
-    else
-        echo "❌ Docker 資料強制重新匯入失敗，嘗試一般匯入..."
-        # 如果強制匯入失敗，使用原有的匯入邏輯
-        for i in 1 2 3; do
-            echo "📊 第 $i 次嘗試匯入資料..."
-            if python manage.py load_tournament_data; then
-                echo "✅ 資料匯入成功！"
-                break
-            else
-                echo "⚠️ 第 $i 次匯入失敗，$([ $i -lt 3 ] && echo "重試中..." || echo "最終失敗")"
-                if [ $i -eq 3 ]; then
-                    echo "❌ 資料匯入最終失敗，但繼續部署"
-                fi
-            fi
-        done
-    fi
+    # 直接執行強制重新匯入，不管是否已存在標記
+    python manage.py force_reimport || {
+        echo "❌ 強制重新匯入失敗，嘗試原有匯入方法..."
+        python manage.py load_tournament_data || echo "⚠️ 所有匯入方法都失敗"
+    }
 else
-    echo "ℹ️ 沒有 Docker 資料檔案，使用一般匯入..."
-    # 多次嘗試匯入資料
-    for i in 1 2 3; do
-        echo "📊 第 $i 次嘗試匯入資料..."
-        if python manage.py load_tournament_data; then
-            echo "✅ 資料匯入成功！"
-            break
-        else
-            echo "⚠️ 第 $i 次匯入失敗，$([ $i -lt 3 ] && echo "重試中..." || echo "最終失敗")"
-            if [ $i -eq 3 ]; then
-                echo "❌ 資料匯入最終失敗，但繼續部署"
-            fi
-        fi
-    done
+    echo "ℹ️ 沒有 Docker 資料檔案，跳過匯入"
 fi
 
 # 驗證資料匯入結果
