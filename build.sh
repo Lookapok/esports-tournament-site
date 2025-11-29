@@ -52,9 +52,10 @@ else:
 echo "🔍 運行資料庫診斷..."
 python manage.py diagnose 2>&1
 
-# 測試資料庫連接
-echo "🔌 檢查資料庫連接狀況..."
-python manage.py check_connection
+# 強制執行資料庫遷移
+echo "🗄️ 檢查並執行資料庫遷移..."
+python manage.py makemigrations tournaments --noinput
+python manage.py migrate --noinput
 
 # 檢查是否需要從 Docker 遷移資料
 echo "🔍 檢查資料遷移需求..."
@@ -62,15 +63,17 @@ if [ -f "production_data.json" ]; then
     echo "✅ 找到 Docker 資料檔案"
     echo "📊 檔案大小: $(du -h production_data.json)"
     
-    echo "🔧 使用安全分步匯入方法..."
-    python manage.py safe_import 2>&1 || {
-        echo "❌ 安全匯入失敗，嘗試其他方法..."
-        echo "🔄 嘗試強制重新匯入..."
-        python manage.py force_reimport 2>&1 || {
-            echo "🔄 嘗試一般匯入..."
-            python manage.py load_tournament_data 2>&1 || echo "⚠️ 所有匯入方法都失敗"
+    echo "�️ 執行完整資料庫重置並匯入Docker資料..."
+    python manage.py reset_and_import 2>&1
+    
+    if [ $? -ne 0 ]; then
+        echo "❌ 重置匯入失敗，嘗試其他方法..."
+        echo "� 嘗試安全匯入..."
+        python manage.py safe_import 2>&1 || {
+            echo "🔄 嘗試強制重新匯入..."
+            python manage.py force_reimport 2>&1 || echo "⚠️ 所有匯入方法都失敗"
         }
-    }
+    fi
 else
     echo "ℹ️ 沒有 Docker 資料檔案，跳過匯入"
 fi
