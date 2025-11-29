@@ -52,6 +52,10 @@ else:
 echo "🔍 運行資料庫診斷..."
 python manage.py diagnose 2>&1
 
+# 測試資料庫連接
+echo "🔌 檢查資料庫連接狀況..."
+python manage.py check_connection
+
 # 檢查是否需要從 Docker 遷移資料
 echo "🔍 檢查資料遷移需求..."
 if [ -f "production_data.json" ]; then
