@@ -44,30 +44,58 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.ERROR("❌ production_data.json 檔案不存在！"))
                 return
             
+            # 顯示檔案資訊
+            file_size = os.path.getsize('production_data.json')
+            self.stdout.write(f"📁 檔案大小: {file_size} bytes")
+            
             # 讀取資料檔案
             with open('production_data.json', 'r', encoding='utf-8') as f:
                 data = json.load(f)
             
-            self.stdout.write(f"📄 資料檔案載入成功，包含:")
-            self.stdout.write(f"  - 錦標賽: {len(data.get('tournaments', []))} 筆")
-            self.stdout.write(f"  - 隊伍: {len(data.get('teams', []))} 筆") 
-            self.stdout.write(f"  - 選手: {len(data.get('players', []))} 筆")
+            # 顯示資料統計
+            tournaments = data.get('tournaments', [])
+            teams = data.get('teams', [])
+            players = data.get('players', [])
+            matches = data.get('matches', [])
+            
+            self.stdout.write(f"📊 資料統計:")
+            self.stdout.write(f"  - 錦標賽: {len(tournaments)} 筆")
+            self.stdout.write(f"  - 隊伍: {len(teams)} 筆")
+            self.stdout.write(f"  - 選手: {len(players)} 筆")
+            self.stdout.write(f"  - 比賽: {len(matches)} 筆")
+            
+            if len(tournaments) == 0:
+                self.stdout.write(self.style.WARNING("⚠️ 沒有錦標賽資料可匯入"))
+                return
             
             with transaction.atomic():
                 # 匯入錦標賽
-                for item in data.get('tournaments', []):
-                    tournament, created = Tournament.objects.get_or_create(
-                        id=item['id'],
-                        defaults={
-                            'name': item['name'],
-                            'game': item['game'],
-                            'start_date': self.parse_datetime_flexible(item.get('start_date')),
-                            'end_date': self.parse_datetime_flexible(item.get('end_date')),
-                            'rules': item.get('rules', ''),
-                            'status': item.get('status', 'upcoming'),
-                            'format': item.get('format', 'single_elimination')
-                        }
-                    )
+                self.stdout.write("🏆 開始匯入錦標賽...")
+                tournament_count = 0
+                for item in tournaments:
+                    try:
+                        tournament, created = Tournament.objects.get_or_create(
+                            id=item['id'],
+                            defaults={
+                                'name': item['name'],
+                                'game': item['game'],
+                                'start_date': self.parse_datetime_flexible(item.get('start_date')),
+                                'end_date': self.parse_datetime_flexible(item.get('end_date')),
+                                'rules': item.get('rules', ''),
+                                'status': item.get('status', 'upcoming'),
+                                'format': item.get('format', 'single_elimination')
+                            }
+                        )
+                        tournament_count += 1
+                        if created:
+                            self.stdout.write(f"  ✅ 創建錦標賽: {tournament.name}")
+                        else:
+                            self.stdout.write(f"  ℹ️ 錦標賽已存在: {tournament.name}")
+                    except Exception as e:
+                        self.stdout.write(f"  ❌ 錦標賽匯入失敗: {item.get('name', 'Unknown')} - {str(e)}")
+                        raise  # 重新拋出錯誤以觸發回滾
+                
+                self.stdout.write(f"🏆 錦標賽匯入完成: {tournament_count} 筆")
                 
                 # 匯入隊伍
                 for item in data.get('teams', []):
