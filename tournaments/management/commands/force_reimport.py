@@ -137,15 +137,15 @@ class Command(BaseCommand):
                         team = Team.objects.get(id=item['team_id'])
                         Player.objects.create(
                             id=item['id'],
-                            name=item['name'],
+                            nickname=item['nickname'],  # Changed from 'name' to 'nickname'
                             team=team,
-                            position=item.get('position', ''),
+                            role=item.get('role', 'Flex'),  # Changed from 'position' to 'role'
                             avatar=item.get('avatar', '')
                         )
                         players_imported += 1
                     except Exception as e:
                         if players_imported < 5:  # Show first few errors
-                            self.stdout.write(f"  ERROR importing player {item.get('name')}: {e}")
+                            self.stdout.write(f"  ERROR importing player {item.get('nickname')}: {e}")
                 if players_imported <= 5:
                     self.stdout.write(f"  First 5 players imported successfully")
                 self.stdout.write(f"Players imported: {players_imported}")

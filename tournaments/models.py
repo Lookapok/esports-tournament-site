@@ -34,6 +34,7 @@ class Tournament(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="隊伍名稱")
+    school = models.CharField(max_length=200, blank=True, verbose_name="學校名稱")
     logo = models.ImageField(upload_to='team_logos/', null=True, blank=True, verbose_name="隊伍Logo")
 
     def __str__(self):
@@ -108,6 +109,7 @@ class Game(models.Model):
 class Group(models.Model):
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='groups', verbose_name="所屬賽事")
     name = models.CharField(max_length=100, verbose_name="組別名稱") # 例如: "A組", "B組"
+    max_teams = models.PositiveIntegerField(default=8, verbose_name="最大隊伍數")
     teams = models.ManyToManyField(Team, related_name='tournament_groups', verbose_name="組內隊伍")
 
     def __str__(self):
