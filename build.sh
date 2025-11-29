@@ -7,14 +7,18 @@ echo "🚀 開始部署 WTACS 電競賽事系統..."
 
 # 更新 pip
 echo "📦 更新 pip..."
-pip install --upgrade pip
+python -m pip install --upgrade pip
+
+# 先單獨安裝 PostgreSQL 驅動
+echo "📦 安裝 PostgreSQL 驅動..."
+python -m pip install psycopg2-binary==2.9.7
 
 # 安裝依賴
 echo "📦 安裝 Python 套件..."
 if [ -f "requirements.production.txt" ]; then
-    pip install -r requirements.production.txt
+    python -m pip install -r requirements.production.txt
 else
-    pip install -r requirements.txt
+    python -m pip install -r requirements.txt
 fi
 
 # 執行資料庫遷移
