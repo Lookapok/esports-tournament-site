@@ -674,6 +674,9 @@ def auto_random_grouping(request, pk):
     return render(request, 'tournaments/auto_grouping.html', context)
 
 # ===== API 端點 =====
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
 def api_generate_sample_stats(request):
     """API 端點：生成範例選手統計數據"""
     if request.method != 'POST':
