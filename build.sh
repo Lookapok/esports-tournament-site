@@ -47,12 +47,36 @@ else:
     print('ℹ️ 管理員帳戶已存在')
 " || echo "⚠️ 建立管理員帳戶失敗，請稍後手動建立"
 
-# 匯入初始資料（強制執行，多次重試）
-echo "📊 強制匯入錦標賽資料..."
-echo "🔍 檢查資料檔案是否存在..."
-if [ -f "production_data.json" ]; then
-    echo "✅ production_data.json 檔案存在"
+# 檢查是否需要從 Docker 遷移資料
+echo "🔍 檢查資料遷移需求..."
+if [ -f "production_data.json" ] && [ ! -f ".migrated_from_docker" ]; then
+    echo "🔄 檢測到 Docker 資料，執行專用遷移..."
+    python manage.py migrate_from_docker
     
+    # 標記已完成遷移
+    if [ $? -eq 0 ]; then
+        touch .migrated_from_docker
+        echo "✅ Docker 資料遷移完成"
+    else
+        echo "❌ Docker 資料遷移失敗，嘗試一般匯入..."
+        # 如果遷移失敗，使用原有的匯入邏輯
+        for i in 1 2 3; do
+            echo "📊 第 $i 次嘗試匯入資料..."
+            if python manage.py load_tournament_data; then
+                echo "✅ 資料匯入成功！"
+                break
+            else
+                echo "⚠️ 第 $i 次匯入失敗，$([ $i -lt 3 ] && echo "重試中..." || echo "最終失敗")"
+                if [ $i -eq 3 ]; then
+                    echo "❌ 資料匯入最終失敗，但繼續部署"
+                fi
+            fi
+        done
+    fi
+elif [ -f ".migrated_from_docker" ]; then
+    echo "✅ 已完成 Docker 資料遷移，跳過"
+else
+    echo "ℹ️ 沒有 Docker 資料檔案，使用一般匯入..."
     # 多次嘗試匯入資料
     for i in 1 2 3; do
         echo "📊 第 $i 次嘗試匯入資料..."
@@ -66,8 +90,6 @@ if [ -f "production_data.json" ]; then
             fi
         fi
     done
-else
-    echo "❌ production_data.json 檔案不存在！"
 fi
 
 # 驗證資料匯入結果

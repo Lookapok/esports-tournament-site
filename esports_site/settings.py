@@ -267,7 +267,10 @@ LOGGING = {
 
 # Debug 模式特殊設定
 if DEBUG:
-    print("💻 使用本地記憶體快取")
+    try:
+        print("💻 使用本地記憶體快取")
+    except UnicodeEncodeError:
+        print("Using local memory cache")
     LOGGING['handlers']['console']['level'] = 'DEBUG'
     for logger in LOGGING['loggers'].values():
         logger['level'] = 'DEBUG'
