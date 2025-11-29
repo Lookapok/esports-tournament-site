@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.conf import settings
 from django.db import connection
-from tournaments.models import Tournament, Team, Player, Match, Game, Group, Standing
+from tournaments.models import Tournament, Team, Player, Match, Game, Group, Standing, PlayerGameStat
 
 def health_check(request):
     """健康檢查端點 - 診斷系統狀態"""
@@ -27,6 +27,7 @@ def health_check(request):
         status['game_count'] = Game.objects.count()
         status['group_count'] = Group.objects.count()
         status['standing_count'] = Standing.objects.count()
+        status['playergamestat_count'] = PlayerGameStat.objects.count()
         
         # 檢查資料完整性
         total_data = (status['tournament_count'] + status['team_count'] + 
@@ -41,6 +42,8 @@ def health_check(request):
             status['issues'].append('有錦標賽但沒有分組資料')
         elif status['tournament_count'] > 0 and status['standing_count'] == 0:
             status['issues'].append('有錦標賽但沒有積分榜資料')
+        elif status['game_count'] > 0 and status['playergamestat_count'] == 0:
+            status['issues'].append('有比賽局數但沒有選手統計數據')
         
     except Exception as e:
         status['status'] = 'ERROR'
