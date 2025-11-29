@@ -143,11 +143,13 @@ def tournament_detail(request, pk):
                         group_teams = list(current_group.teams.all())
                         
                         # 查詢兩支隊伍都在同一分組內的比賽（分組內比賽）
+                        # 只顯示未完成的比賽在賽程中
                         group_matches = tournament.matches.select_related(
                             'team1', 'team2', 'winner'
                         ).filter(
                             team1__in=group_teams,
-                            team2__in=group_teams
+                            team2__in=group_teams,
+                            status='scheduled'  # 只顯示未完成的比賽
                         ).order_by('round_number', 'id')
                         
                         # 調試輸出
