@@ -176,20 +176,112 @@ class Command(BaseCommand):
             
             self.stdout.write(f"🎮 Players imported: {players_imported} (errors: {player_errors})")
             
-            # Step 8: Import other data
-            for data_type in ['matches', 'games', 'standings']:
-                self.stdout.write(f"\n📊 STEP: Importing {data_type}...")
-                imported = 0
-                for item in data.get(data_type, []):
-                    try:
-                        # Skip complex imports for now, focus on basic data
-                        imported += 1
-                    except Exception as e:
-                        if imported < 3:
-                            self.stdout.write(f"  ❌ ERROR with {data_type}: {e}")
-                        break
-                if data_type in ['matches', 'games', 'standings']:
-                    self.stdout.write(f"  ⏭️  Skipping {data_type} for now (will implement later)")
+            # Step 8: Import matches
+            self.stdout.write(f"\n⚽ STEP 7: Importing matches...")
+            matches_imported = 0
+            for item in data.get('matches', []):
+                try:
+                    tournament = Tournament.objects.get(id=item['tournament_id'])
+                    team1 = None
+                    team2 = None
+                    winner = None
+                    
+                    # Handle null team IDs (bye matches)
+                    if item.get('team1_id'):
+                        team1 = Team.objects.get(id=item['team1_id'])
+                    if item.get('team2_id'):
+                        team2 = Team.objects.get(id=item['team2_id'])
+                    if item.get('winner_id'):
+                        winner = Team.objects.get(id=item['winner_id'])
+                    
+                    Match.objects.create(
+                        id=item['id'],
+                        tournament=tournament,
+                        round_number=item.get('round_number', 1),
+                        map=item.get('map', ''),  # Match model uses 'map' not 'map_name'
+                        team1=team1,
+                        team2=team2,
+                        team1_score=item.get('team1_score', 0),
+                        team2_score=item.get('team2_score', 0),
+                        winner=winner,
+                        match_time=item.get('match_time'),
+                        status=item.get('status', 'scheduled'),
+                        is_lower_bracket=item.get('is_lower_bracket', False)
+                    )
+                    matches_imported += 1
+                    
+                    if matches_imported <= 5:
+                        team1_name = team1.name if team1 else "TBD"
+                        team2_name = team2.name if team2 else "TBD" 
+                        self.stdout.write(f"  ✅ Match: {team1_name} vs {team2_name}")
+                    
+                except Exception as e:
+                    if matches_imported <= 3:
+                        self.stdout.write(f"  ❌ ERROR with match {item.get('id')}: {e}")
+            
+            self.stdout.write(f"⚽ Matches imported: {matches_imported}")
+            
+            # Step 9: Import games
+            self.stdout.write(f"\n🎮 STEP 8: Importing games...")
+            games_imported = 0
+            for item in data.get('games', []):
+                try:
+                    match = Match.objects.get(id=item['match_id'])
+                    winner = None
+                    if item.get('winner_id'):
+                        winner = Team.objects.get(id=item['winner_id'])
+                    
+                    Game.objects.create(
+                        id=item['id'],
+                        match=match,
+                        map_number=item.get('map_number', 1),
+                        map_name=item.get('map_name', 'Unknown'),
+                        team1_score=item.get('team1_score', 0),
+                        team2_score=item.get('team2_score', 0),
+                        winner=winner
+                    )
+                    games_imported += 1
+                    
+                    if games_imported <= 5:
+                        self.stdout.write(f"  ✅ Game {item['map_number']}: {item.get('map_name', 'Unknown')}")
+                    
+                except Exception as e:
+                    if games_imported <= 3:
+                        self.stdout.write(f"  ❌ ERROR with game {item.get('id')}: {e}")
+            
+            self.stdout.write(f"🎮 Games imported: {games_imported}")
+            
+            # Step 10: Import standings
+            self.stdout.write(f"\n🏆 STEP 9: Importing standings...")
+            standings_imported = 0
+            for item in data.get('standings', []):
+                try:
+                    tournament = Tournament.objects.get(id=item['tournament_id'])
+                    team = Team.objects.get(id=item['team_id'])
+                    group = None
+                    if item.get('group_id'):
+                        group = Group.objects.get(id=item['group_id'])
+                    
+                    Standing.objects.create(
+                        id=item['id'],
+                        tournament=tournament,
+                        team=team,
+                        group=group,
+                        wins=item.get('wins', 0),
+                        losses=item.get('losses', 0),
+                        draws=item.get('draws', 0),
+                        points=item.get('points', 0)
+                    )
+                    standings_imported += 1
+                    
+                    if standings_imported <= 5:
+                        self.stdout.write(f"  ✅ Standing: {team.name} - {item.get('points', 0)} pts")
+                    
+                except Exception as e:
+                    if standings_imported <= 3:
+                        self.stdout.write(f"  ❌ ERROR with standing {item.get('id')}: {e}")
+            
+            self.stdout.write(f"🏆 Standings imported: {standings_imported}")
             
             # Final status
             self.stdout.write("\n" + "=" * 60)
