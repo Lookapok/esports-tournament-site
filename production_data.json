@@ -1,0 +1,5728 @@
+{
+  "tournaments": [
+    {
+      "id": 9,
+      "name": "WTACS S1",
+      "game": "Valorant",
+      "start_date": "2025-08-15 10:12:54+00:00",
+      "end_date": "2026-01-18 21:30:00+00:00",
+      "rules": "本賽事將採三個階段，直至產生最終總冠軍。雙敗淘汰賽將分為勝部組（Winners Bracket）與敗部組（Losers Bracket），每支隊伍在被淘汰兩次後才正式出局。\r\n主要階段劃分為：\r\n\r\n第一階段(32至16強)：分組循環賽\r\n第二階段(16至8強)：瑞士輪\r\n第三階段(八強至冠亞)：雙敗淘汰賽",
+      "status": "ongoing",
+      "format": "round_robin"
+    }
+  ],
+  "teams": [
+    {
+      "id": 70,
+      "name": "啟英高級中學-CYVS",
+      "logo": "team_logos/啟英.png"
+    },
+    {
+      "id": 39,
+      "name": "弘光科技大學-HKUF",
+      "logo": "team_logos/弘光.jpg"
+    },
+    {
+      "id": 71,
+      "name": "致理科技大學-那晚用橡皮筋騙她是超薄",
+      "logo": "team_logos/治理.png"
+    },
+    {
+      "id": 72,
+      "name": "龍華科技大學-哈吉米南北綠豆",
+      "logo": "team_logos/龍華.png"
+    },
+    {
+      "id": 74,
+      "name": "莊敬高職-莊敬猛虎",
+      "logo": "team_logos/莊敬.png"
+    },
+    {
+      "id": 64,
+      "name": "健行科技大學-不要再murmur了",
+      "logo": "team_logos/Murmur.png"
+    },
+    {
+      "id": 32,
+      "name": "東泰高級中學-TTSH",
+      "logo": "team_logos/ttsh.png"
+    },
+    {
+      "id": 49,
+      "name": "恆毅私立高級中學-55688車禍隊",
+      "logo": "team_logos/橫溢555.png"
+    },
+    {
+      "id": 28,
+      "name": "宜寧高級中學-INHS",
+      "logo": "team_logos/10.png"
+    },
+    {
+      "id": 73,
+      "name": "萬能科技大學-毛毛兄弟幫",
+      "logo": "team_logos/毛毛.png"
+    },
+    {
+      "id": 65,
+      "name": "台北科技大學-北邊的老虎",
+      "logo": "team_logos/北科虎.png"
+    },
+    {
+      "id": 76,
+      "name": "黎明高中-泡槍就對了",
+      "logo": "team_logos/L32.jpg"
+    },
+    {
+      "id": 77,
+      "name": "勤益科技大學-LWX",
+      "logo": ""
+    },
+    {
+      "id": 62,
+      "name": "中國文化大學-重生歸來我為天",
+      "logo": "team_logos/重生歸來我為天.png"
+    },
+    {
+      "id": 30,
+      "name": "萬能科技大學-VNU",
+      "logo": "team_logos/vnu-removebg-preview.png"
+    },
+    {
+      "id": 33,
+      "name": "黎明技術學院-LIT PenguiN",
+      "logo": "team_logos/IMG_7625-removebg-preview.png"
+    },
+    {
+      "id": 35,
+      "name": "國立澎湖高級海事水產職業學校",
+      "logo": "team_logos/2.png"
+    },
+    {
+      "id": 38,
+      "name": "臺北市立松山高級中學-THE FORTH CHOICE",
+      "logo": "team_logos/松山LOGO去背黑.png"
+    },
+    {
+      "id": 48,
+      "name": "永平工商高級中等學校-YPVS永平雷電虎",
+      "logo": "team_logos/永平LOGO去背版.png"
+    },
+    {
+      "id": 59,
+      "name": "國立成功大學附屬臺南工業高級中等學校-Five gun boy",
+      "logo": "team_logos/成大南工-隊伍-LOGO-自組.jpg"
+    },
+    {
+      "id": 63,
+      "name": "台北科技大學-TeamShell",
+      "logo": "team_logos/北科電競社LOGO4167.jpg"
+    },
+    {
+      "id": 36,
+      "name": "嘉義市私立興華中學",
+      "logo": "team_logos/興華LOGO去背版.png"
+    },
+    {
+      "id": 40,
+      "name": "臺中市立清水高級中等學校-清高可愛男娘中心",
+      "logo": "team_logos/CFC.jpg"
+    },
+    {
+      "id": 60,
+      "name": "僑光科技大學-OCU 僑光黑鯊",
+      "logo": "team_logos/OCU.jpg"
+    },
+    {
+      "id": 57,
+      "name": "高雄市私立立志高級中學-LCVS",
+      "logo": "team_logos/lcvs1.jpg"
+    },
+    {
+      "id": 58,
+      "name": "高雄市私立立志高級中學-立志猩勢力",
+      "logo": "team_logos/lcvs2.jpg"
+    },
+    {
+      "id": 50,
+      "name": "樹人高級家事商業職業學校-樹人家商SJHS",
+      "logo": "team_logos/樹人logo-v0.png"
+    },
+    {
+      "id": 56,
+      "name": "稻江商職-稻江哈士奇II",
+      "logo": "team_logos/DJT_0SP0Vth.png"
+    },
+    {
+      "id": 51,
+      "name": "健行科技大學-EK 1v50",
+      "logo": "team_logos/健行_oPkk3iU.jpg"
+    },
+    {
+      "id": 47,
+      "name": "台北海洋科技大學-台北海大狂獵鯊",
+      "logo": "team_logos/總.png"
+    },
+    {
+      "id": 53,
+      "name": "黎明技術學院-黎明企鵝鵝",
+      "logo": "team_logos/IMG_7625-removebg-preview_TtrthUu.png"
+    },
+    {
+      "id": 52,
+      "name": "黎明技術學院-黎明企鵝",
+      "logo": "team_logos/IMG_7625-removebg-preview_py0YpwP.png"
+    },
+    {
+      "id": 27,
+      "name": "稻江商職-稻江哈士奇I",
+      "logo": "team_logos/DJT.png"
+    },
+    {
+      "id": 29,
+      "name": "正修科技大學-CSU",
+      "logo": "team_logos/正修龍logo去背藍.png"
+    }
+  ],
+  "players": [
+    {
+      "id": 261,
+      "nickname": "陳家凱#2Ji10",
+      "team_id": 32,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 263,
+      "nickname": "LFT Foryou#15y",
+      "team_id": 32,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 265,
+      "nickname": "水煮蛋#茶葉蛋",
+      "team_id": 32,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 267,
+      "nickname": "Txzzking#9907",
+      "team_id": 49,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 268,
+      "nickname": "XgụAi#0719",
+      "team_id": 73,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 271,
+      "nickname": "NPC Booj1",
+      "team_id": 49,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 272,
+      "nickname": "Rymp0z#666",
+      "team_id": 53,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 273,
+      "nickname": "你是不是油貓餅#1113",
+      "team_id": 58,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 275,
+      "nickname": "太っだ虎",
+      "team_id": 53,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 276,
+      "nickname": "Destiny#0620",
+      "team_id": 77,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 277,
+      "nickname": "Markk#5663",
+      "team_id": 77,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 278,
+      "nickname": "Workeys#5246",
+      "team_id": 77,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 279,
+      "nickname": "CrazyGua#6969",
+      "team_id": 77,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 280,
+      "nickname": "我不是人#2486",
+      "team_id": 77,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 281,
+      "nickname": "jankx123#7092",
+      "team_id": 77,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 282,
+      "nickname": "鬱金香",
+      "team_id": 59,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 284,
+      "nickname": "BYM",
+      "team_id": 57,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 285,
+      "nickname": "Dilemma",
+      "team_id": 32,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 286,
+      "nickname": "zuizzz",
+      "team_id": 38,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 287,
+      "nickname": "Yuz1n",
+      "team_id": 38,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 290,
+      "nickname": "Yenzo",
+      "team_id": 35,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 291,
+      "nickname": "不當暈船小狗",
+      "team_id": 35,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 292,
+      "nickname": "hongganlunlai",
+      "team_id": 35,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 293,
+      "nickname": "IMSAM",
+      "team_id": 35,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 294,
+      "nickname": "B1lly",
+      "team_id": 57,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 295,
+      "nickname": "N1 lzT1my",
+      "team_id": 70,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 298,
+      "nickname": "ShangYan",
+      "team_id": 73,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 300,
+      "nickname": "哈哈哈哈哈哈哈哈哈哈哈哈",
+      "team_id": 50,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 301,
+      "nickname": "同志大遊行",
+      "team_id": 50,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 302,
+      "nickname": "LWX",
+      "team_id": 50,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 303,
+      "nickname": "4immye",
+      "team_id": 50,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 304,
+      "nickname": "YPERay",
+      "team_id": 48,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 305,
+      "nickname": "太った虎",
+      "team_id": 53,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 307,
+      "nickname": "pnyu",
+      "team_id": 62,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 5,
+      "nickname": "Asta",
+      "team_id": 30,
+      "avatar": "",
+      "role": "Controller"
+    },
+    {
+      "id": 6,
+      "nickname": "Anc1ent",
+      "team_id": 30,
+      "avatar": "",
+      "role": "Duelist"
+    },
+    {
+      "id": 7,
+      "nickname": "T1ankong",
+      "team_id": 30,
+      "avatar": "player_avatars/2.jpg",
+      "role": "Flex"
+    },
+    {
+      "id": 8,
+      "nickname": "Juan|Y1Qiu",
+      "team_id": 30,
+      "avatar": "",
+      "role": "Sentinel"
+    },
+    {
+      "id": 11,
+      "nickname": "DJT Zank#0000",
+      "team_id": 27,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 13,
+      "nickname": "靈芝的好壞在於多糖體#0816",
+      "team_id": 27,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 17,
+      "nickname": "PangXinXin#9558",
+      "team_id": 28,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 19,
+      "nickname": "Plipli#2247",
+      "team_id": 28,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 21,
+      "nickname": "Lilura#0829",
+      "team_id": 28,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 22,
+      "nickname": "Spoit#2007",
+      "team_id": 28,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 28,
+      "nickname": "白月owo#7414",
+      "team_id": 35,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 29,
+      "nickname": "等一場你不會回來的雨#5200",
+      "team_id": 35,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 30,
+      "nickname": "NoAimjustMissher#穀估顧",
+      "team_id": 35,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 31,
+      "nickname": "kevinkuo771234#8783",
+      "team_id": 35,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 32,
+      "nickname": "hongganlunglai#飛豬巴克利",
+      "team_id": 35,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 33,
+      "nickname": "霹靂卡霹靂拉拉波波力那貝貝魯多ツ#喵喵喵喵喵",
+      "team_id": 36,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 34,
+      "nickname": "我會想回到過去#8888",
+      "team_id": 36,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 35,
+      "nickname": "蜂窩性祖師爺#0727",
+      "team_id": 36,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 36,
+      "nickname": "Skeptic#VNCNT",
+      "team_id": 36,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 37,
+      "nickname": "棒打老虎雞吃蟲子#TW2",
+      "team_id": 36,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 38,
+      "nickname": "Zizi#e04",
+      "team_id": 36,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 44,
+      "nickname": "CSU rAz1k#2005",
+      "team_id": 29,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 45,
+      "nickname": "Mántouu#moo",
+      "team_id": 29,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 46,
+      "nickname": "ApisDeathF1sh#0817",
+      "team_id": 29,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 47,
+      "nickname": "CSU T1muW#noob",
+      "team_id": 29,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 48,
+      "nickname": "Anos Voldigoad#1337X",
+      "team_id": 29,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 49,
+      "nickname": "M1crap1s#0804",
+      "team_id": 29,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 60,
+      "nickname": "W11san#這就是愛嗎",
+      "team_id": 40,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 61,
+      "nickname": "許金枝#5269",
+      "team_id": 40,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 62,
+      "nickname": "在我睡醒前叫醒我#不想起床",
+      "team_id": 40,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 63,
+      "nickname": "500嫄的印鈔廠廠長#nmixx",
+      "team_id": 40,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 64,
+      "nickname": "Raoooora#Cat",
+      "team_id": 40,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 65,
+      "nickname": "HKUF Gunter4OLA#lyh77",
+      "team_id": 39,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 66,
+      "nickname": "Dizzy#HKUF",
+      "team_id": 39,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 67,
+      "nickname": "HKUF Yoyoman#1110",
+      "team_id": 39,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 68,
+      "nickname": "HKUF Unhappyツ#1030",
+      "team_id": 39,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 69,
+      "nickname": "SGe#54321",
+      "team_id": 39,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 70,
+      "nickname": "HKUF Sof1nA#coach",
+      "team_id": 39,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 71,
+      "nickname": "ズイい#1024",
+      "team_id": 38,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 72,
+      "nickname": "Josh阿旭#嗨早安",
+      "team_id": 38,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 73,
+      "nickname": "Yc1üz#ily",
+      "team_id": 38,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 74,
+      "nickname": "abouTZU kop#0614",
+      "team_id": 38,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 75,
+      "nickname": "Wannaslp#我想睡覺",
+      "team_id": 38,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 76,
+      "nickname": "結束バンド 伊地知 虹夏#0529",
+      "team_id": 38,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 77,
+      "nickname": "周杰倫#5305",
+      "team_id": 38,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 78,
+      "nickname": "x1ayue#音無夏月",
+      "team_id": 29,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 79,
+      "nickname": "Levitating#Ethan",
+      "team_id": 47,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 80,
+      "nickname": "popoman4Q#LiNn0",
+      "team_id": 47,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 81,
+      "nickname": "xzzcat#i1on",
+      "team_id": 47,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 82,
+      "nickname": "Yakuri#heng",
+      "team_id": 47,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 18,
+      "nickname": "Zafk1eL1337#2008",
+      "team_id": 28,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 20,
+      "nickname": "写不出诗篇#2003",
+      "team_id": 28,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 106,
+      "nickname": "Hd1d0pp#0124",
+      "team_id": 50,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 14,
+      "nickname": "Ve1bae唯一一#Ve1",
+      "team_id": 27,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 83,
+      "nickname": "choose one#537",
+      "team_id": 47,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 84,
+      "nickname": "Ch1llzZz#0607",
+      "team_id": 47,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 86,
+      "nickname": "AKA狼狼#504",
+      "team_id": 48,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 88,
+      "nickname": "Fan Chen2#1385",
+      "team_id": 48,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 89,
+      "nickname": "Index#1213",
+      "team_id": 48,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 90,
+      "nickname": "emo guai55#5555",
+      "team_id": 48,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 91,
+      "nickname": "快樂大波貝#卡夫卡的狗",
+      "team_id": 48,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 92,
+      "nickname": "horizon旭#致命昧爱",
+      "team_id": 48,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 98,
+      "nickname": "NPC Cozan#NPC",
+      "team_id": 49,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 99,
+      "nickname": "Quintus#7129",
+      "team_id": 49,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 100,
+      "nickname": "NPC Andy#any",
+      "team_id": 49,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 101,
+      "nickname": "梅川伊芙#9798",
+      "team_id": 49,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 102,
+      "nickname": "TW Ray#射的很遠",
+      "team_id": 49,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 105,
+      "nickname": "我守住了A卻守不住妳的B#0000",
+      "team_id": 50,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 107,
+      "nickname": "donkkk#xxxx",
+      "team_id": 50,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 108,
+      "nickname": "Spoxy#1224",
+      "team_id": 50,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 109,
+      "nickname": "葉明ILtw#阿巴阿巴",
+      "team_id": 50,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 110,
+      "nickname": "biowhy#6938",
+      "team_id": 51,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 111,
+      "nickname": "若櫻欸#欸欸欸欸",
+      "team_id": 51,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 112,
+      "nickname": "DSB EKちゃん#22Sai",
+      "team_id": 51,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 113,
+      "nickname": "LIGHTMOON#5631",
+      "team_id": 51,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 114,
+      "nickname": "HeTer#9845",
+      "team_id": 51,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 115,
+      "nickname": "Ra1ny#1816",
+      "team_id": 52,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 116,
+      "nickname": "yanyandd#99011",
+      "team_id": 52,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 117,
+      "nickname": "Sunf4n#sss",
+      "team_id": 52,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 118,
+      "nickname": "YeeeeenLi#7838",
+      "team_id": 52,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 119,
+      "nickname": "SecreT#hihih",
+      "team_id": 52,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 120,
+      "nickname": "无敌疯学生#BLG",
+      "team_id": 52,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 121,
+      "nickname": "LIT QueYa#0414",
+      "team_id": 33,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 122,
+      "nickname": "Liam#0731",
+      "team_id": 33,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 123,
+      "nickname": "LIT yZk#L1y",
+      "team_id": 33,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 124,
+      "nickname": "LIT SumiLunai#1129",
+      "team_id": 33,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 125,
+      "nickname": "LIT Awei#0414",
+      "team_id": 33,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 126,
+      "nickname": "LIT  Xuannn#ZZZ",
+      "team_id": 53,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 127,
+      "nickname": "LIT Lian#QiuYu",
+      "team_id": 53,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 128,
+      "nickname": "恶魔瞄准#ADD",
+      "team_id": 53,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 129,
+      "nickname": "St1aLThf1anK#YuE18",
+      "team_id": 53,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 262,
+      "nickname": "Twitch 邱邱5451#5451",
+      "team_id": 32,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 264,
+      "nickname": "Lisa小#54088",
+      "team_id": 32,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 266,
+      "nickname": "Xi4oZhou#8742",
+      "team_id": 53,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 225,
+      "nickname": "旅人救世劍#0611",
+      "team_id": 71,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 269,
+      "nickname": "WhySoSerious#aimer",
+      "team_id": 63,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 270,
+      "nickname": "bananashooter#pro",
+      "team_id": 47,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 185,
+      "nickname": "蛋餅小奴#0520",
+      "team_id": 62,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 255,
+      "nickname": "女人只會影響我的槍法#9042",
+      "team_id": 76,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 274,
+      "nickname": "nubツ#8556",
+      "team_id": 35,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 283,
+      "nickname": "Nia",
+      "team_id": 30,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 288,
+      "nickname": "Máñtouu",
+      "team_id": 29,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 289,
+      "nickname": "qqba",
+      "team_id": 28,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 296,
+      "nickname": "oxitize",
+      "team_id": 28,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 297,
+      "nickname": "HzZ suK1Ya",
+      "team_id": 59,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 299,
+      "nickname": "Nerissas dog",
+      "team_id": 40,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 306,
+      "nickname": "上杉絵梨衣",
+      "team_id": 53,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 308,
+      "nickname": "sofa",
+      "team_id": 27,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 130,
+      "nickname": "0nyxVex#LFT",
+      "team_id": 53,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 138,
+      "nickname": "gogo狗勾#閃閃閃閃閃",
+      "team_id": 27,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 139,
+      "nickname": "He1t#0118",
+      "team_id": 27,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 146,
+      "nickname": "DJT HenB1N#佳世子我婆",
+      "team_id": 56,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 147,
+      "nickname": "AAAsen#kgym",
+      "team_id": 56,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 148,
+      "nickname": "Expel#4319",
+      "team_id": 56,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 149,
+      "nickname": "DJT TouXi#車禍大隊長",
+      "team_id": 56,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 150,
+      "nickname": "SangYu#5251",
+      "team_id": 56,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 151,
+      "nickname": "st1ll wa1t1ng#9723",
+      "team_id": 57,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 152,
+      "nickname": "kuma#amuk",
+      "team_id": 57,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 153,
+      "nickname": "yanyandd#4281",
+      "team_id": 57,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 154,
+      "nickname": "阿圈アチュエン#別在靠被了",
+      "team_id": 57,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 155,
+      "nickname": "EDG 張瑜芯#001",
+      "team_id": 57,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 156,
+      "nickname": "watch this#1102",
+      "team_id": 57,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 157,
+      "nickname": "我婆鹿野千夏#0826",
+      "team_id": 58,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 158,
+      "nickname": "TralaleroTralala#5678",
+      "team_id": 58,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 159,
+      "nickname": "嗚嗚別打窩#love",
+      "team_id": 58,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 160,
+      "nickname": "Yulinn#0822",
+      "team_id": 58,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 161,
+      "nickname": "漓o眸#1028",
+      "team_id": 58,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 162,
+      "nickname": "XchenX#4432",
+      "team_id": 51,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 164,
+      "nickname": "Bertramツ#Nimi",
+      "team_id": 51,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 165,
+      "nickname": "cŸr3ne#sui",
+      "team_id": 51,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 168,
+      "nickname": "Juan|XiaoQ",
+      "team_id": 30,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 171,
+      "nickname": "邪黑トーン#wxsbb",
+      "team_id": 60,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 172,
+      "nickname": "rgser#08rgs",
+      "team_id": 60,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 173,
+      "nickname": "q1AoeN#no g",
+      "team_id": 60,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 174,
+      "nickname": "灰の魔女Elaina#0210",
+      "team_id": 60,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 175,
+      "nickname": "不及格藥方#5111",
+      "team_id": 60,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 176,
+      "nickname": "Xenith#2210",
+      "team_id": 60,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 177,
+      "nickname": "Eren Yeager #進擊の巨人",
+      "team_id": 60,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 183,
+      "nickname": "中国文化大学美术系第一突破手#PCCU",
+      "team_id": 62,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 184,
+      "nickname": "SiSioN#1337",
+      "team_id": 62,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 186,
+      "nickname": "Danking空悲切#66666",
+      "team_id": 62,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 187,
+      "nickname": "ICNT sleep#CYN",
+      "team_id": 62,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 188,
+      "nickname": "欸欸欠揍#2594",
+      "team_id": 63,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 189,
+      "nickname": "AppLe#TW1",
+      "team_id": 63,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 190,
+      "nickname": "taf0s#0692",
+      "team_id": 63,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 191,
+      "nickname": "THP EmptyAir#Air",
+      "team_id": 63,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 192,
+      "nickname": "月色真美#moon",
+      "team_id": 63,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 193,
+      "nickname": "Yzz#1006",
+      "team_id": 59,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 194,
+      "nickname": "Jasond03#0223",
+      "team_id": 59,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 195,
+      "nickname": "Hzz穹稻穗宮原#傳奇機長",
+      "team_id": 59,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 196,
+      "nickname": "西涼太子#114",
+      "team_id": 59,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 197,
+      "nickname": "挑食不吃菜#8877",
+      "team_id": 59,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 198,
+      "nickname": "薩買迪克#6969",
+      "team_id": 59,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 204,
+      "nickname": "Kuro#せんせい",
+      "team_id": 65,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 205,
+      "nickname": "hea1sh0t#Ace",
+      "team_id": 65,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 206,
+      "nickname": "Passerby#0503",
+      "team_id": 65,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 207,
+      "nickname": "月は見えなかった#00000",
+      "team_id": 65,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 208,
+      "nickname": "유레인#0525",
+      "team_id": 65,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 209,
+      "nickname": "Tairitsu#1450",
+      "team_id": 65,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 210,
+      "nickname": "Hoshina Reze#BOMB",
+      "team_id": 65,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 211,
+      "nickname": "比奇堡第一智能障碍海超人#Lin",
+      "team_id": 64,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 212,
+      "nickname": "比奇堡第一天才突破手派大星教授#派崔克星星",
+      "team_id": 64,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 213,
+      "nickname": "比奇堡第一美女派大珊#Q愛與花Q",
+      "team_id": 64,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 214,
+      "nickname": "Try my best#7777",
+      "team_id": 64,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 215,
+      "nickname": "INFINITE#柚柚班",
+      "team_id": 64,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 216,
+      "nickname": "布梨狗#uvu",
+      "team_id": 64,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 222,
+      "nickname": "zEx1An#0625",
+      "team_id": 71,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 223,
+      "nickname": "粥粥粥粥粥#粥粥粥",
+      "team_id": 71,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 224,
+      "nickname": "essayer#773",
+      "team_id": 71,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 226,
+      "nickname": "Ebara69#7005",
+      "team_id": 71,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 227,
+      "nickname": "XiaoHa#16y",
+      "team_id": 70,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 228,
+      "nickname": "Falcons Niko#背身三槍",
+      "team_id": 70,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 229,
+      "nickname": "KSH#0421",
+      "team_id": 70,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 230,
+      "nickname": "请你吃我勾吧就不能颗秒我了#勾吧超级大",
+      "team_id": 70,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 231,
+      "nickname": "X2LspHp#0612",
+      "team_id": 70,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 232,
+      "nickname": "Reze TQDD#1487",
+      "team_id": 70,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 233,
+      "nickname": "Karyl ツ #男の娘",
+      "team_id": 72,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 234,
+      "nickname": "下雨天#精品品",
+      "team_id": 72,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 235,
+      "nickname": "Normal#lhu",
+      "team_id": 72,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 236,
+      "nickname": "璃月第一突破手刻晴#Karyl",
+      "team_id": 72,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 237,
+      "nickname": "南瓜pumpkin8766#5608",
+      "team_id": 72,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 238,
+      "nickname": "Z0 huawei1016#Z0WIN",
+      "team_id": 73,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 239,
+      "nickname": "ONLY초신성#Minji",
+      "team_id": 73,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 240,
+      "nickname": "ShangYan#YUJ",
+      "team_id": 73,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 241,
+      "nickname": "VNU XmA#18y",
+      "team_id": 73,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 242,
+      "nickname": "wCr1119c#cdc",
+      "team_id": 73,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 243,
+      "nickname": "Kr1sss#Zzz",
+      "team_id": 74,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 244,
+      "nickname": "Lanthe#yuio",
+      "team_id": 74,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 245,
+      "nickname": "Chen youting#刨冰かき氷",
+      "team_id": 74,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 246,
+      "nickname": "SurPr1se#ryoku",
+      "team_id": 74,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 247,
+      "nickname": "Jackyyy#zwh",
+      "team_id": 74,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 248,
+      "nickname": "r1chard#2334",
+      "team_id": 74,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 256,
+      "nickname": "孤獨下雨#2402",
+      "team_id": 76,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 257,
+      "nickname": "xiaohei#0831",
+      "team_id": 76,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 258,
+      "nickname": "Good for you#1526",
+      "team_id": 76,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 259,
+      "nickname": "悠悠ฅ#xuu",
+      "team_id": 76,
+      "avatar": "",
+      "role": "Flex"
+    },
+    {
+      "id": 260,
+      "nickname": "CDog#0710",
+      "team_id": 76,
+      "avatar": "",
+      "role": "Flex"
+    }
+  ],
+  "matches": [
+    {
+      "id": 303,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 35,
+      "team2_id": 40,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 305,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 35,
+      "team2_id": 73,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 306,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 35,
+      "team2_id": 74,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 310,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 38,
+      "team2_id": 40,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 311,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 38,
+      "team2_id": 62,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 312,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 38,
+      "team2_id": 73,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 314,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 39,
+      "team2_id": 49,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 316,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 39,
+      "team2_id": 40,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 317,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 39,
+      "team2_id": 62,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 321,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 49,
+      "team2_id": 40,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 331,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 40,
+      "team2_id": 74,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 339,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 33,
+      "team2_id": 72,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 350,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 58,
+      "team2_id": 51,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 351,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 58,
+      "team2_id": 71,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 352,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 58,
+      "team2_id": 72,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 353,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 58,
+      "team2_id": 53,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 354,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 58,
+      "team2_id": 27,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 357,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 51,
+      "team2_id": 72,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 375,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 28,
+      "team2_id": 63,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 376,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 28,
+      "team2_id": 57,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 383,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 30,
+      "team2_id": 57,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 386,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": null,
+      "team2_id": 48,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 372,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 28,
+      "team2_id": null,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 379,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 30,
+      "team2_id": null,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 341,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 33,
+      "team2_id": 27,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 33,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 313,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 38,
+      "team2_id": 74,
+      "team1_score": 2,
+      "team2_score": 1,
+      "winner_id": 38,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 318,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 39,
+      "team2_id": 73,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 39,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 378,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 28,
+      "team2_id": 52,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 52,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 322,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 49,
+      "team2_id": 62,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 62,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 325,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 36,
+      "team2_id": 40,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 40,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 362,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 71,
+      "team2_id": 53,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 53,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 299,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 35,
+      "team2_id": 38,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 38,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 323,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 49,
+      "team2_id": 73,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 73,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 359,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 51,
+      "team2_id": 27,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 27,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 336,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 33,
+      "team2_id": 58,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 33,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 371,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 28,
+      "team2_id": 30,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 28,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 368,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 53,
+      "team2_id": 27,
+      "team1_score": 2,
+      "team2_score": 1,
+      "winner_id": 53,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 337,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 33,
+      "team2_id": 51,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 33,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 338,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 33,
+      "team2_id": 71,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 33,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 355,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 58,
+      "team2_id": null,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 364,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 71,
+      "team2_id": null,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 370,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 27,
+      "team2_id": null,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 342,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 33,
+      "team2_id": 77,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 33,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 367,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 72,
+      "team2_id": 77,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 77,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 319,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 39,
+      "team2_id": 74,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 39,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 324,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 49,
+      "team2_id": 74,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 49,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 385,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 30,
+      "team2_id": 52,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 52,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 329,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 40,
+      "team2_id": 62,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 62,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 307,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 38,
+      "team2_id": 39,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 39,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 377,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 28,
+      "team2_id": 64,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 28,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 301,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 35,
+      "team2_id": 49,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 49,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 334,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 73,
+      "team2_id": 74,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 73,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 308,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 38,
+      "team2_id": 49,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 38,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 384,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 30,
+      "team2_id": 64,
+      "team1_score": 2,
+      "team2_score": 1,
+      "winner_id": 30,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 356,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 51,
+      "team2_id": 71,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 71,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 380,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 30,
+      "team2_id": 48,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 30,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 300,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 35,
+      "team2_id": 39,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 39,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 374,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 28,
+      "team2_id": 59,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 28,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 332,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 62,
+      "team2_id": 73,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 62,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 330,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 40,
+      "team2_id": 73,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 73,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 382,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 30,
+      "team2_id": 63,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 30,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 358,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 51,
+      "team2_id": 53,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 53,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 381,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 30,
+      "team2_id": 59,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 30,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 333,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 62,
+      "team2_id": 74,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 62,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 363,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 71,
+      "team2_id": 27,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 27,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 361,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 71,
+      "team2_id": 72,
+      "team1_score": 2,
+      "team2_score": 1,
+      "winner_id": 71,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 340,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 33,
+      "team2_id": 53,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 33,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 366,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 72,
+      "team2_id": 27,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 27,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 365,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 72,
+      "team2_id": 53,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 53,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 328,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 36,
+      "team2_id": 74,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 74,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 327,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 36,
+      "team2_id": 73,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 73,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 326,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 36,
+      "team2_id": 62,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 62,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 320,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 49,
+      "team2_id": 36,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 49,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 315,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 39,
+      "team2_id": 36,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 39,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 309,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 38,
+      "team2_id": 36,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 38,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 304,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 35,
+      "team2_id": 62,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 62,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 302,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 35,
+      "team2_id": 36,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 35,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 360,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 51,
+      "team2_id": 77,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 77,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 373,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 28,
+      "team2_id": 48,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 28,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 394,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 48,
+      "team2_id": 57,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 397,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 59,
+      "team2_id": 63,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 407,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 32,
+      "team2_id": 60,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 410,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 32,
+      "team2_id": 56,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 420,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 60,
+      "team2_id": 29,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 436,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 56,
+      "team2_id": 76,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 439,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 47,
+      "team2_id": 76,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 441,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 70,
+      "team2_id": 76,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 343,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": null,
+      "team2_id": 58,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 344,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": null,
+      "team2_id": 51,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 346,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": null,
+      "team2_id": 72,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 347,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": null,
+      "team2_id": 53,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 335,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 33,
+      "team2_id": null,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 387,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": null,
+      "team2_id": 59,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 388,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": null,
+      "team2_id": 63,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 389,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": null,
+      "team2_id": 57,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 390,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": null,
+      "team2_id": 64,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 391,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": null,
+      "team2_id": 52,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 431,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 65,
+      "team2_id": 29,
+      "team1_score": 1,
+      "team2_score": 2,
+      "winner_id": 29,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 434,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 56,
+      "team2_id": 70,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 70,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 438,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 47,
+      "team2_id": 29,
+      "team1_score": 1,
+      "team2_score": 2,
+      "winner_id": 29,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 415,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 60,
+      "team2_id": 50,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 60,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 395,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 48,
+      "team2_id": 64,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 64,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 403,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 63,
+      "team2_id": 52,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 52,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 417,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 60,
+      "team2_id": 56,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 60,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 349,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": null,
+      "team2_id": null,
+      "team1_score": 0,
+      "team2_score": 0,
+      "winner_id": null,
+      "match_time": null,
+      "status": "scheduled",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 369,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 53,
+      "team2_id": 77,
+      "team1_score": 1,
+      "team2_score": 2,
+      "winner_id": 77,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 399,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 59,
+      "team2_id": 64,
+      "team1_score": 1,
+      "team2_score": 2,
+      "winner_id": 64,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 398,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 59,
+      "team2_id": 57,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 59,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 401,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 63,
+      "team2_id": 57,
+      "team1_score": 2,
+      "team2_score": 1,
+      "winner_id": 63,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 429,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 65,
+      "team2_id": 47,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 47,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 409,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 32,
+      "team2_id": 65,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 32,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 425,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 50,
+      "team2_id": 70,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 70,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 406,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 64,
+      "team2_id": 52,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 52,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 427,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 50,
+      "team2_id": 76,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 50,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 405,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 57,
+      "team2_id": 52,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 52,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 435,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 56,
+      "team2_id": 29,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 29,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 440,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 70,
+      "team2_id": 29,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 29,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 419,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 60,
+      "team2_id": 70,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 60,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 423,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 50,
+      "team2_id": 56,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 56,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 404,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 57,
+      "team2_id": 64,
+      "team1_score": 1,
+      "team2_score": 2,
+      "winner_id": 64,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 348,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 77,
+      "team2_id": 27,
+      "team1_score": 1,
+      "team2_score": 2,
+      "winner_id": 27,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 396,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 48,
+      "team2_id": 52,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 52,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 437,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 47,
+      "team2_id": 70,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 47,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 442,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 29,
+      "team2_id": 76,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 29,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 426,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 50,
+      "team2_id": 29,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 29,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 414,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 32,
+      "team2_id": 76,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 32,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 408,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 32,
+      "team2_id": 50,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 32,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 424,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 50,
+      "team2_id": 47,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 47,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 432,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 65,
+      "team2_id": 76,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 65,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 412,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 32,
+      "team2_id": 70,
+      "team1_score": 1,
+      "team2_score": 2,
+      "winner_id": 70,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 393,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 48,
+      "team2_id": 63,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 63,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 392,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 48,
+      "team2_id": 59,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 59,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 400,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 59,
+      "team2_id": 52,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 52,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 422,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 50,
+      "team2_id": 65,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 50,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 345,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 77,
+      "team2_id": 71,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 77,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 402,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 63,
+      "team2_id": 64,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 63,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 411,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 32,
+      "team2_id": 47,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 47,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 421,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 60,
+      "team2_id": 76,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 60,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 413,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 32,
+      "team2_id": 29,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 29,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 418,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 60,
+      "team2_id": 47,
+      "team1_score": 1,
+      "team2_score": 2,
+      "winner_id": 47,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 416,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 60,
+      "team2_id": 65,
+      "team1_score": 2,
+      "team2_score": 0,
+      "winner_id": 60,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 428,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 65,
+      "team2_id": 56,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 56,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 430,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 65,
+      "team2_id": 70,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 70,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    },
+    {
+      "id": 433,
+      "tournament_id": 9,
+      "round_number": 1,
+      "map": null,
+      "team1_id": 56,
+      "team2_id": 47,
+      "team1_score": 0,
+      "team2_score": 2,
+      "winner_id": 47,
+      "match_time": null,
+      "status": "completed",
+      "is_lower_bracket": false
+    }
+  ],
+  "games": [
+    {
+      "id": 81,
+      "match_id": 348,
+      "map_number": 1,
+      "map_name": "[未知地圖]",
+      "team1_score": 13,
+      "team2_score": 9,
+      "winner_id": 27
+    },
+    {
+      "id": 42,
+      "match_id": 359,
+      "map_number": 1,
+      "map_name": "SUNSET",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 27
+    },
+    {
+      "id": 95,
+      "match_id": 427,
+      "map_number": 1,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 50
+    },
+    {
+      "id": 93,
+      "match_id": 406,
+      "map_number": 1,
+      "map_name": "bind",
+      "team1_score": 13,
+      "team2_score": 4,
+      "winner_id": 52
+    },
+    {
+      "id": 76,
+      "match_id": 401,
+      "map_number": 1,
+      "map_name": "sunset",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 63
+    },
+    {
+      "id": 23,
+      "match_id": 438,
+      "map_number": 1,
+      "map_name": "Sunset",
+      "team1_score": 8,
+      "team2_score": 13,
+      "winner_id": 47
+    },
+    {
+      "id": 53,
+      "match_id": 337,
+      "map_number": 1,
+      "map_name": "corrode",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 33
+    },
+    {
+      "id": 26,
+      "match_id": 415,
+      "map_number": 1,
+      "map_name": "bind",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 60
+    },
+    {
+      "id": 67,
+      "match_id": 399,
+      "map_number": 1,
+      "map_name": "Unknown Map",
+      "team1_score": 9,
+      "team2_score": 13,
+      "winner_id": 59
+    },
+    {
+      "id": 175,
+      "match_id": 365,
+      "map_number": 1,
+      "map_name": "[未知地圖]",
+      "team1_score": 13,
+      "team2_score": 4,
+      "winner_id": 53
+    },
+    {
+      "id": 173,
+      "match_id": 366,
+      "map_number": 1,
+      "map_name": "CORRODE",
+      "team1_score": 13,
+      "team2_score": 11,
+      "winner_id": 27
+    },
+    {
+      "id": 60,
+      "match_id": 369,
+      "map_number": 1,
+      "map_name": "sunset",
+      "team1_score": 13,
+      "team2_score": 11,
+      "winner_id": 77
+    },
+    {
+      "id": 28,
+      "match_id": 325,
+      "map_number": 1,
+      "map_name": "Bind",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 40
+    },
+    {
+      "id": 3,
+      "match_id": 341,
+      "map_number": 1,
+      "map_name": "Sunset",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 33
+    },
+    {
+      "id": 181,
+      "match_id": 373,
+      "map_number": 1,
+      "map_name": "劫境之地",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 28
+    },
+    {
+      "id": 14,
+      "match_id": 362,
+      "map_number": 1,
+      "map_name": "Sunset",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 53
+    },
+    {
+      "id": 166,
+      "match_id": 363,
+      "map_number": 1,
+      "map_name": "Bind",
+      "team1_score": 13,
+      "team2_score": 10,
+      "winner_id": 27
+    },
+    {
+      "id": 65,
+      "match_id": 345,
+      "map_number": 1,
+      "map_name": "abyss",
+      "team1_score": 13,
+      "team2_score": 11,
+      "winner_id": 77
+    },
+    {
+      "id": 107,
+      "match_id": 334,
+      "map_number": 1,
+      "map_name": "Split",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 73
+    },
+    {
+      "id": 32,
+      "match_id": 299,
+      "map_number": 1,
+      "map_name": "bind",
+      "team1_score": 0,
+      "team2_score": 13,
+      "winner_id": 38
+    },
+    {
+      "id": 109,
+      "match_id": 440,
+      "map_number": 1,
+      "map_name": "HAVEN",
+      "team1_score": 15,
+      "team2_score": 13,
+      "winner_id": 29
+    },
+    {
+      "id": 8,
+      "match_id": 318,
+      "map_number": 1,
+      "map_name": "haven",
+      "team1_score": 10,
+      "team2_score": 13,
+      "winner_id": 39
+    },
+    {
+      "id": 30,
+      "match_id": 395,
+      "map_number": 1,
+      "map_name": "[未知地圖]",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 64
+    },
+    {
+      "id": 113,
+      "match_id": 423,
+      "map_number": 1,
+      "map_name": "CORRODE",
+      "team1_score": 13,
+      "team2_score": 4,
+      "winner_id": 56
+    },
+    {
+      "id": 44,
+      "match_id": 336,
+      "map_number": 1,
+      "map_name": "ABYSS",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 33
+    },
+    {
+      "id": 115,
+      "match_id": 404,
+      "map_number": 1,
+      "map_name": null,
+      "team1_score": 9,
+      "team2_score": 13,
+      "winner_id": 57
+    },
+    {
+      "id": 55,
+      "match_id": 417,
+      "map_number": 1,
+      "map_name": "corrode",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 60
+    },
+    {
+      "id": 164,
+      "match_id": 333,
+      "map_number": 1,
+      "map_name": "深層邊境",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 62
+    },
+    {
+      "id": 141,
+      "match_id": 374,
+      "map_number": 1,
+      "map_name": "Bind",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 28
+    },
+    {
+      "id": 46,
+      "match_id": 371,
+      "map_number": 1,
+      "map_name": "BIND",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 28
+    },
+    {
+      "id": 162,
+      "match_id": 381,
+      "map_number": 1,
+      "map_name": "遺落境地",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 30
+    },
+    {
+      "id": 110,
+      "match_id": 419,
+      "map_number": 1,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 60
+    },
+    {
+      "id": 120,
+      "match_id": 384,
+      "map_number": 1,
+      "map_name": "haven",
+      "team1_score": 12,
+      "team2_score": 14,
+      "winner_id": 64
+    },
+    {
+      "id": 118,
+      "match_id": 308,
+      "map_number": 1,
+      "map_name": "abyss",
+      "team1_score": 13,
+      "team2_score": 11,
+      "winner_id": 38
+    },
+    {
+      "id": 179,
+      "match_id": 421,
+      "map_number": 1,
+      "map_name": "轟隆之地",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 60
+    },
+    {
+      "id": 74,
+      "match_id": 385,
+      "map_number": 1,
+      "map_name": "Bind",
+      "team1_score": 8,
+      "team2_score": 13,
+      "winner_id": 52
+    },
+    {
+      "id": 160,
+      "match_id": 392,
+      "map_number": 1,
+      "map_name": "遺落境地",
+      "team1_score": 13,
+      "team2_score": 7,
+      "winner_id": 59
+    },
+    {
+      "id": 125,
+      "match_id": 396,
+      "map_number": 1,
+      "map_name": "深海遺珠",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 52
+    },
+    {
+      "id": 84,
+      "match_id": 418,
+      "map_number": 1,
+      "map_name": "Sunset",
+      "team1_score": 13,
+      "team2_score": 8,
+      "winner_id": 47
+    },
+    {
+      "id": 127,
+      "match_id": 437,
+      "map_number": 1,
+      "map_name": "日落之城",
+      "team1_score": 13,
+      "team2_score": 7,
+      "winner_id": 47
+    },
+    {
+      "id": 10,
+      "match_id": 378,
+      "map_number": 1,
+      "map_name": "Lotus",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 52
+    },
+    {
+      "id": 129,
+      "match_id": 356,
+      "map_number": 1,
+      "map_name": "Bind",
+      "team1_score": 13,
+      "team2_score": 4,
+      "winner_id": 71
+    },
+    {
+      "id": 12,
+      "match_id": 322,
+      "map_number": 1,
+      "map_name": "Split",
+      "team1_score": 13,
+      "team2_score": 9,
+      "winner_id": 62
+    },
+    {
+      "id": 131,
+      "match_id": 380,
+      "map_number": 1,
+      "map_name": "劫境之地",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 30
+    },
+    {
+      "id": 34,
+      "match_id": 323,
+      "map_number": 1,
+      "map_name": "sunset",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 73
+    },
+    {
+      "id": 133,
+      "match_id": 442,
+      "map_number": 1,
+      "map_name": "Bind",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 29
+    },
+    {
+      "id": 87,
+      "match_id": 329,
+      "map_number": 1,
+      "map_name": "Bind",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 62
+    },
+    {
+      "id": 135,
+      "match_id": 360,
+      "map_number": 1,
+      "map_name": "深海遺珠",
+      "team1_score": 3,
+      "team2_score": 13,
+      "winner_id": 77
+    },
+    {
+      "id": 48,
+      "match_id": 368,
+      "map_number": 1,
+      "map_name": "sunset",
+      "team1_score": 8,
+      "team2_score": 13,
+      "winner_id": 27
+    },
+    {
+      "id": 137,
+      "match_id": 426,
+      "map_number": 1,
+      "map_name": "Split",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 29
+    },
+    {
+      "id": 72,
+      "match_id": 398,
+      "map_number": 1,
+      "map_name": "bind",
+      "team1_score": 13,
+      "team2_score": 8,
+      "winner_id": 59
+    },
+    {
+      "id": 143,
+      "match_id": 332,
+      "map_number": 1,
+      "map_name": "劫境之地",
+      "team1_score": 13,
+      "team2_score": 9,
+      "winner_id": 62
+    },
+    {
+      "id": 51,
+      "match_id": 403,
+      "map_number": 1,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 4,
+      "winner_id": 52
+    },
+    {
+      "id": 139,
+      "match_id": 300,
+      "map_number": 1,
+      "map_name": "Haven",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 39
+    },
+    {
+      "id": 171,
+      "match_id": 340,
+      "map_number": 1,
+      "map_name": "SUNSET",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 33
+    },
+    {
+      "id": 145,
+      "match_id": 330,
+      "map_number": 1,
+      "map_name": "雙塔迷城",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 73
+    },
+    {
+      "id": 91,
+      "match_id": 425,
+      "map_number": 1,
+      "map_name": "corrode",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 70
+    },
+    {
+      "id": 89,
+      "match_id": 409,
+      "map_number": 1,
+      "map_name": "Split",
+      "team1_score": 13,
+      "team2_score": 8,
+      "winner_id": 32
+    },
+    {
+      "id": 147,
+      "match_id": 408,
+      "map_number": 1,
+      "map_name": "遺落境地",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 32
+    },
+    {
+      "id": 105,
+      "match_id": 301,
+      "map_number": 1,
+      "map_name": "abyss",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 49
+    },
+    {
+      "id": 149,
+      "match_id": 424,
+      "map_number": 1,
+      "map_name": "遺落境地",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 47
+    },
+    {
+      "id": 63,
+      "match_id": 367,
+      "map_number": 1,
+      "map_name": "bind",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 77
+    },
+    {
+      "id": 151,
+      "match_id": 382,
+      "map_number": 1,
+      "map_name": "HAVEN",
+      "team1_score": 13,
+      "team2_score": 9,
+      "winner_id": 30
+    },
+    {
+      "id": 16,
+      "match_id": 342,
+      "map_number": 1,
+      "map_name": "BIND",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 33
+    },
+    {
+      "id": 153,
+      "match_id": 412,
+      "map_number": 1,
+      "map_name": "BIND",
+      "team1_score": 4,
+      "team2_score": 13,
+      "winner_id": 32
+    },
+    {
+      "id": 18,
+      "match_id": 431,
+      "map_number": 1,
+      "map_name": "BIND",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 29
+    },
+    {
+      "id": 158,
+      "match_id": 358,
+      "map_number": 1,
+      "map_name": "深海遺珠",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 53
+    },
+    {
+      "id": 156,
+      "match_id": 393,
+      "map_number": 1,
+      "map_name": "劫境之地",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 63
+    },
+    {
+      "id": 57,
+      "match_id": 338,
+      "map_number": 1,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 33
+    },
+    {
+      "id": 70,
+      "match_id": 324,
+      "map_number": 1,
+      "map_name": "Split",
+      "team1_score": 13,
+      "team2_score": 11,
+      "winner_id": 49
+    },
+    {
+      "id": 168,
+      "match_id": 361,
+      "map_number": 1,
+      "map_name": null,
+      "team1_score": 14,
+      "team2_score": 12,
+      "winner_id": 71
+    },
+    {
+      "id": 177,
+      "match_id": 411,
+      "map_number": 1,
+      "map_name": "雙塔迷城",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 47
+    },
+    {
+      "id": 97,
+      "match_id": 405,
+      "map_number": 1,
+      "map_name": "Lotus",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 52
+    },
+    {
+      "id": 79,
+      "match_id": 429,
+      "map_number": 1,
+      "map_name": "Pearl",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 47
+    },
+    {
+      "id": 99,
+      "match_id": 307,
+      "map_number": 1,
+      "map_name": "PEARL",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 39
+    },
+    {
+      "id": 21,
+      "match_id": 434,
+      "map_number": 1,
+      "map_name": "CORRODE",
+      "team1_score": 13,
+      "team2_score": 11,
+      "winner_id": 70
+    },
+    {
+      "id": 101,
+      "match_id": 435,
+      "map_number": 1,
+      "map_name": "HAVEN",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 29
+    },
+    {
+      "id": 5,
+      "match_id": 313,
+      "map_number": 1,
+      "map_name": "Peral",
+      "team1_score": 14,
+      "team2_score": 12,
+      "winner_id": 38
+    },
+    {
+      "id": 103,
+      "match_id": 377,
+      "map_number": 1,
+      "map_name": "BIND",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 28
+    },
+    {
+      "id": 182,
+      "match_id": 373,
+      "map_number": 2,
+      "map_name": "日落之城",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 28
+    },
+    {
+      "id": 31,
+      "match_id": 395,
+      "map_number": 2,
+      "map_name": "Unknown Map",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 64
+    },
+    {
+      "id": 58,
+      "match_id": 338,
+      "map_number": 2,
+      "map_name": "split",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 33
+    },
+    {
+      "id": 64,
+      "match_id": 367,
+      "map_number": 2,
+      "map_name": "split",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 77
+    },
+    {
+      "id": 4,
+      "match_id": 341,
+      "map_number": 2,
+      "map_name": "Haven",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 33
+    },
+    {
+      "id": 6,
+      "match_id": 313,
+      "map_number": 2,
+      "map_name": "Sunset",
+      "team1_score": 8,
+      "team2_score": 13,
+      "winner_id": 74
+    },
+    {
+      "id": 11,
+      "match_id": 378,
+      "map_number": 2,
+      "map_name": "Split",
+      "team1_score": 13,
+      "team2_score": 9,
+      "winner_id": 52
+    },
+    {
+      "id": 35,
+      "match_id": 323,
+      "map_number": 2,
+      "map_name": "[未知地圖]",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 73
+    },
+    {
+      "id": 56,
+      "match_id": 417,
+      "map_number": 2,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 60
+    },
+    {
+      "id": 68,
+      "match_id": 399,
+      "map_number": 2,
+      "map_name": "[未知地圖]",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 64
+    },
+    {
+      "id": 9,
+      "match_id": 318,
+      "map_number": 2,
+      "map_name": "bind",
+      "team1_score": 10,
+      "team2_score": 13,
+      "winner_id": 39
+    },
+    {
+      "id": 73,
+      "match_id": 398,
+      "map_number": 2,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 10,
+      "winner_id": 59
+    },
+    {
+      "id": 13,
+      "match_id": 322,
+      "map_number": 2,
+      "map_name": "Abyss",
+      "team1_score": 13,
+      "team2_score": 8,
+      "winner_id": 62
+    },
+    {
+      "id": 15,
+      "match_id": 362,
+      "map_number": 2,
+      "map_name": "Corrode",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 53
+    },
+    {
+      "id": 19,
+      "match_id": 431,
+      "map_number": 2,
+      "map_name": "CORRODE",
+      "team1_score": 10,
+      "team2_score": 13,
+      "winner_id": 63
+    },
+    {
+      "id": 22,
+      "match_id": 434,
+      "map_number": 2,
+      "map_name": "Split",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 70
+    },
+    {
+      "id": 24,
+      "match_id": 438,
+      "map_number": 2,
+      "map_name": "HAVEN",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 29
+    },
+    {
+      "id": 27,
+      "match_id": 415,
+      "map_number": 2,
+      "map_name": "Fracture",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 60
+    },
+    {
+      "id": 29,
+      "match_id": 325,
+      "map_number": 2,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 40
+    },
+    {
+      "id": 43,
+      "match_id": 359,
+      "map_number": 2,
+      "map_name": "BIND",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 27
+    },
+    {
+      "id": 33,
+      "match_id": 299,
+      "map_number": 2,
+      "map_name": "haven",
+      "team1_score": 0,
+      "team2_score": 13,
+      "winner_id": 38
+    },
+    {
+      "id": 45,
+      "match_id": 336,
+      "map_number": 2,
+      "map_name": "Sunset",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 33
+    },
+    {
+      "id": 47,
+      "match_id": 371,
+      "map_number": 2,
+      "map_name": "HAVEN",
+      "team1_score": 13,
+      "team2_score": 4,
+      "winner_id": 28
+    },
+    {
+      "id": 49,
+      "match_id": 368,
+      "map_number": 2,
+      "map_name": "Lotus",
+      "team1_score": 13,
+      "team2_score": 9,
+      "winner_id": 53
+    },
+    {
+      "id": 85,
+      "match_id": 418,
+      "map_number": 2,
+      "map_name": "Ascent",
+      "team1_score": 3,
+      "team2_score": 13,
+      "winner_id": 60
+    },
+    {
+      "id": 52,
+      "match_id": 403,
+      "map_number": 2,
+      "map_name": "Sunset",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 52
+    },
+    {
+      "id": 54,
+      "match_id": 337,
+      "map_number": 2,
+      "map_name": "SUNSET",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 33
+    },
+    {
+      "id": 92,
+      "match_id": 425,
+      "map_number": 2,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 8,
+      "winner_id": 70
+    },
+    {
+      "id": 17,
+      "match_id": 342,
+      "map_number": 2,
+      "map_name": "SUNSET",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 33
+    },
+    {
+      "id": 61,
+      "match_id": 369,
+      "map_number": 2,
+      "map_name": "Ascent",
+      "team1_score": 8,
+      "team2_score": 13,
+      "winner_id": 53
+    },
+    {
+      "id": 100,
+      "match_id": 307,
+      "map_number": 2,
+      "map_name": "SUNSET",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 39
+    },
+    {
+      "id": 98,
+      "match_id": 405,
+      "map_number": 2,
+      "map_name": "Sunset",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 52
+    },
+    {
+      "id": 102,
+      "match_id": 435,
+      "map_number": 2,
+      "map_name": "CORRODE",
+      "team1_score": 13,
+      "team2_score": 4,
+      "winner_id": 29
+    },
+    {
+      "id": 104,
+      "match_id": 377,
+      "map_number": 2,
+      "map_name": "SUNSET",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 28
+    },
+    {
+      "id": 82,
+      "match_id": 348,
+      "map_number": 2,
+      "map_name": "SPLIT",
+      "team1_score": 5,
+      "team2_score": 13,
+      "winner_id": 77
+    },
+    {
+      "id": 106,
+      "match_id": 301,
+      "map_number": 2,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 1,
+      "winner_id": 49
+    },
+    {
+      "id": 66,
+      "match_id": 345,
+      "map_number": 2,
+      "map_name": "sunset",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 77
+    },
+    {
+      "id": 96,
+      "match_id": 427,
+      "map_number": 2,
+      "map_name": "sunset",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 50
+    },
+    {
+      "id": 94,
+      "match_id": 406,
+      "map_number": 2,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 52
+    },
+    {
+      "id": 90,
+      "match_id": 409,
+      "map_number": 2,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 9,
+      "winner_id": 32
+    },
+    {
+      "id": 88,
+      "match_id": 329,
+      "map_number": 2,
+      "map_name": "peral",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 62
+    },
+    {
+      "id": 80,
+      "match_id": 429,
+      "map_number": 2,
+      "map_name": "corrode",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 47
+    },
+    {
+      "id": 77,
+      "match_id": 401,
+      "map_number": 2,
+      "map_name": "haven",
+      "team1_score": 11,
+      "team2_score": 13,
+      "winner_id": 57
+    },
+    {
+      "id": 75,
+      "match_id": 385,
+      "map_number": 2,
+      "map_name": "haven",
+      "team1_score": 1,
+      "team2_score": 13,
+      "winner_id": 52
+    },
+    {
+      "id": 71,
+      "match_id": 324,
+      "map_number": 2,
+      "map_name": "sunset",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 49
+    },
+    {
+      "id": 108,
+      "match_id": 334,
+      "map_number": 2,
+      "map_name": "Split",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 73
+    },
+    {
+      "id": 111,
+      "match_id": 440,
+      "map_number": 2,
+      "map_name": "SUNSET",
+      "team1_score": 13,
+      "team2_score": 4,
+      "winner_id": 29
+    },
+    {
+      "id": 112,
+      "match_id": 419,
+      "map_number": 2,
+      "map_name": "Fracture",
+      "team1_score": 13,
+      "team2_score": 8,
+      "winner_id": 60
+    },
+    {
+      "id": 114,
+      "match_id": 423,
+      "map_number": 2,
+      "map_name": "HAVEN",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 56
+    },
+    {
+      "id": 116,
+      "match_id": 404,
+      "map_number": 2,
+      "map_name": null,
+      "team1_score": 13,
+      "team2_score": 10,
+      "winner_id": 64
+    },
+    {
+      "id": 142,
+      "match_id": 374,
+      "map_number": 2,
+      "map_name": "Sunset",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 28
+    },
+    {
+      "id": 121,
+      "match_id": 384,
+      "map_number": 2,
+      "map_name": "bind",
+      "team1_score": 13,
+      "team2_score": 8,
+      "winner_id": 30
+    },
+    {
+      "id": 119,
+      "match_id": 308,
+      "map_number": 2,
+      "map_name": "peral",
+      "team1_score": 16,
+      "team2_score": 14,
+      "winner_id": 38
+    },
+    {
+      "id": 126,
+      "match_id": 396,
+      "map_number": 2,
+      "map_name": "遺落境地",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 52
+    },
+    {
+      "id": 128,
+      "match_id": 437,
+      "map_number": 2,
+      "map_name": "遺落境地",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 47
+    },
+    {
+      "id": 130,
+      "match_id": 356,
+      "map_number": 2,
+      "map_name": "パール",
+      "team1_score": 13,
+      "team2_score": 11,
+      "winner_id": 71
+    },
+    {
+      "id": 132,
+      "match_id": 380,
+      "map_number": 2,
+      "map_name": "遺落境地",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 30
+    },
+    {
+      "id": 134,
+      "match_id": 442,
+      "map_number": 2,
+      "map_name": "HAVEN",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 29
+    },
+    {
+      "id": 136,
+      "match_id": 360,
+      "map_number": 2,
+      "map_name": "劫境之地",
+      "team1_score": 4,
+      "team2_score": 13,
+      "winner_id": 77
+    },
+    {
+      "id": 138,
+      "match_id": 426,
+      "map_number": 2,
+      "map_name": "劫境之地",
+      "team1_score": 1,
+      "team2_score": 13,
+      "winner_id": 29
+    },
+    {
+      "id": 144,
+      "match_id": 332,
+      "map_number": 2,
+      "map_name": "遺落境地",
+      "team1_score": 13,
+      "team2_score": 7,
+      "winner_id": 62
+    },
+    {
+      "id": 140,
+      "match_id": 300,
+      "map_number": 2,
+      "map_name": "Sunset",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 39
+    },
+    {
+      "id": 146,
+      "match_id": 330,
+      "map_number": 2,
+      "map_name": "深淵幽境",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 73
+    },
+    {
+      "id": 163,
+      "match_id": 381,
+      "map_number": 2,
+      "map_name": "日落之城",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 30
+    },
+    {
+      "id": 148,
+      "match_id": 408,
+      "map_number": 2,
+      "map_name": "劫境之地",
+      "team1_score": 13,
+      "team2_score": 4,
+      "winner_id": 32
+    },
+    {
+      "id": 150,
+      "match_id": 424,
+      "map_number": 2,
+      "map_name": "日落之城",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 47
+    },
+    {
+      "id": 152,
+      "match_id": 382,
+      "map_number": 2,
+      "map_name": "BIND",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 30
+    },
+    {
+      "id": 154,
+      "match_id": 412,
+      "map_number": 2,
+      "map_name": "CORRODE",
+      "team1_score": 13,
+      "team2_score": 8,
+      "winner_id": 70
+    },
+    {
+      "id": 157,
+      "match_id": 393,
+      "map_number": 2,
+      "map_name": "遺落境地",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 63
+    },
+    {
+      "id": 159,
+      "match_id": 358,
+      "map_number": 2,
+      "map_name": "雙塔迷城",
+      "team1_score": 13,
+      "team2_score": 4,
+      "winner_id": 53
+    },
+    {
+      "id": 161,
+      "match_id": 392,
+      "map_number": 2,
+      "map_name": "日落之城",
+      "team1_score": 13,
+      "team2_score": 9,
+      "winner_id": 59
+    },
+    {
+      "id": 165,
+      "match_id": 333,
+      "map_number": 2,
+      "map_name": "Split",
+      "team1_score": 13,
+      "team2_score": 9,
+      "winner_id": 62
+    },
+    {
+      "id": 167,
+      "match_id": 363,
+      "map_number": 2,
+      "map_name": "CORRODE",
+      "team1_score": 13,
+      "team2_score": 7,
+      "winner_id": 27
+    },
+    {
+      "id": 169,
+      "match_id": 361,
+      "map_number": 2,
+      "map_name": "Unknown Map",
+      "team1_score": 13,
+      "team2_score": 10,
+      "winner_id": 72
+    },
+    {
+      "id": 172,
+      "match_id": 340,
+      "map_number": 2,
+      "map_name": "HAVEN",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 33
+    },
+    {
+      "id": 174,
+      "match_id": 366,
+      "map_number": 2,
+      "map_name": "Haven",
+      "team1_score": 13,
+      "team2_score": 9,
+      "winner_id": 27
+    },
+    {
+      "id": 176,
+      "match_id": 365,
+      "map_number": 2,
+      "map_name": null,
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 53
+    },
+    {
+      "id": 178,
+      "match_id": 411,
+      "map_number": 2,
+      "map_name": "日落之城",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 47
+    },
+    {
+      "id": 180,
+      "match_id": 421,
+      "map_number": 2,
+      "map_name": "遺落境地",
+      "team1_score": 13,
+      "team2_score": 0,
+      "winner_id": 60
+    },
+    {
+      "id": 170,
+      "match_id": 361,
+      "map_number": 3,
+      "map_name": "Unknown Map",
+      "team1_score": 10,
+      "team2_score": 13,
+      "winner_id": 71
+    },
+    {
+      "id": 86,
+      "match_id": 418,
+      "map_number": 3,
+      "map_name": "haven",
+      "team1_score": 13,
+      "team2_score": 5,
+      "winner_id": 47
+    },
+    {
+      "id": 69,
+      "match_id": 399,
+      "map_number": 3,
+      "map_name": "Unknown Map",
+      "team1_score": 13,
+      "team2_score": 2,
+      "winner_id": 64
+    },
+    {
+      "id": 155,
+      "match_id": 412,
+      "map_number": 3,
+      "map_name": "HAVEN",
+      "team1_score": 13,
+      "team2_score": 10,
+      "winner_id": 70
+    },
+    {
+      "id": 83,
+      "match_id": 348,
+      "map_number": 3,
+      "map_name": "HAVEN",
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 27
+    },
+    {
+      "id": 122,
+      "match_id": 384,
+      "map_number": 3,
+      "map_name": "sunset",
+      "team1_score": 13,
+      "team2_score": 6,
+      "winner_id": 30
+    },
+    {
+      "id": 50,
+      "match_id": 368,
+      "map_number": 3,
+      "map_name": "corrode",
+      "team1_score": 13,
+      "team2_score": 7,
+      "winner_id": 53
+    },
+    {
+      "id": 117,
+      "match_id": 404,
+      "map_number": 3,
+      "map_name": null,
+      "team1_score": 13,
+      "team2_score": 3,
+      "winner_id": 64
+    },
+    {
+      "id": 25,
+      "match_id": 438,
+      "map_number": 3,
+      "map_name": "PEARL",
+      "team1_score": 16,
+      "team2_score": 14,
+      "winner_id": 29
+    },
+    {
+      "id": 78,
+      "match_id": 401,
+      "map_number": 3,
+      "map_name": "abyss",
+      "team1_score": 13,
+      "team2_score": 8,
+      "winner_id": 63
+    },
+    {
+      "id": 7,
+      "match_id": 313,
+      "map_number": 3,
+      "map_name": "Corrode",
+      "team1_score": 15,
+      "team2_score": 13,
+      "winner_id": 38
+    },
+    {
+      "id": 62,
+      "match_id": 369,
+      "map_number": 3,
+      "map_name": "Lotus",
+      "team1_score": 13,
+      "team2_score": 8,
+      "winner_id": 77
+    },
+    {
+      "id": 20,
+      "match_id": 431,
+      "map_number": 3,
+      "map_name": "Haven",
+      "team1_score": 13,
+      "team2_score": 4,
+      "winner_id": 29
+    }
+  ],
+  "groups": [
+    {
+      "id": 99,
+      "tournament_id": 9,
+      "name": "C組"
+    },
+    {
+      "id": 100,
+      "tournament_id": 9,
+      "name": "D組"
+    },
+    {
+      "id": 97,
+      "tournament_id": 9,
+      "name": "A組"
+    },
+    {
+      "id": 98,
+      "tournament_id": 9,
+      "name": "B組"
+    }
+  ],
+  "standings": [
+    {
+      "id": 85,
+      "tournament_id": 9,
+      "team_id": 58,
+      "group_id": 98,
+      "wins": 0,
+      "losses": 1,
+      "draws": 0,
+      "points": 0
+    },
+    {
+      "id": 88,
+      "tournament_id": 9,
+      "team_id": 72,
+      "group_id": 98,
+      "wins": 0,
+      "losses": 4,
+      "draws": 0,
+      "points": 0
+    },
+    {
+      "id": 77,
+      "tournament_id": 9,
+      "team_id": 49,
+      "group_id": 97,
+      "wins": 3,
+      "losses": 3,
+      "draws": 0,
+      "points": 9
+    },
+    {
+      "id": 76,
+      "tournament_id": 9,
+      "team_id": 39,
+      "group_id": 97,
+      "wins": 5,
+      "losses": 0,
+      "draws": 0,
+      "points": 15
+    },
+    {
+      "id": 75,
+      "tournament_id": 9,
+      "team_id": 38,
+      "group_id": 97,
+      "wins": 4,
+      "losses": 1,
+      "draws": 0,
+      "points": 12
+    },
+    {
+      "id": 74,
+      "tournament_id": 9,
+      "team_id": 35,
+      "group_id": 97,
+      "wins": 1,
+      "losses": 4,
+      "draws": 0,
+      "points": 3
+    },
+    {
+      "id": 92,
+      "tournament_id": 9,
+      "team_id": 28,
+      "group_id": 99,
+      "wins": 4,
+      "losses": 1,
+      "draws": 0,
+      "points": 12
+    },
+    {
+      "id": 89,
+      "tournament_id": 9,
+      "team_id": 53,
+      "group_id": 98,
+      "wins": 4,
+      "losses": 2,
+      "draws": 0,
+      "points": 12
+    },
+    {
+      "id": 95,
+      "tournament_id": 9,
+      "team_id": 48,
+      "group_id": 99,
+      "wins": 0,
+      "losses": 6,
+      "draws": 0,
+      "points": 0
+    },
+    {
+      "id": 100,
+      "tournament_id": 9,
+      "team_id": 52,
+      "group_id": 99,
+      "wins": 7,
+      "losses": 0,
+      "draws": 0,
+      "points": 21
+    },
+    {
+      "id": 96,
+      "tournament_id": 9,
+      "team_id": 59,
+      "group_id": 99,
+      "wins": 2,
+      "losses": 4,
+      "draws": 0,
+      "points": 6
+    },
+    {
+      "id": 97,
+      "tournament_id": 9,
+      "team_id": 63,
+      "group_id": 99,
+      "wins": 3,
+      "losses": 2,
+      "draws": 0,
+      "points": 9
+    },
+    {
+      "id": 79,
+      "tournament_id": 9,
+      "team_id": 40,
+      "group_id": 97,
+      "wins": 1,
+      "losses": 2,
+      "draws": 0,
+      "points": 3
+    },
+    {
+      "id": 93,
+      "tournament_id": 9,
+      "team_id": 30,
+      "group_id": 99,
+      "wins": 4,
+      "losses": 2,
+      "draws": 0,
+      "points": 12
+    },
+    {
+      "id": 83,
+      "tournament_id": 9,
+      "team_id": 33,
+      "group_id": 98,
+      "wins": 6,
+      "losses": 0,
+      "draws": 0,
+      "points": 18
+    },
+    {
+      "id": 82,
+      "tournament_id": 9,
+      "team_id": 74,
+      "group_id": 97,
+      "wins": 1,
+      "losses": 5,
+      "draws": 0,
+      "points": 3
+    },
+    {
+      "id": 81,
+      "tournament_id": 9,
+      "team_id": 73,
+      "group_id": 97,
+      "wins": 4,
+      "losses": 2,
+      "draws": 0,
+      "points": 12
+    },
+    {
+      "id": 80,
+      "tournament_id": 9,
+      "team_id": 62,
+      "group_id": 97,
+      "wins": 6,
+      "losses": 0,
+      "draws": 0,
+      "points": 18
+    },
+    {
+      "id": 78,
+      "tournament_id": 9,
+      "team_id": 36,
+      "group_id": 97,
+      "wins": 0,
+      "losses": 8,
+      "draws": 0,
+      "points": 0
+    },
+    {
+      "id": 86,
+      "tournament_id": 9,
+      "team_id": 51,
+      "group_id": 98,
+      "wins": 0,
+      "losses": 5,
+      "draws": 0,
+      "points": 0
+    },
+    {
+      "id": 87,
+      "tournament_id": 9,
+      "team_id": 71,
+      "group_id": 98,
+      "wins": 2,
+      "losses": 4,
+      "draws": 0,
+      "points": 6
+    },
+    {
+      "id": 99,
+      "tournament_id": 9,
+      "team_id": 64,
+      "group_id": 99,
+      "wins": 3,
+      "losses": 4,
+      "draws": 0,
+      "points": 9
+    },
+    {
+      "id": 105,
+      "tournament_id": 9,
+      "team_id": 56,
+      "group_id": 100,
+      "wins": 2,
+      "losses": 4,
+      "draws": 0,
+      "points": 6
+    },
+    {
+      "id": 98,
+      "tournament_id": 9,
+      "team_id": 57,
+      "group_id": 99,
+      "wins": 0,
+      "losses": 4,
+      "draws": 0,
+      "points": 0
+    },
+    {
+      "id": 90,
+      "tournament_id": 9,
+      "team_id": 27,
+      "group_id": 98,
+      "wins": 4,
+      "losses": 2,
+      "draws": 0,
+      "points": 12
+    },
+    {
+      "id": 103,
+      "tournament_id": 9,
+      "team_id": 50,
+      "group_id": 100,
+      "wins": 2,
+      "losses": 6,
+      "draws": 0,
+      "points": 6
+    },
+    {
+      "id": 110,
+      "tournament_id": 9,
+      "team_id": 77,
+      "group_id": 98,
+      "wins": 4,
+      "losses": 2,
+      "draws": 0,
+      "points": 12
+    },
+    {
+      "id": 109,
+      "tournament_id": 9,
+      "team_id": 76,
+      "group_id": 100,
+      "wins": 0,
+      "losses": 5,
+      "draws": 0,
+      "points": 0
+    },
+    {
+      "id": 108,
+      "tournament_id": 9,
+      "team_id": 29,
+      "group_id": 100,
+      "wins": 7,
+      "losses": 0,
+      "draws": 0,
+      "points": 21
+    },
+    {
+      "id": 101,
+      "tournament_id": 9,
+      "team_id": 32,
+      "group_id": 100,
+      "wins": 3,
+      "losses": 3,
+      "draws": 0,
+      "points": 9
+    },
+    {
+      "id": 102,
+      "tournament_id": 9,
+      "team_id": 60,
+      "group_id": 100,
+      "wins": 5,
+      "losses": 1,
+      "draws": 0,
+      "points": 15
+    },
+    {
+      "id": 107,
+      "tournament_id": 9,
+      "team_id": 70,
+      "group_id": 100,
+      "wins": 4,
+      "losses": 3,
+      "draws": 0,
+      "points": 12
+    },
+    {
+      "id": 104,
+      "tournament_id": 9,
+      "team_id": 65,
+      "group_id": 100,
+      "wins": 1,
+      "losses": 7,
+      "draws": 0,
+      "points": 3
+    },
+    {
+      "id": 106,
+      "tournament_id": 9,
+      "team_id": 47,
+      "group_id": 100,
+      "wins": 6,
+      "losses": 1,
+      "draws": 0,
+      "points": 18
+    }
+  ]
+}
