@@ -1,32 +1,52 @@
-# WTACS 電競賽事系統 - 精簡版依賴套件
-# 只保留 Django Web 應用程式必需的套件
+# 🏆 WTACS 電競賽事系統 - 生產環境依賴
+# 精簡版：只保留核心功能必需套件
 
-# ==> Django 核心框架
+# 🎯 Django 核心框架
 Django==5.2.5
-djangorestframework==3.16.1
-django-tables2==2.7.5
-django-redis==5.4.0
+djangorestframework==3.15.2
 
-# ==> 資料庫支援
-psycopg2-binary>=2.8.6
-redis==5.0.1
+# 📊 資料庫支援
+psycopg2-binary==2.9.9
 
-# ==> 圖片處理
-Pillow>=9.0.0
+# 🖼️ 圖片處理
+Pillow==11.0.0
 
-# ==> 環境配置
+# 🤖 Discord Bot
+discord.py==2.5.2
+
+# 📋 表格與匯出
+django-tables2==2.7.0
+
+# ⚙️ 環境配置
 python-decouple==3.8
-python-dotenv==1.0.1
 dj-database-url==2.3.0
 
-# ==> 靜態檔案處理
+# 🎨 靜態檔案處理
 whitenoise==6.11.0
 
-# ==> 生產環境伺服器
+# 🚀 生產環境伺服器
 gunicorn==23.0.0
 
-# ==> Discord Bot 支援（可選）
-discord.py==2.5.2
+# 🔒 CORS 處理
+django-cors-headers==4.4.0
+
+# 📄 API 文件
+drf-yasg==1.21.8
+
+# 🛡️ 安全性
+django-ratelimit==4.1.0
+
+# 🌐 時區處理
+pytz==2024.2
+
+# 📝 文字處理
+python-slugify==8.0.4
+
+# 📊 分頁過濾
+django-filter==24.3
+
+# 🌐 HTTP 工具
+requests==2.32.3
 
 # ==> HTTP 請求（Discord Bot 依賴）
 aiohttp==3.12.15
