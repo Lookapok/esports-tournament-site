@@ -29,7 +29,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = [
     '127.0.0.1', 
     'localhost',
-    'wtacs-esports.onrender.com',  # 更新為您的實際域名
+    'winnertakesall-tw.onrender.com',  # 實際的 Render 域名
     '.onrender.com',  # 允許所有 Render 子域名
 ]
 
@@ -51,7 +51,7 @@ if IS_RENDER:  # Render 生產環境
     
     # CSRF 信任的來源
     CSRF_TRUSTED_ORIGINS = [
-        'https://wtacs-esports.onrender.com',
+        'https://winnertakesall-tw.onrender.com',
         'https://*.onrender.com',
     ]
 else:  # 本地開發環境（支援 HTTP 和 HTTPS）
