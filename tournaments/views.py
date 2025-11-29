@@ -137,27 +137,34 @@ def tournament_detail(request, pk):
                             group=current_group
                         ).select_related('team').order_by('-points', '-wins', 'team__name')
 
-                        # [修正] 簡化查詢邏輯 - 測試版本
+                        # [修正] 分組比賽查詢邏輯 - 確保正確顯示賽程
                         from django.db.models import Q
                         
-                        # 方案1: 簡單的 OR 查詢，任一隊伍在分組內的比賽
                         group_teams = list(current_group.teams.all())
+                        
+                        # 查詢兩支隊伍都在同一分組內的比賽（分組內比賽）
                         group_matches = tournament.matches.select_related(
                             'team1', 'team2', 'winner'
                         ).filter(
-                            Q(team1__in=group_teams) | Q(team2__in=group_teams)
+                            team1__in=group_teams,
+                            team2__in=group_teams
                         ).order_by('round_number', 'id')
                         
-                        print(f"DEBUG: {current_group.name} - 使用 OR 查詢找到 {len(group_matches)} 場比賽")
+                        # 調試輸出
+                        print(f"DEBUG: {current_group.name} 有 {len(group_teams)} 支隊伍")
+                        print(f"DEBUG: 隊伍名稱: {[team.name for team in group_teams]}")
+                        print(f"DEBUG: 找到 {group_matches.count()} 場比賽")
                         
-                        # 方案2: 如果OR查詢還是沒有結果，再嘗試AND查詢
-                        if len(group_matches) == 0:
-                            group_matches = tournament.matches.select_related(
-                                'team1', 'team2', 'winner'
-                            ).filter(
-                                Q(team1__in=group_teams) & Q(team2__in=group_teams)
-                            ).order_by('round_number', 'id')
-                            print(f"DEBUG: {current_group.name} - 使用 AND 查詢找到 {len(group_matches)} 場比賽")
+                        # 如果沒有比賽，檢查所有比賽
+                        if group_matches.count() == 0:
+                            all_matches = tournament.matches.count()
+                            print(f"DEBUG: 錦標賽總共有 {all_matches} 場比賽")
+                            
+                            # 檢查前幾場比賽的隊伍
+                            for match in tournament.matches.select_related('team1', 'team2')[:5]:
+                                t1_name = match.team1.name if match.team1 else 'None'
+                                t2_name = match.team2.name if match.team2 else 'None'
+                                print(f"DEBUG: 比賽 {match.id}: {t1_name} vs {t2_name}")
                         
                         # 限制結果數量
                         group_matches = list(group_matches[:50])
@@ -777,4 +784,55 @@ def api_generate_sample_stats(request):
         return JsonResponse({
             'error': str(e),
             'success': False
+        }, status=500)
+
+@csrf_exempt
+def api_diagnose_tournament_9(request):
+    """診斷錦標賽 9 的分組和比賽數據"""
+    try:
+        from .models import Tournament, Group, Match, Team
+        
+        # 獲取錦標賽 9
+        tournament = Tournament.objects.get(id=9)
+        
+        # 獲取分組數據
+        groups_data = []
+        for group in tournament.groups.order_by('name'):
+            teams_in_group = list(group.teams.values_list('name', flat=True))
+            groups_data.append({
+                'name': group.name,
+                'team_count': len(teams_in_group),
+                'teams': teams_in_group
+            })
+        
+        # 獲取比賽數據
+        matches_data = []
+        for match in tournament.matches.select_related('team1', 'team2').order_by('round_number', 'id'):
+            matches_data.append({
+                'id': match.id,
+                'round_number': match.round_number,
+                'team1': match.team1.name if match.team1 else '待定',
+                'team2': match.team2.name if match.team2 else '待定',
+                'status': match.status,
+                'team1_score': match.team1_score,
+                'team2_score': match.team2_score
+            })
+        
+        return JsonResponse({
+            'success': True,
+            'tournament_name': tournament.name,
+            'group_count': tournament.groups.count(),
+            'match_count': tournament.matches.count(),
+            'team_count': tournament.participants.count(),
+            'groups': groups_data,
+            'matches': matches_data
+        })
+        
+    except Tournament.DoesNotExist:
+        return JsonResponse({
+            'error': 'Tournament 9 not found'
+        }, status=404)
+    except Exception as e:
+        return JsonResponse({
+            'error': str(e)
         }, status=500)
