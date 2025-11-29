@@ -137,43 +137,29 @@ def tournament_detail(request, pk):
                             group=current_group
                         ).select_related('team').order_by('-points', '-wins', 'team__name')
 
-                        # [修正] 分組比賽查詢邏輯 - 確保正確顯示賽程
+                        # [修正] 不依賴 Team.group，直接從 Standing 獲取隊伍列表
+                        # 因為 Team-Group 關聯可能有問題，但 Standing 數據是正確的
+                        group_teams = [standing.team for standing in group_standings]
+                        
+                        # [修正] 分組比賽查詢邏輯 - 使用 Standing 中的隊伍
                         from django.db.models import Q
                         
-                        group_teams = list(current_group.teams.all())
-                        
-                        # 查詢兩支隊伍都在同一分組內的比賽（分組內比賽）
-                        # 只顯示未完成的比賽（狀態為'scheduled'）
-                        group_matches = tournament.matches.select_related(
-                            'team1', 'team2', 'winner'
-                        ).filter(
-                            team1__in=group_teams,
-                            team2__in=group_teams,
-                            status='scheduled'  # 只顯示尚未開始的比賽
-                        ).order_by('round_number', 'id')
-                        
-                        # 調試輸出
-                        print(f"DEBUG: {current_group.name} 未完成比賽數: {group_matches.count()}")
-                        if group_matches.count() > 0:
-                            print(f"DEBUG: 前3場比賽:")
-                            for match in group_matches[:3]:
-                                print(f"  - {match.team1.name} vs {match.team2.name}")
-                        
-                        # 調試輸出
-                        print(f"DEBUG: {current_group.name} 有 {len(group_teams)} 支隊伍")
-                        print(f"DEBUG: 隊伍名稱: {[team.name for team in group_teams]}")
-                        print(f"DEBUG: 找到 {group_matches.count()} 場比賽")
-                        
-                        # 如果沒有比賽，檢查所有比賽
-                        if group_matches.count() == 0:
-                            all_matches = tournament.matches.count()
-                            print(f"DEBUG: 錦標賽總共有 {all_matches} 場比賽")
+                        if group_teams:
+                            # 查詢這些隊伍之間的未完成比賽
+                            group_matches = tournament.matches.select_related(
+                                'team1', 'team2', 'winner'
+                            ).filter(
+                                Q(team1__in=group_teams) & Q(team2__in=group_teams),
+                                status='scheduled'  # 只顯示尚未開始的比賽
+                            ).order_by('round_number', 'id')
                             
-                            # 檢查前幾場比賽的隊伍
-                            for match in tournament.matches.select_related('team1', 'team2')[:5]:
-                                t1_name = match.team1.name if match.team1 else 'None'
-                                t2_name = match.team2.name if match.team2 else 'None'
-                                print(f"DEBUG: 比賽 {match.id}: {t1_name} vs {t2_name}")
+                            # 調試輸出
+                            print(f"DEBUG: {current_group.name} 從Standing獲取 {len(group_teams)} 支隊伍")
+                            print(f"DEBUG: 隊伍名稱: {[team.name for team in group_teams]}")
+                            print(f"DEBUG: 找到未完成比賽 {group_matches.count()} 場")
+                        else:
+                            print(f"DEBUG: {current_group.name} Standing中沒有隊伍")
+                            group_matches = tournament.matches.none()
                         
                         # 限制結果數量
                         group_matches = list(group_matches[:50])
