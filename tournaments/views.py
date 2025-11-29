@@ -143,27 +143,21 @@ def tournament_detail(request, pk):
                         group_teams = list(current_group.teams.all())
                         
                         # 查詢兩支隊伍都在同一分組內的比賽（分組內比賽）
-                        # 先查詢所有比賽，然後分別處理
-                        all_group_matches = tournament.matches.select_related(
+                        # 只顯示未完成的比賽（狀態為'scheduled'）
+                        group_matches = tournament.matches.select_related(
                             'team1', 'team2', 'winner'
                         ).filter(
                             team1__in=group_teams,
-                            team2__in=group_teams
+                            team2__in=group_teams,
+                            status='scheduled'  # 只顯示尚未開始的比賽
                         ).order_by('round_number', 'id')
                         
-                        # 調試：檢查比賽狀態
-                        print(f"DEBUG: {current_group.name} 所有比賽數: {all_group_matches.count()}")
-                        for match in all_group_matches[:3]:
-                            print(f"DEBUG: 比賽 {match.id}: {match.team1.name} vs {match.team2.name}, 狀態: {match.status}")
-                        
-                        # 只顯示未完成的比賽，但如果沒有就顯示所有比賽
-                        scheduled_matches = all_group_matches.filter(status='scheduled')
-                        if scheduled_matches.exists():
-                            group_matches = scheduled_matches
-                        else:
-                            # 如果沒有scheduled狀態的比賽，檢查其他狀態
-                            group_matches = all_group_matches
-                            print(f"DEBUG: 沒有scheduled比賽，顯示所有 {group_matches.count()} 場比賽")
+                        # 調試輸出
+                        print(f"DEBUG: {current_group.name} 未完成比賽數: {group_matches.count()}")
+                        if group_matches.count() > 0:
+                            print(f"DEBUG: 前3場比賽:")
+                            for match in group_matches[:3]:
+                                print(f"  - {match.team1.name} vs {match.team2.name}")
                         
                         # 調試輸出
                         print(f"DEBUG: {current_group.name} 有 {len(group_teams)} 支隊伍")
