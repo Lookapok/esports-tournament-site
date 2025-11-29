@@ -8,7 +8,7 @@ import json
 import os
 from django.core.management.base import BaseCommand
 from django.db import transaction, connection
-from tournaments.models import Tournament, Team, Player, Match, Game, Group, Standing
+from tournaments.models import Tournament, Team, Player, Match, Game, Group, Standing, PlayerGameStat
 
 class Command(BaseCommand):
     help = 'Reset database and import Docker data'
@@ -22,6 +22,7 @@ class Command(BaseCommand):
             # Step 1: Clear all data
             self.stdout.write("\n🧹 STEP 1: Clearing all existing data...")
             Standing.objects.all().delete()
+            PlayerGameStat.objects.all().delete()
             Game.objects.all().delete() 
             Match.objects.all().delete()
             Player.objects.all().delete()
@@ -42,7 +43,7 @@ class Command(BaseCommand):
             
             # Show data stats
             self.stdout.write("📊 Docker data contains:")
-            for key in ['tournaments', 'teams', 'players', 'matches', 'games', 'groups', 'standings']:
+            for key in ['tournaments', 'teams', 'players', 'matches', 'games', 'groups', 'standings', 'player_stats']:
                 count = len(data.get(key, []))
                 self.stdout.write(f"  - {key}: {count}")
             
@@ -283,6 +284,37 @@ class Command(BaseCommand):
             
             self.stdout.write(f"🏆 Standings imported: {standings_imported}")
             
+            # Step 11: Import player stats
+            self.stdout.write(f"\n📊 STEP 10: Importing player stats...")
+            stats_imported = 0
+            for item in data.get('player_stats', []):
+                try:
+                    game = Game.objects.get(id=item['game_id'])
+                    player = Player.objects.get(id=item['player_id'])
+                    team = Team.objects.get(id=item['team_id'])
+                    
+                    PlayerGameStat.objects.create(
+                        id=item.get('id'),
+                        game=game,
+                        player=player,
+                        team=team,
+                        kills=item.get('kills', 0),
+                        deaths=item.get('deaths', 0),
+                        assists=item.get('assists', 0),
+                        first_kills=item.get('first_kills', 0),
+                        acs=item.get('acs', 0.0)
+                    )
+                    stats_imported += 1
+                    
+                    if stats_imported <= 5:
+                        self.stdout.write(f"  ✅ Stat: {player.nickname} - {item.get('kills', 0)}K/{item.get('deaths', 0)}D/{item.get('assists', 0)}A")
+                    
+                except Exception as e:
+                    if stats_imported <= 3:
+                        self.stdout.write(f"  ❌ ERROR with stat {item.get('id')}: {e}")
+            
+            self.stdout.write(f"📊 Player stats imported: {stats_imported}")
+            
             # Final status
             self.stdout.write("\n" + "=" * 60)
             self.stdout.write("📊 FINAL DATABASE STATUS:")
@@ -294,6 +326,7 @@ class Command(BaseCommand):
                 'games': Game.objects.count(),
                 'groups': Group.objects.count(),
                 'standings': Standing.objects.count(),
+                'player_stats': PlayerGameStat.objects.count(),
             }
             
             for key, count in final_counts.items():
