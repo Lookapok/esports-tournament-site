@@ -1,5 +1,6 @@
 #!/bin/bash
 # Render 自動部署腳本
+# Force rebuild: 2025-11-29 23:00
 
 set -e  # 遇到錯誤就停止
 
