@@ -47,23 +47,3 @@ django-filter==24.3
 
 # 🌐 HTTP 工具
 requests==2.32.3
-
-# ==> HTTP 請求（Discord Bot 依賴）
-aiohttp==3.12.15
-aiosignal==1.4.0
-frozenlist==1.7.0
-multidict==6.6.3
-yarl==1.20.1
-attrs==25.3.0
-aiohappyeyeballs==2.6.1
-
-# ==> 基礎工具
-requests==2.32.4
-certifi==2025.7.14
-charset-normalizer==3.4.2
-urllib3==2.5.0
-idna==3.10
-packaging==25.0
-click==8.2.2
-setuptools==80.9.0
-typing-extensions==4.14.1
