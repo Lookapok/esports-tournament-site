@@ -38,9 +38,20 @@ class Command(BaseCommand):
         try:
             self.stdout.write("🔄 開始匯入錦標賽資料...")
             
+            # 檢查檔案是否存在
+            import os
+            if not os.path.exists('production_data.json'):
+                self.stdout.write(self.style.ERROR("❌ production_data.json 檔案不存在！"))
+                return
+            
             # 讀取資料檔案
             with open('production_data.json', 'r', encoding='utf-8') as f:
                 data = json.load(f)
+            
+            self.stdout.write(f"📄 資料檔案載入成功，包含:")
+            self.stdout.write(f"  - 錦標賽: {len(data.get('tournaments', []))} 筆")
+            self.stdout.write(f"  - 隊伍: {len(data.get('teams', []))} 筆") 
+            self.stdout.write(f"  - 選手: {len(data.get('players', []))} 筆")
             
             with transaction.atomic():
                 # 匯入錦標賽
