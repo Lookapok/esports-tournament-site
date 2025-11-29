@@ -48,6 +48,10 @@ else:
     print('ℹ️ 管理員帳戶已存在')
 " || echo "⚠️ 建立管理員帳戶失敗，請稍後手動建立"
 
+# 運行診斷檢查
+echo "🔍 運行資料庫診斷..."
+python manage.py diagnose 2>&1
+
 # 檢查是否需要從 Docker 遷移資料
 echo "🔍 檢查資料遷移需求..."
 if [ -f "production_data.json" ]; then
