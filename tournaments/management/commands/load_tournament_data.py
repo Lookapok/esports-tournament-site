@@ -3,9 +3,36 @@ import json
 from tournaments.models import Tournament, Team, Player, Match, Game, Group, Standing
 from django.db import transaction
 from django.utils.dateparse import parse_date, parse_datetime
+from django.utils import timezone
+from datetime import datetime
 
 class Command(BaseCommand):
     help = '匯入錦標賽資料從 production_data.json'
+
+    def parse_datetime_flexible(self, datetime_string):
+        """靈活解析日期時間，支援多種格式"""
+        if not datetime_string:
+            return None
+        
+        try:
+            # 嘗試解析 datetime 格式
+            dt = parse_datetime(datetime_string)
+            if dt:
+                return dt
+        except:
+            pass
+        
+        try:
+            # 嘗試解析純日期格式，轉為 datetime
+            date_obj = parse_date(datetime_string)
+            if date_obj:
+                return timezone.make_aware(datetime.combine(date_obj, datetime.min.time()))
+        except:
+            pass
+            
+        # 如果都失敗，使用當前時間
+        self.stdout.write(f"⚠️ 無法解析日期時間: {datetime_string}，使用當前時間")
+        return timezone.now()
 
     def handle(self, *args, **options):
         try:
@@ -23,8 +50,8 @@ class Command(BaseCommand):
                         defaults={
                             'name': item['name'],
                             'game': item['game'],
-                            'start_date': parse_date(item['start_date']) if item['start_date'] else None,
-                            'end_date': parse_date(item['end_date']) if item['end_date'] else None,
+                            'start_date': self.parse_datetime_flexible(item.get('start_date')),
+                            'end_date': self.parse_datetime_flexible(item.get('end_date')),
                             'rules': item.get('rules', ''),
                             'status': item.get('status', 'upcoming'),
                             'format': item.get('format', 'single_elimination')
