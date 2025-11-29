@@ -1,11 +1,27 @@
 services:
   - type: web
-    name: winnerstakesall
+    name: wtacs-esports
     env: python
-    buildCommand: bash build.sh
+    region: singapore
+    plan: free
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate --noinput
     startCommand: gunicorn esports_site.wsgi:application
     envVars:
       - key: RENDER
         value: "true"
       - key: DEBUG
         value: "false"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false  # 手動設定 Supabase 連線
+      - key: ALLOWED_HOSTS
+        value: "wtacs-esports.onrender.com,localhost,127.0.0.1"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://wtacs-esports.onrender.com,https://*.onrender.com"
+      - key: PYTHONPATH
+        value: "/opt/render/project/src"

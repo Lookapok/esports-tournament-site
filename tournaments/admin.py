@@ -45,11 +45,15 @@ class PlayerAdmin(admin.ModelAdmin):
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ('id', '__str__', 'tournament', 'status', 'winner') # <--- 加上 id
-    list_filter = ('tournament', 'status')
+    list_display = ('id', '__str__', 'tournament', 'status', 'team1_score', 'team2_score', 'winner') # <--- 加上比分和 id
+    list_filter = ('tournament', 'status', 'winner')
     search_fields = ('team1__name', 'team2__name')
     list_display_links = ('id', '__str__') # <-- 讓 id 也可以點擊
     inlines = [GameInline]
+    
+    # 新增自定義欄位顯示
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('team1', 'team2', 'winner', 'tournament')
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
@@ -208,3 +212,153 @@ def fix_group_data_action(modeladmin, request, queryset):
 
 # 將 action 加入 TournamentAdmin
 TournamentAdmin.actions = [generate_matches_action, fix_group_data_action]
+
+# --- 比賽管理 Admin Actions ---
+
+@admin.action(description='設置隊伍1為勝者（自動根據比分判斷）')
+def set_team1_as_winner_action(modeladmin, request, queryset):
+    """設置選定比賽的隊伍1為勝者"""
+    updated_count = 0
+    for match in queryset:
+        if match.team1 and match.team2:
+            old_winner = match.winner
+            match.winner = match.team1
+            match.status = 'completed'  # 自動設為已完成
+            match.save()
+            updated_count += 1
+            
+            # 記錄變更
+            business_logger.info('Match Winner Set Manually', extra={
+                'event_type': 'match_winner_set',
+                'match_id': match.id,
+                'team1': match.team1.name,
+                'team2': match.team2.name,
+                'winner': match.winner.name,
+                'old_winner': old_winner.name if old_winner else None,
+                'user': str(request.user),
+            })
+    
+    modeladmin.message_user(
+        request, 
+        f"已成功設置 {updated_count} 場比賽的隊伍1為勝者，並自動觸發積分計算。", 
+        messages.SUCCESS
+    )
+
+@admin.action(description='設置隊伍2為勝者（自動根據比分判斷）')
+def set_team2_as_winner_action(modeladmin, request, queryset):
+    """設置選定比賽的隊伍2為勝者"""
+    updated_count = 0
+    for match in queryset:
+        if match.team1 and match.team2:
+            old_winner = match.winner
+            match.winner = match.team2
+            match.status = 'completed'  # 自動設為已完成
+            match.save()
+            updated_count += 1
+            
+            # 記錄變更
+            business_logger.info('Match Winner Set Manually', extra={
+                'event_type': 'match_winner_set',
+                'match_id': match.id,
+                'team1': match.team1.name,
+                'team2': match.team2.name,
+                'winner': match.winner.name,
+                'old_winner': old_winner.name if old_winner else None,
+                'user': str(request.user),
+            })
+    
+    modeladmin.message_user(
+        request, 
+        f"已成功設置 {updated_count} 場比賽的隊伍2為勝者，並自動觸發積分計算。", 
+        messages.SUCCESS
+    )
+
+@admin.action(description='根據比分自動設置勝者')
+def auto_set_winner_by_score_action(modeladmin, request, queryset):
+    """根據比分自動設置勝者"""
+    updated_count = 0
+    no_score_count = 0
+    tie_count = 0
+    
+    for match in queryset:
+        if match.team1_score is None or match.team2_score is None:
+            no_score_count += 1
+            continue
+            
+        if match.team1_score == match.team2_score:
+            tie_count += 1
+            continue
+            
+        old_winner = match.winner
+        
+        if match.team1_score > match.team2_score:
+            match.winner = match.team1
+        else:
+            match.winner = match.team2
+            
+        match.status = 'completed'
+        match.save()
+        updated_count += 1
+        
+        # 記錄變更
+        business_logger.info('Match Winner Auto-Set by Score', extra={
+            'event_type': 'match_winner_auto_set',
+            'match_id': match.id,
+            'team1': match.team1.name,
+            'team2': match.team2.name,
+            'team1_score': match.team1_score,
+            'team2_score': match.team2_score,
+            'winner': match.winner.name,
+            'old_winner': old_winner.name if old_winner else None,
+            'user': str(request.user),
+        })
+    
+    messages_list = []
+    if updated_count > 0:
+        messages_list.append(f"成功設置 {updated_count} 場比賽的勝者")
+    if no_score_count > 0:
+        messages_list.append(f"{no_score_count} 場比賽沒有比分，跳過")
+    if tie_count > 0:
+        messages_list.append(f"{tie_count} 場比賽平手，需要手動處理")
+        
+    modeladmin.message_user(
+        request, 
+        "；".join(messages_list) + "。", 
+        messages.SUCCESS if updated_count > 0 else messages.WARNING
+    )
+
+@admin.action(description='清除勝者設置（重設比賽狀態）')
+def clear_winner_action(modeladmin, request, queryset):
+    """清除選定比賽的勝者設置"""
+    updated_count = 0
+    for match in queryset:
+        if match.winner:
+            old_winner = match.winner
+            match.winner = None
+            match.status = 'scheduled'  # 重設為預定狀態
+            match.save()
+            updated_count += 1
+            
+            # 記錄變更
+            business_logger.info('Match Winner Cleared', extra={
+                'event_type': 'match_winner_cleared',
+                'match_id': match.id,
+                'team1': match.team1.name,
+                'team2': match.team2.name,
+                'old_winner': old_winner.name,
+                'user': str(request.user),
+            })
+    
+    modeladmin.message_user(
+        request, 
+        f"已成功清除 {updated_count} 場比賽的勝者設置，並自動觸發積分重算。", 
+        messages.SUCCESS
+    )
+
+# 將 actions 加入 MatchAdmin
+MatchAdmin.actions = [
+    set_team1_as_winner_action, 
+    set_team2_as_winner_action, 
+    auto_set_winner_by_score_action,
+    clear_winner_action
+]

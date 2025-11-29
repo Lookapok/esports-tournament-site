@@ -29,7 +29,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = [
     '127.0.0.1', 
     'localhost',
-    'winnerstakesall.onrender.com',  # Render 部署域名
+    'wtacs-esports.onrender.com',  # 更新為您的實際域名
     '.onrender.com',  # 允許所有 Render 子域名
 ]
 
@@ -51,7 +51,7 @@ if IS_RENDER:  # Render 生產環境
     
     # CSRF 信任的來源
     CSRF_TRUSTED_ORIGINS = [
-        'https://winnerstakesall.onrender.com',
+        'https://wtacs-esports.onrender.com',
         'https://*.onrender.com',
     ]
 else:  # 本地開發環境（支援 HTTP 和 HTTPS）
@@ -483,3 +483,28 @@ if DEBUG:
     for logger in LOGGING['loggers'].values():
         if 'level' in logger:
             logger['level'] = 'DEBUG'
+
+# 生產環境安全設定
+if not DEBUG:
+    # 強制 HTTPS
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+    # 安全 Cookie 設定
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    
+    # HSTS 設定
+    SECURE_HSTS_SECONDS = 31536000  # 1 年
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    
+    # 其他安全設定
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+
+# 檔案上傳設定
+MAX_UPLOAD_SIZE = 5 * 1024 * 1024  # 5MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = MAX_UPLOAD_SIZE
+DATA_UPLOAD_MAX_MEMORY_SIZE = MAX_UPLOAD_SIZE

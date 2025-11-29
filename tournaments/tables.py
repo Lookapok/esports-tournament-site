@@ -2,14 +2,38 @@
 import django_tables2 as tables
 from .models import PlayerGameStat
 
+def get_opponent_info(record):
+    """
+    根據選手所屬隊伍，返回對手信息
+    """
+    match = record.game.match
+    player_team = record.team
+    
+    # 確定對手隊伍
+    if match.team1 == player_team:
+        opponent = match.team2
+    elif match.team2 == player_team:
+        opponent = match.team1
+    else:
+        # 如果選手隊伍不是比賽中的任一隊伍，顯示完整對戰信息
+        if match.team1 and match.team2:
+            return f"R{match.round_number}: {match.team1.name} vs {match.team2.name}"
+        else:
+            return f"R{match.round_number}: TBD"
+    
+    # 顯示對手名稱 - 簡潔版本
+    if opponent:
+        return f"R{match.round_number} vs {opponent.name}"
+    else:
+        return f"R{match.round_number} vs TBD"
+
 class StatsTable(tables.Table):
-    # --- [修改] 比賽欄位 ---
-    # 使用 lambda 函數自訂連結文字，讓它變短
+    # --- [修改] 比賽欄位 - 顯示對手信息 ---
+    # 使用 lambda 函數顯示對手信息
     match = tables.LinkColumn(
         "tournament_detail",
-        # 只顯示「賽事名稱 - R輪次」
-        text=lambda record: f"{record.game.match.tournament.name} - R{record.game.match.round_number}",
-        args=[tables.A("game.match.pk")],
+        text=lambda record: get_opponent_info(record),
+        args=[tables.A("game.match.tournament.pk")],
         verbose_name="比賽"
     )
     
