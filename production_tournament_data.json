@@ -1,0 +1,427 @@
+[
+{
+  "model": "tournaments.tournament",
+  "pk": 9,
+  "fields": {
+    "name": "WTACS S1",
+    "game": "Valorant",
+    "start_date": "2025-08-15T10:12:54Z",
+    "end_date": "2026-01-18T21:30:00Z",
+    "rules": "本賽事將採三個階段，直至產生最終總冠軍。雙敗淘汰賽將分為勝部組（Winners Bracket）與敗部組（Losers Bracket），每支隊伍在被淘汰兩次後才正式出局。\r\n主要階段劃分為：\r\n\r\n第一階段(32至16強)：分組循環賽\r\n第二階段(16至8強)：瑞士輪\r\n第三階段(八強至冠亞)：雙敗淘汰賽",
+    "status": "ongoing",
+    "format": "round_robin",
+    "participants": [
+      70,
+      39,
+      71,
+      72,
+      74,
+      64,
+      32,
+      49,
+      28,
+      73,
+      65,
+      76,
+      77,
+      62,
+      30,
+      33,
+      35,
+      38,
+      48,
+      59,
+      63,
+      36,
+      40,
+      60,
+      57,
+      58,
+      50,
+      56,
+      51,
+      47,
+      53,
+      52,
+      27,
+      29
+    ]
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 27,
+  "fields": {
+    "name": "稻江商職-稻江哈士奇I",
+    "logo": "team_logos/DJT.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 28,
+  "fields": {
+    "name": "宜寧高級中學-INHS",
+    "logo": "team_logos/10.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 29,
+  "fields": {
+    "name": "正修科技大學-CSU",
+    "logo": "team_logos/正修龍logo去背藍.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 30,
+  "fields": {
+    "name": "萬能科技大學-VNU",
+    "logo": "team_logos/vnu-removebg-preview.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 32,
+  "fields": {
+    "name": "東泰高級中學-TTSH",
+    "logo": "team_logos/ttsh.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 33,
+  "fields": {
+    "name": "黎明技術學院-LIT PenguiN",
+    "logo": "team_logos/IMG_7625-removebg-preview.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 35,
+  "fields": {
+    "name": "國立澎湖高級海事水產職業學校",
+    "logo": "team_logos/2.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 36,
+  "fields": {
+    "name": "嘉義市私立興華中學",
+    "logo": "team_logos/興華LOGO去背版.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 38,
+  "fields": {
+    "name": "臺北市立松山高級中學-THE FORTH CHOICE",
+    "logo": "team_logos/松山LOGO去背黑.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 39,
+  "fields": {
+    "name": "弘光科技大學-HKUF",
+    "logo": "team_logos/弘光.jpg"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 40,
+  "fields": {
+    "name": "臺中市立清水高級中等學校-清高可愛男娘中心",
+    "logo": "team_logos/CFC.jpg"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 47,
+  "fields": {
+    "name": "台北海洋科技大學-台北海大狂獵鯊",
+    "logo": "team_logos/總.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 48,
+  "fields": {
+    "name": "永平工商高級中等學校-YPVS永平雷電虎",
+    "logo": "team_logos/永平LOGO去背版.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 49,
+  "fields": {
+    "name": "恆毅私立高級中學-55688車禍隊",
+    "logo": "team_logos/橫溢555.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 50,
+  "fields": {
+    "name": "樹人高級家事商業職業學校-樹人家商SJHS",
+    "logo": "team_logos/樹人logo-v0.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 51,
+  "fields": {
+    "name": "健行科技大學-EK 1v50",
+    "logo": "team_logos/健行_oPkk3iU.jpg"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 52,
+  "fields": {
+    "name": "黎明技術學院-黎明企鵝",
+    "logo": "team_logos/IMG_7625-removebg-preview_py0YpwP.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 53,
+  "fields": {
+    "name": "黎明技術學院-黎明企鵝鵝",
+    "logo": "team_logos/IMG_7625-removebg-preview_TtrthUu.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 56,
+  "fields": {
+    "name": "稻江商職-稻江哈士奇II",
+    "logo": "team_logos/DJT_0SP0Vth.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 57,
+  "fields": {
+    "name": "高雄市私立立志高級中學-LCVS",
+    "logo": "team_logos/lcvs1.jpg"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 58,
+  "fields": {
+    "name": "高雄市私立立志高級中學-立志猩勢力",
+    "logo": "team_logos/lcvs2.jpg"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 59,
+  "fields": {
+    "name": "國立成功大學附屬臺南工業高級中等學校-Five gun boy",
+    "logo": "team_logos/成大南工-隊伍-LOGO-自組.jpg"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 60,
+  "fields": {
+    "name": "僑光科技大學-OCU 僑光黑鯊",
+    "logo": "team_logos/OCU.jpg"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 62,
+  "fields": {
+    "name": "中國文化大學-重生歸來我為天",
+    "logo": "team_logos/重生歸來我為天.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 63,
+  "fields": {
+    "name": "台北科技大學-TeamShell",
+    "logo": "team_logos/北科電競社LOGO4167.jpg"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 64,
+  "fields": {
+    "name": "健行科技大學-不要再murmur了",
+    "logo": "team_logos/Murmur.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 65,
+  "fields": {
+    "name": "台北科技大學-北邊的老虎",
+    "logo": "team_logos/北科虎.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 70,
+  "fields": {
+    "name": "啟英高級中學-CYVS",
+    "logo": "team_logos/啟英.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 71,
+  "fields": {
+    "name": "致理科技大學-那晚用橡皮筋騙她是超薄",
+    "logo": "team_logos/治理.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 72,
+  "fields": {
+    "name": "龍華科技大學-哈吉米南北綠豆",
+    "logo": "team_logos/龍華.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 73,
+  "fields": {
+    "name": "萬能科技大學-毛毛兄弟幫",
+    "logo": "team_logos/毛毛.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 74,
+  "fields": {
+    "name": "莊敬高職-莊敬猛虎",
+    "logo": "team_logos/莊敬.png"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 76,
+  "fields": {
+    "name": "黎明高中-泡槍就對了",
+    "logo": "team_logos/L32.jpg"
+  }
+},
+{
+  "model": "tournaments.team",
+  "pk": 77,
+  "fields": {
+    "name": "勤益科技大學-LWX",
+    "logo": ""
+  }
+},
+{
+  "model": "tournaments.player",
+  "pk": 5,
+  "fields": {
+    "nickname": "Asta",
+    "team": 30,
+    "avatar": "",
+    "role": "Controller"
+  }
+},
+{
+  "model": "tournaments.player",
+  "pk": 6,
+  "fields": {
+    "nickname": "Anc1ent",
+    "team": 30,
+    "avatar": "",
+    "role": "Duelist"
+  }
+},
+{
+  "model": "tournaments.player",
+  "pk": 7,
+  "fields": {
+    "nickname": "T1ankong",
+    "team": 30,
+    "avatar": "player_avatars/2.jpg",
+    "role": "Flex"
+  }
+},
+{
+  "model": "tournaments.player",
+  "pk": 8,
+  "fields": {
+    "nickname": "Juan|Y1Qiu",
+    "team": 30,
+    "avatar": "",
+    "role": "Sentinel"
+  }
+},
+{
+  "model": "tournaments.player",
+  "pk": 11,
+  "fields": {
+    "nickname": "DJT Zank#0000",
+    "team": 27,
+    "avatar": "",
+    "role": "Flex"
+  }
+},
+{
+  "model": "tournaments.player",
+  "pk": 13,
+  "fields": {
+    "nickname": "靈芝的好壞在於多糖體#0816",
+    "team": 27,
+    "avatar": "",
+    "role": "Flex"
+  }
+},
+{
+  "model": "tournaments.player",
+  "pk": 14,
+  "fields": {
+    "nickname": "Ve1bae唯一一#Ve1",
+    "team": 27,
+    "avatar": "",
+    "role": "Flex"
+  }
+},
+{
+  "model": "tournaments.player",
+  "pk": 17,
+  "fields": {
+    "nickname": "PangXinXin#9558",
+    "team": 28,
+    "avatar": "",
+    "role": "Flex"
+  }
+},
+{
+  "model": "tournaments.player",
+  "pk": 18,
+  "fields": {
+    "nickname": "Zafk1eL1337#2008",
+    "team": 28,
+    "avatar": "",
+    "role": "Flex"
+  }
+},
+{
+  "model": "tournaments.player",
+  "pk": 19,
+  "fields": {
+    "nickname": "Plipli#2247",
+    "team": 28,
+    "avatar": "",
+    "role": "Flex"
+  }
+},
+{
+  "model": "tournaments.player",
+  "pk": 20,
+  "fields": {
+    "nickname": 

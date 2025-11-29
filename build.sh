@@ -37,6 +37,18 @@ else:
     print('ℹ️ 管理員帳戶已存在')
 " || echo "⚠️ 建立管理員帳戶失敗，請稍後手動建立"
 
+# 匯入初始資料（如果資料庫為空）
+echo "📊 檢查並匯入錦標賽資料..."
+python manage.py shell -c "
+from tournaments.models import Tournament
+if Tournament.objects.count() == 0:
+    print('資料庫為空，開始匯入資料...')
+    from django.core.management import call_command
+    call_command('load_tournament_data')
+else:
+    print('資料庫已有資料，跳過匯入')
+" || echo "⚠️ 資料匯入檢查失敗"
+
 # 檢查 media 文件是否存在
 echo "📁 檢查 media 文件..."
 if [ -d "media/team_logos" ]; then
