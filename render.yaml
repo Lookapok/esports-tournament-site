@@ -5,14 +5,18 @@ services:
     region: singapore
     plan: free
     buildCommand: |
-      pip install --upgrade pip
-      pip install -r requirements.txt
-      python manage.py collectstatic --noinput
-      python manage.py migrate --noinput
+      chmod +x build.sh
+      ./build.sh
     startCommand: gunicorn esports_site.wsgi:application
     envVars:
       - key: RENDER
         value: "true"
+      - key: DEBUG
+        value: "False"
+      - key: DJANGO_SETTINGS_MODULE
+        value: "esports_site.settings"
+      - key: DATABASE_URL
+        sync: false  # 需要在 Render 控制台手動設定 Supabase 連接字串
       - key: DEBUG
         value: "false"
       - key: SECRET_KEY
