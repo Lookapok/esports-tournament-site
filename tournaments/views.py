@@ -137,12 +137,33 @@ def tournament_detail(request, pk):
                             group=current_group
                         ).select_related('team').order_by('-points', '-wins', 'team__name')
 
-                        # [修正] 不依賴 Team.group，直接從 Standing 獲取隊伍列表
-                        # 因為 Team-Group 關聯可能有問題，但 Standing 數據是正確的
-                        group_teams = [standing.team for standing in group_standings]
+                        # [測試] 檢查 Group-Team 直接關聯是否已修復
+                        group_teams_direct = list(current_group.teams.all())
                         
-                        # [修正] 分組比賽查詢邏輯 - 使用 Standing 中的隊伍
+                        # [保留] 查詢當前分組的積分榜 (Standing) 並進行排序
+                        group_standings = Standing.objects.filter(
+                            group=current_group
+                        ).select_related('team').order_by('-points', '-wins', 'team__name')
+                        
+                        # [比較] 從Standing獲取的隊伍列表（舊方法）
+                        group_teams_from_standing = [standing.team for standing in group_standings]
+
+                        # [修正] 使用直接關聯，如果沒有則fallback到Standing
                         from django.db.models import Q
+                        
+                        if group_teams_direct:
+                            # 使用修復後的直接關聯
+                            group_teams = group_teams_direct
+                            print(f"DEBUG: {current_group.name} 使用直接關聯獲取 {len(group_teams)} 支隊伍")
+                        elif group_teams_from_standing:
+                            # Fallback到Standing方法
+                            group_teams = group_teams_from_standing
+                            print(f"DEBUG: {current_group.name} Fallback到Standing獲取 {len(group_teams)} 支隊伍")
+                        else:
+                            group_teams = []
+                            print(f"DEBUG: {current_group.name} 兩種方法都沒找到隊伍")
+                        
+                        print(f"DEBUG: 隊伍名稱: {[team.name for team in group_teams]}")
                         
                         if group_teams:
                             # 查詢這些隊伍之間的未完成比賽
@@ -153,12 +174,8 @@ def tournament_detail(request, pk):
                                 status='scheduled'  # 只顯示尚未開始的比賽
                             ).order_by('round_number', 'id')
                             
-                            # 調試輸出
-                            print(f"DEBUG: {current_group.name} 從Standing獲取 {len(group_teams)} 支隊伍")
-                            print(f"DEBUG: 隊伍名稱: {[team.name for team in group_teams]}")
                             print(f"DEBUG: 找到未完成比賽 {group_matches.count()} 場")
                         else:
-                            print(f"DEBUG: {current_group.name} Standing中沒有隊伍")
                             group_matches = tournament.matches.none()
                         
                         # 限制結果數量
