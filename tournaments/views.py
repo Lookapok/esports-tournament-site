@@ -335,7 +335,7 @@ def overall_stats(request):
 # This is the function that was missing
 def tournament_stats(request, pk):
     tournament = get_object_or_404(Tournament, pk=pk)
-    stats = PlayerGameStat.objects.filter(game__tournament=tournament).select_related('player', 'team')
+    stats = PlayerGameStat.objects.filter(game__match__tournament=tournament).select_related('player', 'team')
     context = {
         'tournament': tournament,
         'stats': stats,
