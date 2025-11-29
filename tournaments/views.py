@@ -250,32 +250,21 @@ def tournament_detail(request, pk):
         return render(request, 'tournaments/tournament_detail.html', context)
 
 def team_list(request):
-    # ===== 優化的隊伍列表快取策略 =====
-    from django.conf import settings
-    cache_version = getattr(settings, 'CACHE_VERSION', 1)
-    cache_key = f'team_list_v{cache_version}_all'  # 移除分頁，改為全部隊伍
-    
-    # 檢查快取
-    cached_result = cache.get(cache_key)
-    if cached_result:
-        return render(request, 'tournaments/team_list.html', cached_result)
-    
-    # 1. 優化的隊伍查詢，載入所有隊伍
-    teams = Team.objects.prefetch_related(
-        Prefetch('players', queryset=Player.objects.only('id', 'nickname', 'role'))
-    ).only('id', 'name', 'logo').order_by('name')
-    
-    context = {
-        'teams': teams,  # 顯示所有隊伍
-    }
-    
-    # 隊伍資料相對穩定，快取 15 分鐘
+    """臨時修復版本的team_list視圖，移除可能有問題的查詢優化"""
     try:
-        cache.set(cache_key, context, 900)
+        # 使用最簡單的查詢，避免字段不存在的問題
+        teams = Team.objects.all().order_by('name')
+        
+        context = {
+            'teams': teams,
+        }
+        
+        return render(request, 'tournaments/team_list.html', context)
+        
     except Exception as e:
-        print(f"隊伍列表快取設定失敗: {e}")
-    
-    return render(request, 'tournaments/team_list.html', context)
+        # 如果還是出錯，返回錯誤信息
+        from django.http import HttpResponse
+        return HttpResponse(f"Team list error: {e}", status=500)
 
 # tournaments/views.py
 
