@@ -401,10 +401,6 @@ LOGGING = {
             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
             'style': '{',
         },
-        'json': {
-            '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
         'simple': {
             'format': '{levelname} {asctime} {message}',
             'style': '{',
@@ -422,7 +418,7 @@ LOGGING = {
             'filename': LOGS_DIR / 'django.log',
             'maxBytes': 1024*1024*10,  # 10MB
             'backupCount': 5,
-            'formatter': 'json',
+            'formatter': 'verbose',
         },
         'api_file': {
             'level': 'INFO',
@@ -430,7 +426,7 @@ LOGGING = {
             'filename': LOGS_DIR / 'api.log',
             'maxBytes': 1024*1024*10,  # 10MB
             'backupCount': 5,
-            'formatter': 'json',
+            'formatter': 'verbose',
         },
         'business_file': {
             'level': 'INFO',
@@ -438,7 +434,7 @@ LOGGING = {
             'filename': LOGS_DIR / 'business.log',
             'maxBytes': 1024*1024*10,  # 10MB
             'backupCount': 5,
-            'formatter': 'json',
+            'formatter': 'verbose',
         },
         'error_file': {
             'level': 'ERROR',
@@ -446,7 +442,7 @@ LOGGING = {
             'filename': LOGS_DIR / 'error.log',
             'maxBytes': 1024*1024*10,  # 10MB
             'backupCount': 5,
-            'formatter': 'json',
+            'formatter': 'verbose',
         },
     },
     'loggers': {
