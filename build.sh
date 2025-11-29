@@ -81,11 +81,22 @@ fi
 # 驗證資料匯入結果
 echo "🔍 驗證資料匯入結果..."
 python manage.py shell -c "
-from tournaments.models import Tournament, Team, Player
+from tournaments.models import Tournament, Team, Player, PlayerGameStat
 print(f'錦標賽數量: {Tournament.objects.count()}')
 print(f'隊伍數量: {Team.objects.count()}')
 print(f'選手數量: {Player.objects.count()}')
+print(f'選手統計數據: {PlayerGameStat.objects.count()}')
 " || echo "⚠️ 資料驗證失敗"
+
+# 生成範例選手統計數據（如果沒有的話）
+echo "📊 檢查選手統計數據..."
+STATS_COUNT=$(python manage.py shell -c "from tournaments.models import PlayerGameStat; print(PlayerGameStat.objects.count())" 2>/dev/null || echo "0")
+if [ "$STATS_COUNT" = "0" ]; then
+    echo "🎯 生成範例選手統計數據..."
+    python manage.py generate_sample_stats || echo "⚠️ 生成範例統計數據失敗"
+else
+    echo "✅ 選手統計數據已存在 ($STATS_COUNT 筆)"
+fi
 
 # 檢查 media 文件是否存在
 echo "📁 檢查 media 文件..."
