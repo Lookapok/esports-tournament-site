@@ -52,13 +52,33 @@ else:
 echo "🔍 檢查資料遷移需求..."
 if [ -f "production_data.json" ]; then
     echo "✅ 找到 Docker 資料檔案"
+    echo "📊 檔案資訊:"
+    ls -la production_data.json
+    echo "📄 檔案前10行:"
+    head -10 production_data.json
+    
     echo "🧹 清空現有資料並強制重新匯入所有資料..."
     
-    # 直接執行強制重新匯入，不管是否已存在標記
-    python manage.py force_reimport || {
-        echo "❌ 強制重新匯入失敗，嘗試原有匯入方法..."
-        python manage.py load_tournament_data || echo "⚠️ 所有匯入方法都失敗"
+    # 執行強制重新匯入，並顯示完整輸出
+    echo "🚀 開始執行 force_reimport..."
+    python manage.py force_reimport 2>&1 || {
+        echo "❌ 強制重新匯入失敗，詳細錯誤如上"
+        echo "🔄 嘗試原有匯入方法..."
+        python manage.py load_tournament_data 2>&1 || echo "⚠️ 所有匯入方法都失敗"
     }
+    
+    echo "✅ 匯入完成，檢查最終狀態..."
+    python manage.py shell -c "
+from tournaments.models import Tournament, Team, Player, Match, Game, Group, Standing
+print(f'Final counts:')
+print(f'  Tournaments: {Tournament.objects.count()}')
+print(f'  Teams: {Team.objects.count()}')
+print(f'  Players: {Player.objects.count()}')
+print(f'  Matches: {Match.objects.count()}')
+print(f'  Games: {Game.objects.count()}')
+print(f'  Groups: {Group.objects.count()}')
+print(f'  Standings: {Standing.objects.count()}')
+"
 else
     echo "ℹ️ 沒有 Docker 資料檔案，跳過匯入"
 fi
