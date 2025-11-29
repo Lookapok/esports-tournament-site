@@ -12,7 +12,7 @@ import random
 import math
 from django.contrib import messages
 from django.http import JsonResponse
-from .models import Tournament, Match, Team, Player, PlayerGameStat, Group, Standing
+from .models import Tournament, Match, Team, Player, PlayerGameStat, Group, Standing, Game
 from .forms import TournamentCreationStep1Form, TeamCreationStep2Form
 from .tables import StatsTable
 from .logic import generate_round_robin_matches, generate_swiss_round_matches, generate_single_elimination_matches, generate_double_elimination_matches
@@ -672,3 +672,92 @@ def auto_random_grouping(request, pk):
     }
     
     return render(request, 'tournaments/auto_grouping.html', context)
+
+# ===== API 端點 =====
+def api_generate_sample_stats(request):
+    """API 端點：生成範例選手統計數據"""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Only POST method allowed'}, status=405)
+    
+    try:
+        from django.db import transaction
+        
+        # Check current status
+        games_count = Game.objects.count()
+        existing_stats = PlayerGameStat.objects.count()
+        
+        if games_count == 0:
+            return JsonResponse({
+                'error': 'No games found', 
+                'games_count': games_count,
+                'stats_count': existing_stats
+            }, status=400)
+        
+        stats_created = 0
+        
+        with transaction.atomic():
+            # Generate stats for games without existing stats
+            for game in Game.objects.select_related('match', 'match__team1', 'match__team2').all():
+                try:
+                    # Skip if this game already has stats
+                    if PlayerGameStat.objects.filter(game=game).exists():
+                        continue
+                    
+                    team1 = game.match.team1
+                    team2 = game.match.team2
+                    
+                    if not team1 or not team2:
+                        continue
+                    
+                    # Get players for each team
+                    team1_players = list(Player.objects.filter(team=team1)[:5])
+                    team2_players = list(Player.objects.filter(team=team2)[:5])
+                    
+                    # Generate stats for team1 players
+                    for player in team1_players[:random.randint(3, min(5, len(team1_players)))]:
+                        if not PlayerGameStat.objects.filter(game=game, player=player).exists():
+                            PlayerGameStat.objects.create(
+                                game=game,
+                                player=player,
+                                team=team1,
+                                kills=random.randint(8, 25),
+                                deaths=random.randint(5, 18),
+                                assists=random.randint(2, 15),
+                                first_kills=random.randint(0, 3),
+                                acs=round(random.uniform(150.0, 280.0), 1)
+                            )
+                            stats_created += 1
+                    
+                    # Generate stats for team2 players
+                    for player in team2_players[:random.randint(3, min(5, len(team2_players)))]:
+                        if not PlayerGameStat.objects.filter(game=game, player=player).exists():
+                            PlayerGameStat.objects.create(
+                                game=game,
+                                player=player,
+                                team=team2,
+                                kills=random.randint(8, 25),
+                                deaths=random.randint(5, 18),
+                                assists=random.randint(2, 15),
+                                first_kills=random.randint(0, 3),
+                                acs=round(random.uniform(150.0, 280.0), 1)
+                            )
+                            stats_created += 1
+                
+                except Exception as e:
+                    continue  # Skip problematic games
+        
+        final_stats_count = PlayerGameStat.objects.count()
+        
+        return JsonResponse({
+            'success': True,
+            'message': f'Generated {stats_created} player stats',
+            'stats_created': stats_created,
+            'total_stats': final_stats_count,
+            'games_processed': games_count
+        })
+        
+    except Exception as e:
+        return JsonResponse({
+            'error': str(e),
+            'success': False
+        }, status=500)
