@@ -49,17 +49,15 @@ else:
 
 # 檢查是否需要從 Docker 遷移資料
 echo "🔍 檢查資料遷移需求..."
-if [ -f "production_data.json" ] && [ ! -f ".migrated_from_docker" ]; then
-    echo "🔄 檢測到 Docker 資料，執行專用遷移..."
-    python manage.py migrate_from_docker
+if [ -f "production_data.json" ]; then
+    echo "✅ 找到 Docker 資料檔案，強制重新匯入所有資料..."
+    python manage.py force_reimport
     
-    # 標記已完成遷移
     if [ $? -eq 0 ]; then
-        touch .migrated_from_docker
-        echo "✅ Docker 資料遷移完成"
+        echo "✅ Docker 資料強制重新匯入完成"
     else
-        echo "❌ Docker 資料遷移失敗，嘗試一般匯入..."
-        # 如果遷移失敗，使用原有的匯入邏輯
+        echo "❌ Docker 資料強制重新匯入失敗，嘗試一般匯入..."
+        # 如果強制匯入失敗，使用原有的匯入邏輯
         for i in 1 2 3; do
             echo "📊 第 $i 次嘗試匯入資料..."
             if python manage.py load_tournament_data; then
@@ -73,8 +71,6 @@ if [ -f "production_data.json" ] && [ ! -f ".migrated_from_docker" ]; then
             fi
         done
     fi
-elif [ -f ".migrated_from_docker" ]; then
-    echo "✅ 已完成 Docker 資料遷移，跳過"
 else
     echo "ℹ️ 沒有 Docker 資料檔案，使用一般匯入..."
     # 多次嘗試匯入資料
