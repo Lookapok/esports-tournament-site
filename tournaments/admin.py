@@ -94,15 +94,21 @@ def generate_matches_action(modeladmin, request, queryset):
         # --- 分組循環邏輯 ---
         if tournament.format == 'round_robin':
             # 1. (重要) 先為所有參賽隊伍建立空的積分榜紀錄
-            # 先刪除舊的，避免重複
-            Standing.objects.filter(tournament=tournament).delete()
-            # 改為遍歷所有分組，然後為每個分組的隊伍建立積分表
+            # 不刪除現有的 Standing，而是確保所有參賽隊伍都有積分記錄
+            for team in tournament.participants.all():
+                # 檢查是否已存在，不存在才建立新的
+                if not Standing.objects.filter(tournament=tournament, team=team).exists():
+                    Standing.objects.create(tournament=tournament, team=team)
+            
+            # 同步 Group.teams 和 Standing.group 的關係 (如果有分組資料的話)
             groups = tournament.groups.all()
             for group in groups:
                 for team in group.teams.all():
-                    # 檢查是否已存在，避免重複建立
-                    if not Standing.objects.filter(tournament=tournament, team=team, group=group).exists():
-                        Standing.objects.create(tournament=tournament, team=team, group=group)
+                    # 更新對應的 Standing 記錄的分組資訊
+                    standing = Standing.objects.filter(tournament=tournament, team=team).first()
+                    if standing and standing.group != group:
+                        standing.group = group
+                        standing.save()
 
             # 2. 呼叫 logic 函式來產生比賽
             count = generate_round_robin_matches(tournament)
