@@ -58,27 +58,34 @@ fi
 
 echo "🛡️ 所有資料變更功能已停用，保護現有數據"
 
-# 複製乾淨的原始數據並執行一次性恢復
-echo "📋 緊急恢復原始數據..."
-if [ ! -f "../production_data.json" ]; then
-    echo "❌ 找不到原始數據備份檔案"
-else
-    echo "✅ 找到原始數據備份，執行恢復..."
-    cp ../production_data.json ./production_data.json
+# 檢查並恢復統計數據
+echo "📊 檢查統計數據狀態..."
+STATS_COUNT=$(python manage.py shell -c "
+from tournaments.models import PlayerGameStat
+print(PlayerGameStat.objects.count())
+" 2>/dev/null || echo "0")
+
+echo "當前統計數據: $STATS_COUNT 筆"
+
+if [ "$STATS_COUNT" = "0" ]; then
+    echo "🔄 統計數據為空，自動恢復..."
+    python manage.py restore_player_stats --real-data-only
     
-    echo "🔄 執行資料恢復..."
-    python manage.py reset_and_import 2>&1
+    # 驗證恢復結果
+    NEW_STATS_COUNT=$(python manage.py shell -c "
+from tournaments.models import PlayerGameStat
+print(PlayerGameStat.objects.count())
+" 2>/dev/null || echo "0")
     
-    if [ $? -eq 0 ]; then
-        echo "✅ 資料恢復成功"
+    echo "恢復後統計數據: $NEW_STATS_COUNT 筆"
+    
+    if [ "$NEW_STATS_COUNT" != "0" ]; then
+        echo "✅ 統計數據恢復成功"
     else
-        echo "❌ 資料恢復失敗，嘗試其他方法..."
-        python manage.py safe_import 2>&1 || python manage.py force_reimport 2>&1
+        echo "❌ 統計數據恢復失敗"
     fi
-    
-    # 立即刪除檔案防止重複執行
-    rm -f production_data.json
-    echo "🗑️ 已刪除恢復檔案防止重複執行"
+else
+    echo "✅ 統計數據已存在，無需恢復"
 fi
 
 # 驗證最終資料狀態
