@@ -62,27 +62,30 @@ echo "🛡️ 所有資料變更功能已停用，保護現有數據"
 echo "📊 檢查統計數據狀態..."
 STATS_COUNT=$(python manage.py shell -c "
 from tournaments.models import PlayerGameStat
-print(PlayerGameStat.objects.count())
-" 2>/dev/null || echo "0")
+count = PlayerGameStat.objects.count()
+print(f'STATS_COUNT:{count}')
+" 2>/dev/null | grep "STATS_COUNT:" | cut -d: -f2 || echo "0")
 
 echo "當前統計數據: $STATS_COUNT 筆"
 
-if [ "$STATS_COUNT" = "0" ]; then
+if [ "$STATS_COUNT" = "0" ] || [ -z "$STATS_COUNT" ]; then
     echo "🔄 統計數據為空，自動恢復..."
-    python manage.py restore_player_stats --real-data-only
+    python manage.py restore_player_stats --real-data-only 2>&1
     
     # 驗證恢復結果
     NEW_STATS_COUNT=$(python manage.py shell -c "
 from tournaments.models import PlayerGameStat
-print(PlayerGameStat.objects.count())
-" 2>/dev/null || echo "0")
+count = PlayerGameStat.objects.count()
+print(f'STATS_COUNT:{count}')
+" 2>/dev/null | grep "STATS_COUNT:" | cut -d: -f2 || echo "0")
     
     echo "恢復後統計數據: $NEW_STATS_COUNT 筆"
     
-    if [ "$NEW_STATS_COUNT" != "0" ]; then
+    if [ "$NEW_STATS_COUNT" != "0" ] && [ -n "$NEW_STATS_COUNT" ]; then
         echo "✅ 統計數據恢復成功"
     else
         echo "❌ 統計數據恢復失敗"
+    fi
     fi
 else
     echo "✅ 統計數據已存在，無需恢復"

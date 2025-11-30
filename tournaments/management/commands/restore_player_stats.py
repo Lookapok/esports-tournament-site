@@ -31,12 +31,17 @@ class Command(BaseCommand):
         # 檢查是否已有統計數據
         if current_stats > 0:
             self.stdout.write(f"⚠️ 已有 {current_stats} 筆統計數據")
-            confirm = input("是否要清除重新生成? (y/N): ")
-            if confirm.lower() == 'y':
-                PlayerGameStat.objects.all().delete()
-                self.stdout.write("🗑️ 已清除現有統計數據")
-            else:
+            if options['real_data_only']:
+                # 在自動模式下不詢問，直接保留現有數據
+                self.stdout.write("🔒 自動模式：保留現有統計數據")
                 return
+            else:
+                confirm = input("是否要清除重新生成? (y/N): ")
+                if confirm.lower() == 'y':
+                    PlayerGameStat.objects.all().delete()
+                    self.stdout.write("🗑️ 已清除現有統計數據")
+                else:
+                    return
         
         real_data_only = options['real_data_only']
         
