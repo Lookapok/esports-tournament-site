@@ -76,8 +76,9 @@ except Exception as e:
 
 GENERATE_STATS=$?
 if [ $GENERATE_STATS -eq 1 ]; then
-    echo "🎯 生成選手統計數據..."
-    python manage.py generate_sample_stats 2>&1 || echo "⚠️ 統計數據生成失敗"
+    echo "ℹ️ 檢測到有遊戲但缺少統計數據"
+    echo "📝 這可能是因為隊伍棄賽或比賽尚未進行"
+    echo "🔒 不自動生成假數據，保持數據真實性"
 elif [ $GENERATE_STATS -eq 0 ]; then
     echo "✅ 選手統計數據已存在 ($STATS_COUNT 筆)"
 else
