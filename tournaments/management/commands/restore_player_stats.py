@@ -118,6 +118,6 @@ class Command(BaseCommand):
             sample = PlayerGameStat.objects.select_related('player', 'team')[:3]
             self.stdout.write("\n📝 樣本數據:")
             for stat in sample:
-                self.stdout.write(f"  {stat.player.name} ({stat.team.name}): K{stat.kills} D{stat.deaths} ACS{stat.acs}")
+                self.stdout.write(f"  {stat.player.nickname} ({stat.team.name}): K{stat.kills} D{stat.deaths} ACS{stat.acs}")
         
         self.stdout.write("\n🎉 統計數據恢復完成！統計頁面現在應該有數據了")

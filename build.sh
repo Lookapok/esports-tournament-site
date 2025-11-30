@@ -86,7 +86,6 @@ print(f'STATS_COUNT:{count}')
     else
         echo "❌ 統計數據恢復失敗"
     fi
-    fi
 else
     echo "✅ 統計數據已存在，無需恢復"
 fi
