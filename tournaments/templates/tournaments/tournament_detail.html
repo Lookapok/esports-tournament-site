@@ -478,14 +478,9 @@
                 </div>
                 <div class="card-body">
                     {% for round_number, matches_in_round in rounds.items %}
-                        <div class="mb-4 round-section">
-                            <div class="d-flex align-items-center mb-3">
-                                <span class="badge bg-gradient bg-secondary me-2 px-3 py-2 fs-6 shadow-sm">
-                                    <i class="fas fa-stopwatch me-1"></i>第 {{ round_number }} 輪
-                                </span>
-                                <div class="flex-grow-1 border-bottom border-2 opacity-25"></div>
-                                <small class="text-muted ms-2">{{ matches_in_round|length }} 場比賽</small>
-                            </div>
+                        <div class="mb-4">
+                            <h6 class="mb-3 text-primary">第 {{ round_number }} 輪</h6>
+                            <div class="row">
                             
                             {% for match in matches_in_round %}
                                 <div class="card mb-3 border-0 shadow-sm match-card position-relative overflow-hidden">
