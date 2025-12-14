@@ -88,9 +88,6 @@ esports_project/
 ## 🌐 線上展示
 
 - **網站**: https://winnertakesall-tw.onrender.com
-- **管理員**: https://winnertakesall-tw.onrender.com/admin/
-  - 帳號: `admin` / 密碼: `wtacs2024`
-- **API**: https://winnertakesall-tw.onrender.com/api/
 
 ## 📊 API 文檔
 
