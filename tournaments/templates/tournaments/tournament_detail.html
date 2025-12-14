@@ -481,77 +481,20 @@
                         <div class="mb-4">
                             <h6 class="mb-3 text-primary">第 {{ round_number }} 輪</h6>
                             <div class="row">
-                            
                             {% for match in matches_in_round %}
-                                <div class="card mb-3 border-0 shadow-sm match-card position-relative overflow-hidden">
-                                    <!-- 背景裝飾 -->
-                                    <div class="position-absolute top-0 start-0 w-100 h-100 opacity-5">
-                                        <div class="bg-gradient" style="background: linear-gradient(45deg, #0d6efd, #6f42c1);"></div>
-                                    </div>
-                                    
-                                    <div class="card-body p-3 position-relative">
-                                        <div class="row align-items-center g-2">
-                                            <!-- 隊伍1 -->
-                                            <div class="col-lg-4 col-md-5 col-12 text-lg-end text-center mb-2 mb-lg-0">
-                                                <div class="d-flex align-items-center justify-content-lg-end justify-content-center">
-                                                    <span class="fw-semibold text-primary me-2 team-name">{{ match.team1.name }}</span>
-                                                    <div class="team-avatar bg-gradient bg-primary text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 36px; height: 36px; font-size: 14px; font-weight: bold;">
-                                                        {{ match.team1.name|first }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <!-- 比分 -->
-                                            <div class="col-lg-4 col-md-2 col-12 text-center mb-2 mb-lg-0">
-                                            <div class="col-4 text-center">
-                                                {% if match.status == 'completed' %}
-                                                    <div class="match-score d-flex align-items-center justify-content-center">
-                                                        <div class="score-container d-flex align-items-center bg-light rounded-pill px-3 py-2 shadow-sm">
-                                                            <span class="badge {% if match.team1_score > match.team2_score %}bg-success{% elif match.team1_score < match.team2_score %}bg-secondary{% else %}bg-warning{% endif %} me-2 px-2 py-1 fs-6">
-                                                                {{ match.team1_score }}
-                                                            </span>
-                                                            <span class="text-muted mx-2 fw-bold">VS</span>
-                                                            <span class="badge {% if match.team2_score > match.team1_score %}bg-success{% elif match.team2_score < match.team1_score %}bg-secondary{% else %}bg-warning{% endif %} ms-2 px-2 py-1 fs-6">
-                                                                {{ match.team2_score }}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    {% if match.winner %}
-                                                        <div class="winner-badge mt-2">
-                                                            <span class="badge bg-success text-white px-3 py-1 rounded-pill">
-                                                                <i class="fas fa-trophy me-1"></i>{{ match.winner.name }} 獲勝
-                                                            </span>
-                                                        </div>
-                                                    {% endif %}
-                                                {% else %}
-                                                    <div class="text-center">
-                                                        <div class="pending-match bg-warning bg-opacity-10 rounded-pill px-3 py-2 d-inline-block">
-                                                            <span class="badge bg-warning text-dark">
-                                                                <i class="fas fa-clock me-1"></i>待開打
-                                                            </span>
-                                                        </div>
-                                                        {% if match.match_time %}
-                                                            <small class="text-muted d-block mt-2">
-                                                                <i class="fas fa-calendar-alt me-1"></i>{{ match.match_time|date:"m/d H:i" }}
-                                                            </small>
-                                                        {% endif %}
-                                                    </div>
-                                                {% endif %}
-                                            </div>
-                                            
-                                            <!-- 隊伍2 -->
-                                            <div class="col-lg-4 col-md-5 col-12 text-lg-start text-center">
-                                                <div class="d-flex align-items-center justify-content-lg-start justify-content-center">
-                                                    <div class="team-avatar bg-gradient bg-danger text-white rounded-circle d-flex align-items-center justify-content-center me-2 shadow-sm" style="width: 36px; height: 36px; font-size: 14px; font-weight: bold;">
-                                                        {{ match.team2.name|first }}
-                                                    </div>
-                                                    <span class="fw-semibold text-danger team-name">{{ match.team2.name }}</span>
-                                                </div>
-                                            </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="card border-0 shadow-sm {% if match.status == 'completed' %}bg-light{% endif %}">
+                                        <div class="card-body p-2 d-flex justify-content-between align-items-center">
+                                            <span class="text-truncate team-name-black" style="max-width: 40%;">{{ match.team1.name }}</span>
+                                            <span class="badge bg-{% if match.status == 'completed' %}success{% else %}secondary{% endif %} mx-2 fs-6">
+                                                {{ match.team1_score }} - {{ match.team2_score }}
+                                            </span>
+                                            <span class="text-truncate text-end team-name-black" style="max-width: 40%;">{{ match.team2.name }}</span>
                                         </div>
                                     </div>
                                 </div>
                             {% endfor %}
+                            </div>
                         </div>
                     {% empty %}
                         <div class="text-center py-5">
@@ -559,41 +502,9 @@
                             <h5 class="text-muted">尚無比賽賽程</h5>
                             <p class="text-muted mb-0">請等待管理員排程比賽</p>
                         </div>
-            {% endfor %}
-            
-            <!-- 分頁導航 -->
-            {% if page_matches.has_other_pages %}
-                <nav aria-label="賽程分頁導航" class="mt-4">
-                    <ul class="pagination pagination-sm justify-content-center">
-                        {% if page_matches.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page=1">&laquo; 第一頁</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page_matches.previous_page_number }}">上一頁</a>
-                            </li>
-                        {% endif %}
-                        
-                        <li class="page-item active">
-                            <span class="page-link">
-                                第 {{ page_matches.number }} 頁 / 共 {{ page_matches.paginator.num_pages }} 頁
-                            </span>
-                        </li>
-                        
-                        {% if page_matches.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page_matches.next_page_number }}">下一頁</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page_matches.paginator.num_pages }}">最後一頁 &raquo;</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                    <div class="text-center text-muted small">
-                        共 {{ page_matches.paginator.count }} 場比賽
-                    </div>
-                </nav>
-            {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 
