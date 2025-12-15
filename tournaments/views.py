@@ -200,34 +200,26 @@ def tournament_detail(request, pk):
                 
         elif tournament.format == 'swiss':
             try:
-                # 瑞士輪：極度優化積分榜和分頁比賽
-                context['standings'] = tournament.standings.select_related('team').only(
+                # 瑞士輪：優化積分榜
+                context['swiss_standings'] = tournament.standings.select_related('team').only(
                     'team__name', 'points', 'wins', 'losses', 'draws'
-                ).order_by('-points', '-wins')[:20]  # 限制顯示前20名
+                ).order_by('-points', '-wins')
                 
-                # 極度優化的分頁比賽（每頁15場以加快載入）
-                from django.core.paginator import Paginator
-                
+                # 獲取所有比賽並按輪次分組
                 matches = tournament.matches.select_related('team1', 'team2', 'winner').only(
                     'id', 'round_number', 'team1__name', 'team2__name', 'winner__name',
-                    'team1_score', 'team2_score', 'status', 'match_time'
+                    'team1_score', 'team2_score', 'status', 'datetime'
                 ).order_by('round_number', 'id')
                 
-                paginator = Paginator(matches, 15)  # 減少每頁數量
-                page_number = request.GET.get('page', 1)
-                page_matches = paginator.get_page(page_number)
-                
-                # 按輪次分組（僅針對當前頁面的比賽）
+                # 按輪次分組所有比賽
                 rounds = defaultdict(list)
-                for match in page_matches:
+                for match in matches:
                     rounds[match.round_number].append(match)
                 
-                context['rounds'] = dict(rounds)
-                context['page_matches'] = page_matches
+                context['swiss_rounds'] = dict(rounds)
             except Exception as e:
-                context['standings'] = []
-                context['rounds'] = {}
-                context['page_matches'] = []
+                context['swiss_standings'] = []
+                context['swiss_rounds'] = {}
                 
         else:  # Elimination (single/double)
             try:
