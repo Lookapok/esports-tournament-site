@@ -112,20 +112,20 @@ def tournament_detail(request, pk):
         
         # 2. 根據賽制分別極度優化數據載入
         if tournament.format == 'round_robin':
-            # 分組循環：按分組分頁顯示（A組、B組、C組、D組等）
-            from django.core.paginator import Paginator
-            
+            # 分組循環：支援分組切換顯示
             try:
-                # 只載入必要的分組資料，按名稱排序
+                # 載入所有分組
                 groups = tournament.groups.order_by('name')
                 
-                # 按分組分頁（每頁顯示一個分組）
-                paginator = Paginator(groups, 1)
-                page_number = request.GET.get('page', 1)
-                page_groups = paginator.get_page(page_number)
-                
-                # 取得當前頁面的分組
-                current_group = page_groups.object_list[0] if page_groups.object_list else None
+                # 從URL參數獲取選中的分組
+                selected_group_id = request.GET.get('group')
+                if selected_group_id:
+                    try:
+                        current_group = groups.get(id=selected_group_id)
+                    except:
+                        current_group = groups.first()
+                else:
+                    current_group = groups.first()  # 默認顯示第一組
                 
                 # --- [核心修正點] ---
                 group_standings = []
@@ -186,7 +186,7 @@ def tournament_detail(request, pk):
                         group_matches = []
                 # --- [修正結束] ---
 
-                context['groups'] = page_groups
+                context['groups'] = groups
                 context['current_group'] = current_group
                 context['group_matches'] = group_matches
                 context['group_standings'] = group_standings

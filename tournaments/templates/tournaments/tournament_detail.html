@@ -42,6 +42,23 @@
     <h3 class="mt-5">分組賽況</h3>
     <hr>
     
+    <!-- 分組切換標籤 -->
+    {% if groups %}
+        <div class="mb-3">
+            <ul class="nav nav-pills" id="group-tabs" role="tablist">
+                {% for group in groups %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link {% if group == current_group %}active{% endif %}" 
+                           href="?group={{ group.id }}" 
+                           role="tab">
+                            {{ group.name }} <span class="badge bg-secondary ms-1">{{ group.teams.count }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    
     {% if current_group %}
         <div class="card">
             <div class="card-header">
