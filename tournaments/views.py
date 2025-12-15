@@ -853,16 +853,18 @@ def api_debug_tournament(request, pk):
             'tournament_format': tournament.format,
         }
         
-        team_query = Team.objects.filter(tournament=tournament)
-        teams = list(team_query.values('id', 'name'))
+        # 通過多對多關聯獲取隊伍
+        teams = list(tournament.participants.values('id', 'name'))
         debug_info['teams_count'] = len(teams)
         debug_info['teams'] = teams[:3]
         
+        # 檢查積分數據
         standing_query = Standing.objects.filter(tournament=tournament)
         standings = list(standing_query.values('team__name', 'points', 'wins'))
         debug_info['standings_count'] = len(standings)
         debug_info['standings'] = standings[:3]
         
+        # 檢查比賽數據
         match_query = Match.objects.filter(tournament=tournament)
         matches = list(match_query.values('team1__name', 'team2__name', 'round_number'))
         debug_info['matches_count'] = len(matches)
