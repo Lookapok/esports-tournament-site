@@ -209,7 +209,7 @@
 
 {% endif %}
 
-{% if user.is_superuser and tournament.participants.exists %}
+{% if user.is_superuser and tournament.teams.exists %}
     <div class="mt-5">
         <h5>管理工具</h5>
         <a href="{% url 'team_list' pk=tournament.pk %}" class="btn btn-secondary btn-sm me-2">
