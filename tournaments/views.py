@@ -840,3 +840,37 @@ def api_diagnose_tournament_9(request):
         return JsonResponse({
             'error': str(e)
         }, status=500)
+
+def api_debug_tournament(request, pk):
+    try:
+        from .models import Tournament, Team, Match, Standing
+        
+        tournament = Tournament.objects.get(pk=pk)
+        
+        debug_info = {
+            'tournament_id': tournament.id,
+            'tournament_name': tournament.name,
+            'tournament_format': tournament.format,
+        }
+        
+        team_query = Team.objects.filter(tournament=tournament)
+        teams = list(team_query.values('id', 'name'))
+        debug_info['teams_count'] = len(teams)
+        debug_info['teams'] = teams[:3]
+        
+        standing_query = Standing.objects.filter(tournament=tournament)
+        standings = list(standing_query.values('team__name', 'points', 'wins'))
+        debug_info['standings_count'] = len(standings)
+        debug_info['standings'] = standings[:3]
+        
+        match_query = Match.objects.filter(tournament=tournament)
+        matches = list(match_query.values('team1__name', 'team2__name', 'round_number'))
+        debug_info['matches_count'] = len(matches)
+        debug_info['matches'] = matches[:3]
+        
+        return JsonResponse(debug_info)
+        
+    except Tournament.DoesNotExist:
+        return JsonResponse({'error': f'錦標賽 {pk} 不存在'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

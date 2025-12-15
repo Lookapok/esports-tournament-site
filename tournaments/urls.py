@@ -16,7 +16,7 @@ urlpatterns = [
     path('api/matches/<int:pk>/', MatchDetailAPI.as_view(), name='api_match_detail'),
     path('api/matches/<int:pk>/report/', GameReportAPIView.as_view(), name='api_game_report'),
     path('api/generate-sample-stats/', views.api_generate_sample_stats, name='api_generate_sample_stats'),
-    path('api/diagnose-tournament-9/', views.api_diagnose_tournament_9, name='api_diagnose_tournament_9'),
+    path('api/debug-tournament/<int:pk>/', views.api_debug_tournament, name='api_debug_tournament'),
 
     # 數據統計頁面
     path('tournaments/<int:pk>/stats/', views.tournament_stats, name='tournament_stats'),
