@@ -1,35 +1,13 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'tournaments/base.html' %}
 
-{% block title %}{{ tournament.name }} - 錦標賽詳情{% endblock %}
+{% block title %}{{ tournament.name }} - 賽事詳情{% endblock %}
 
 {% block content %}
 <style>
-    .swiss-tournament .match-score {
-        display: inline-block;
-        padding: 5px 15px;
-        border-radius: 20px;
-        font-weight: bold;
-        min-width: 50px;
-        text-align: center;
-    }
-
-    .swiss-tournament .match-card {
-        margin-bottom: 15px;
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-    }
-
-    .swiss-tournament .match-card:hover {
-        border-color: #007bff;
-        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
-    }
-
-    .swiss-tournament .round-section {
-        margin-bottom: 30px;
-        background: #f8f9fa;
-        border-radius: 8px;
-        padding: 20px;
+    .team-name-black {
+        color: #343a40 !important;
+        font-weight: 600 !important;
+        text-shadow: none !important;
     }
 </style>
 
@@ -108,7 +86,7 @@
                             <div class="card border-0 shadow-sm {% if match.status == 'completed' %}bg-light{% endif %}">
                                 <div class="card-body py-2">
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <span class="fw-bold">{{ match.team1.name }}</span>
+                                        <span class="fw-bold team-name-black">{{ match.team1.name }}</span>
                                         <div class="mx-3">
                                             <div class="fw-bold text-primary">
                                                 {% if match.status == 'completed' %}
@@ -118,7 +96,7 @@
                                                 {% endif %}
                                             </div>
                                         </div>
-                                        <span class="fw-bold">{{ match.team2.name }}</span>
+                                        <span class="fw-bold team-name-black">{{ match.team2.name }}</span>
                                     </div>
                                     <div class="text-center">
                                         <small class="text-muted">
@@ -182,54 +160,52 @@
     </div>
 
     <!-- 瑞士輪賽程 -->
-    <div class="swiss-tournament">
-        {% for round_number, round_matches in swiss_rounds.items %}
-            <div class="round-section">
-                <h6 class="mb-3 text-primary">第 {{ round_number }} 輪</h6>
-                <div class="row">
-                    {% for match in round_matches %}
-                        <div class="col-md-6">
-                            <div class="card match-card">
-                                <div class="card-body py-2">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <span class="fw-bold">{{ match.team1.name }}</span>
-                                        <div class="mx-3">
-                                            <div class="fw-bold text-primary">
-                                                {% if match.status == 'completed' %}
-                                                    {{ match.team1_score }} - {{ match.team2_score }}
-                                                {% else %}
-                                                    vs
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <span class="fw-bold">{{ match.team2.name }}</span>
-                                    </div>
-                                    <div class="text-center">
-                                        <small class="text-muted">
-                                            {% if match.datetime %}
-                                                {{ match.datetime|date:"m/d H:i" }}
-                                            {% endif %}
+    {% for round_number, round_matches in swiss_rounds.items %}
+        <div class="mb-4">
+            <h6 class="mb-3 text-primary">第 {{ round_number }} 輪</h6>
+            <div class="row">
+                {% for match in round_matches %}
+                    <div class="col-md-6 mb-2">
+                        <div class="card border-0 shadow-sm {% if match.status == 'completed' %}bg-light{% endif %}">
+                            <div class="card-body py-2">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span class="fw-bold team-name-black">{{ match.team1.name }}</span>
+                                    <div class="mx-3">
+                                        <div class="fw-bold text-primary">
                                             {% if match.status == 'completed' %}
-                                                <span class="badge bg-success ms-1">已完成</span>
+                                                {{ match.team1_score }} - {{ match.team2_score }}
                                             {% else %}
-                                                <span class="badge bg-warning ms-1">待比賽</span>
+                                                vs
                                             {% endif %}
-                                        </small>
+                                        </div>
                                     </div>
+                                    <span class="fw-bold team-name-black">{{ match.team2.name }}</span>
+                                </div>
+                                <div class="text-center">
+                                    <small class="text-muted">
+                                        {% if match.datetime %}
+                                            {{ match.datetime|date:"m/d H:i" }}
+                                        {% endif %}
+                                        {% if match.status == 'completed' %}
+                                            <span class="badge bg-success ms-1">已完成</span>
+                                        {% else %}
+                                            <span class="badge bg-warning ms-1">待比賽</span>
+                                        {% endif %}
+                                    </small>
                                 </div>
                             </div>
                         </div>
-                    {% empty %}
-                        <div class="col-12">
-                            <p class="text-center text-muted">第 {{ round_number }} 輪尚無賽程。</p>
-                        </div>
-                    {% endfor %}
-                </div>
+                    </div>
+                {% empty %}
+                    <div class="col-12">
+                        <p class="text-center text-muted">第 {{ round_number }} 輪尚無賽程。</p>
+                    </div>
+                {% endfor %}
             </div>
-        {% empty %}
-            <p class="text-center text-muted">尚無瑞士輪賽程。</p>
-        {% endfor %}
-    </div>
+        </div>
+    {% empty %}
+        <p class="text-center text-muted">尚無瑞士輪賽程。</p>
+    {% endfor %}
 
 {% endif %}
 
