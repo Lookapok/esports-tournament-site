@@ -201,15 +201,10 @@ def tournament_detail(request, pk):
         elif tournament.format == 'swiss':
             try:
                 # 瑞士輪：優化積分榜
-                context['swiss_standings'] = tournament.standings.select_related('team').only(
-                    'team__name', 'points', 'wins', 'losses', 'draws'
-                ).order_by('-points', '-wins')
+                context['swiss_standings'] = tournament.standings.select_related('team').order_by('-points', '-wins')
                 
                 # 獲取所有比賽並按輪次分組
-                matches = tournament.matches.select_related('team1', 'team2', 'winner').only(
-                    'id', 'round_number', 'team1__name', 'team2__name', 'winner__name',
-                    'team1_score', 'team2_score', 'status', 'datetime'
-                ).order_by('round_number', 'id')
+                matches = tournament.matches.select_related('team1', 'team2', 'winner').order_by('round_number', 'id')
                 
                 # 按輪次分組所有比賽
                 rounds = defaultdict(list)
